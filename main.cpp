@@ -44,7 +44,7 @@ int main(int argc, char *args[])
     if (argc == 2)
     {
         fname = args[1];
-        fname = fname.substr(fname.length()-2, fname.length());
+        fname = fname.substr(fname.length() - 2, fname.length());
 
         if (fname == "n6")
         {
@@ -65,7 +65,7 @@ int main(int argc, char *args[])
         }
 
         fname = args[2];
-        fname = fname.substr(fname.length()-2, fname.length());
+        fname = fname.substr(fname.length() - 2, fname.length());
 
         if (fname == "n6")
         {
@@ -89,9 +89,11 @@ int main(int argc, char *args[])
     {
         while (std::getline(infile, line))
         {
+
             code = code + line + " [NL:97:LN] ";
             line = "";
         }
+
 
         Tokenizer t;
         t.setCode(code);
@@ -116,7 +118,7 @@ int main(int argc, char *args[])
         std::string cmd;
         std::string ans;
 
-        n2 = n2.substr(0, n2.length()-3);
+        n2 = n2.substr(0, n2.length() - 3);
         n2 += ".cpp";
 
         std::fstream f;
@@ -126,10 +128,11 @@ int main(int argc, char *args[])
         f.close();
 
         n = args[2];
-        n = n.substr(0, n.length()-3);
+        n = n.substr(0, n.length() - 3);
         cmd = "g++ -o " + n + " " + n2;
 
-        while(ans != "y" && ans != "yes" && ans != "Yes" && ans != "YEs" && ans != "YES" && ans != "yEs" && ans != "yES" && ans != "YeS")
+        while (ans != "y" && ans != "yes" && ans != "Yes" && ans != "YEs" && ans != "YES" && ans != "yEs" &&
+               ans != "yES" && ans != "YeS")
         {
             std::cout << "Moechtest du die Datei kompilieren (G++ erforderlich)? y/n :: ";
             std::cin >> ans;

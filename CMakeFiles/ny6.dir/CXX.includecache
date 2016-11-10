@@ -49,6 +49,8 @@ cmds/Maths.hpp
 /run/media/survari/Survari/Projekte/C++/test/cmds/Maths.hpp
 cmds/EqualsInt.hpp
 /run/media/survari/Survari/Projekte/C++/test/cmds/EqualsInt.hpp
+cmds/EqualsString.hpp
+/run/media/survari/Survari/Projekte/C++/test/cmds/EqualsString.hpp
 
 /run/media/survari/Survari/Projekte/C++/test/Parser.hpp
 iostream
@@ -65,11 +67,19 @@ Goto.hpp
 /run/media/survari/Survari/Projekte/C++/test/Goto.hpp
 Gotos.hpp
 /run/media/survari/Survari/Projekte/C++/test/Gotos.hpp
+StringCheck.hpp
+/run/media/survari/Survari/Projekte/C++/test/StringCheck.hpp
 
 /run/media/survari/Survari/Projekte/C++/test/String.hpp
 iostream
 -
 stdlib.h
+-
+
+/run/media/survari/Survari/Projekte/C++/test/StringCheck.hpp
+cctype
+-
+iostream
 -
 
 /run/media/survari/Survari/Projekte/C++/test/Tokenizer.hpp
@@ -113,6 +123,20 @@ stdlib.h
 /run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
 ../Gotos.hpp
 /run/media/survari/Survari/Projekte/C++/test/Gotos.hpp
+
+/run/media/survari/Survari/Projekte/C++/test/cmds/EqualsString.hpp
+iostream
+-
+vector
+-
+stdlib.h
+-
+../Gotos.hpp
+/run/media/survari/Survari/Projekte/C++/test/Gotos.hpp
+../Variables.hpp
+/run/media/survari/Survari/Projekte/C++/test/Variables.hpp
+../CPPSource.hpp
+/run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
 
 /run/media/survari/Survari/Projekte/C++/test/cmds/Maths.hpp
 iostream

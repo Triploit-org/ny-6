@@ -1,0 +1,42 @@
+{main}  defi    e, [2];
+        defi    e1, [2];
+
+        defi    a, [10];
+        defi    b, [2];
+
+        defi    x, _IN;
+        div     b, a;
+
+        defs    s1, "[ MAIN ] S1";
+        defs    s, "Aha!";
+
+        nqs     s, _SN, str;
+
+        mos     "[ MAIN ] Hallo Welt", s;
+        moi     a, x;
+
+        nqi     e, e1, sas;
+        prv     x;@
+
+        prv     s;@
+        prv     s1;@
+
+        end;
+        endf;
+
+{sas}   say     "[ SAS ] E(";
+        prv     e;
+
+        say     ") !=(<>) E1(";
+        prv     e1;
+        say     ")";@
+
+        return;
+        endf;
+
+{str}   say "Uhuhuhuhu!";@
+        return;
+        endf;
+
+
+

@@ -15,6 +15,8 @@
 #include "cmds/Maths.hpp"
 #include "cmds/EqualsInt.hpp"
 #include "cmds/EqualsString.hpp"
+#include "cmds/Input.hpp"
+#include "cmds/StringOps.hpp"
 
 class System
 {
@@ -24,6 +26,25 @@ private:
 
 
 public:
+
+    int getOSNumber()
+    {
+        #ifdef _WIN32
+            return 0;
+        #elif _WIN64
+            return 1;
+        #elif __unix || __unix__
+            return 2;
+        #elif __APPLE__ || __MACH__
+            return 3;
+        #elif __linux__
+            return 4;
+        #elif __FreeBSD__
+            return 5;
+        #else
+            return 6;
+        #endif
+    }
 
     void addCommand(Command c)
     {
@@ -148,6 +169,21 @@ public:
         gqs.setFunction(greater_equals_str);
         gqs.setArgCount(3);
 
+        Command inp;
+        inp.setName("inp");
+        inp.setFunction(input_variable);
+        inp.setArgCount(1);
+
+        Command sti;
+        sti.setName("sti");
+        sti.setFunction(sti_int);
+        sti.setArgCount(2);
+
+        Command gca;
+        gca.setName("gca");
+        gca.setFunction(gca_string);
+        gca.setArgCount(3);
+
         commands.push_back(moi);
         commands.push_back(mos);
         commands.push_back(defi);
@@ -166,6 +202,9 @@ public:
         commands.push_back(gqs);
         commands.push_back(lqs);
         commands.push_back(nqs);
+        commands.push_back(inp);
+        commands.push_back(sti);
+        commands.push_back(gca);
     }
 } System;
 

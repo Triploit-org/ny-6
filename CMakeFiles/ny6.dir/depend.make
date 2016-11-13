@@ -15,8 +15,10 @@ CMakeFiles/ny6.dir/main.cpp.o: Variables.hpp
 CMakeFiles/ny6.dir/main.cpp.o: cmds/Define.hpp
 CMakeFiles/ny6.dir/main.cpp.o: cmds/EqualsInt.hpp
 CMakeFiles/ny6.dir/main.cpp.o: cmds/EqualsString.hpp
+CMakeFiles/ny6.dir/main.cpp.o: cmds/Input.hpp
 CMakeFiles/ny6.dir/main.cpp.o: cmds/Maths.hpp
 CMakeFiles/ny6.dir/main.cpp.o: cmds/Mov.hpp
 CMakeFiles/ny6.dir/main.cpp.o: cmds/Output.hpp
+CMakeFiles/ny6.dir/main.cpp.o: cmds/StringOps.hpp
 CMakeFiles/ny6.dir/main.cpp.o: main.cpp
 

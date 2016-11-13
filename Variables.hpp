@@ -32,22 +32,81 @@ public:
     {
         String snull;
         snull.setName("_SN");
-
         snull.setStringValue("");
         snull.setWriteAble(false);
 
+        String axs;
+        axs.setName("_axs");
+        axs.setStringValue("");
+        axs.setWriteAble(true);
+
+        String bxs;
+        bxs.setName("_bxs");
+        bxs.setStringValue("");
+        bxs.setWriteAble(true);
+
+        String cxs;
+        bxs.setName("_cxs");
+        bxs.setStringValue("");
+        bxs.setWriteAble(true);
+
+        String dxs;
+        dxs.setName("_dxs");
+        dxs.setStringValue("");
+        dxs.setWriteAble(true);
+
+        String exs;
+        exs.setName("_exs");
+        exs.setStringValue("");
+        exs.setWriteAble(true);
+
+
         strings.push_back(snull);
+        strings.push_back(axs);
+        strings.push_back(bxs);
+        strings.push_back(cxs);
+        strings.push_back(dxs);
+        strings.push_back(exs);
     }
 
     void initInteger()
     {
         Integer inull;
         inull.setName("_IN");
-
         inull.setIntValue(0);
         inull.setWriteAble(false);
 
+        Integer axi;
+        axi.setName("_axi");
+        axi.setIntValue(0);
+        axi.setWriteAble(true);
+
+        Integer bxi;
+        bxi.setName("_bxi");
+        bxi.setIntValue(0);
+        bxi.setWriteAble(true);
+
+        Integer cxi;
+        bxi.setName("_cxi");
+        bxi.setIntValue(0);
+        bxi.setWriteAble(true);
+
+        Integer dxi;
+        dxi.setName("_dxi");
+        dxi.setIntValue(0);
+        dxi.setWriteAble(true);
+
+        Integer exi;
+        exi.setName("_exi");
+        exi.setIntValue(0);
+        exi.setWriteAble(true);
+
         integer.push_back(inull);
+        integer.push_back(axi);
+        integer.push_back(bxi);
+        integer.push_back(cxi);
+        integer.push_back(dxi);
+        integer.push_back(exi);
     }
 
     bool existsStringVariable(std::string name)
@@ -146,6 +205,17 @@ public:
     bool checkGoto(std::string g)
     {
     }
+
+    std::vector<Integer> getIntegerVariables()
+    {
+        return integer;
+    }
+
+    std::vector<String> getStringVariables()
+    {
+        return strings;
+    }
+
 } Variables;
 
 #endif //TEST_VARIABLES_HPP

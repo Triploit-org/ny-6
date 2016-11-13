@@ -32,6 +32,7 @@ public:
     void parseAll()
     {
         bool isfm = true;
+        CPPSource.addRawSource("int main()\n{");
 
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
@@ -39,6 +40,7 @@ public:
             {
                 std::string marke = code[i].substr(1, code[i].length() - 2);
 
+                /*
                 if (StringCH.isNumber(marke))
                 {
                     std::cout << "[ MAIN ]:[ PRAE ]:[ INVALID_GOTO_LABEL:" << marke
@@ -66,6 +68,7 @@ public:
                 {
                     isfm = false;
                 }
+                */
 
                 Goto g;
                 g.setName(marke);
@@ -74,8 +77,6 @@ public:
                 Gotos.addGoto(g);
 
                 // std::cout << "Sprungmarke(PRAE):\t" << code[i] << " -> " << marke << " || " << i << std::endl;
-                CPPSource.addRawSource("int " + marke + "();");
-
                 aktgoto = marke;
             }
             else
@@ -83,12 +84,6 @@ public:
 
                 if (code[i] == "endf")
                 {
-                    if (!Gotos.getGoto(aktgoto).isClosed())
-                    {
-                        CPPSource.addRawSource("}");
-                    }
-
-                    Gotos.setGotoClosed(aktgoto, true);
                     std::cout << Gotos.getGoto(aktgoto).isClosed() << std::endl;
                 }
             }
@@ -99,39 +94,21 @@ public:
 
         if (Gotos.getGoto(aktgoto).getIndex() != -999)
         {
-            if (!Gotos.getGoto(aktgoto).isClosed())
-            {
-                std::cout << "[ MAIN ]:[ PRAE ]:[ NOT_CLOSED:" << aktgoto
-                          << " ] Dieser Sprungmarkenbereich wurde nicht geschlossen!" << std::endl;
-                exit(0);
-            }
         }
 
         CPPSource.addRawSource("");
         aktgoto = "";
-        Gotos.setI(0);
-        bool gMain = false;
 
-        if (Gotos.getGoto("main").getIndex() != -999)
-        {
-            gMain = true;
-        }
-        else
-        {
-            std::cout << "[ MAIN ]:[ COMPILER ]:[ C++ ]:[ MAIN_NOT_FOUND ] Es muss eine Main-Funktion geben!"
-                      << std::endl;
-            exit(0);
-        }
+        Gotos.setI(0);
+        // else
+        // {
+        //     std::cout << "[ MAIN ]:[ COMPILER ]:[ C++ ]:[ MAIN_NOT_FOUND ] Es muss eine Main-Funktion geben!"
+        //               << std::endl;
+        //     exit(0);
+        // }
 
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
-            if (gMain)
-            {
-                i = Gotos.getGoto("main").getIndex();
-                Gotos.setI(i);
-                gMain = false;
-            }
-
             if (code[i].substr(0, 1) == "{" && code[i].substr(code[i].length() - 1, code[i].length() - 2) == "}")
             {
                 std::string marke = code[i].substr(1, code[i].length() - 2);
@@ -139,7 +116,7 @@ public:
 
                 if (!Gotos.getGoto(marke).isAlreadyDefined())
                 {
-                    CPPSource.addRawSource("int " + marke + "() \n{");
+                    CPPSource.addRawSource(marke+":");
                     Gotos.getGoto(marke).setAlreadyDefined(true);
 
                     aktgoto = marke;
@@ -201,7 +178,12 @@ public:
                         else
                         {
                             if (!Variables.isCpp())
+                            {
                                 i = Gotos.getGoto(gt).getIndex();
+                                Gotos.setI(Gotos.getGoto(gt).getIndex());
+                            }
+
+
 
                             CPPSource.addSource(gt + "()");
                             CPPSource.addRawSource("");
@@ -209,14 +191,6 @@ public:
                             //aktgoto = gt;
                             break;
                         }
-                    }
-                    else if (code[i] == "return")
-                    {
-                        CPPSource.addSource("return 0");
-
-                        if (!Variables.isCpp())
-                            Gotos.setI(Gotos.getLJ());
-                        break;
                     }
                     else if (code[i] == "end")
                     {
@@ -231,6 +205,8 @@ public:
             Gotos.setI((Gotos.getI() + 1));
             //std::cout << Gotos.getI() << std::endl;
         }
+
+        CPPSource.addRawSource("\n\treturn 0;\n}");
     }
 };
 

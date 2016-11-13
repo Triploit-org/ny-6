@@ -1,10 +1,11 @@
-{main}  defs    inp, _SN;
+defi    z1, [1];
+defi    z2, [46];
+{main}
+        mos     "Hallo Welt", _exs;
 
-        mos     "Hallo Welt!", inp;
-        prv     inp;@
+        gca     _exs, z1, _cxs;
+        prv     _cxs;@
 
+        prv     _fos;@
+        gt      main;
         end;
-        endf;
-
-
-

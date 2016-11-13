@@ -51,6 +51,10 @@ cmds/EqualsInt.hpp
 /run/media/survari/Survari/Projekte/C++/test/cmds/EqualsInt.hpp
 cmds/EqualsString.hpp
 /run/media/survari/Survari/Projekte/C++/test/cmds/EqualsString.hpp
+cmds/Input.hpp
+/run/media/survari/Survari/Projekte/C++/test/cmds/Input.hpp
+cmds/StringOps.hpp
+/run/media/survari/Survari/Projekte/C++/test/cmds/StringOps.hpp
 
 /run/media/survari/Survari/Projekte/C++/test/Parser.hpp
 iostream
@@ -138,6 +142,20 @@ stdlib.h
 ../CPPSource.hpp
 /run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
 
+/run/media/survari/Survari/Projekte/C++/test/cmds/Input.hpp
+iostream
+-
+vector
+-
+stdlib.h
+-
+../Variables.hpp
+/run/media/survari/Survari/Projekte/C++/test/Variables.hpp
+../CPPSource.hpp
+/run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
+../StringCheck.hpp
+/run/media/survari/Survari/Projekte/C++/test/StringCheck.hpp
+
 /run/media/survari/Survari/Projekte/C++/test/cmds/Maths.hpp
 iostream
 -
@@ -159,6 +177,18 @@ stdlib.h
 /run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
 
 /run/media/survari/Survari/Projekte/C++/test/cmds/Output.hpp
+iostream
+-
+vector
+-
+stdlib.h
+-
+../Variables.hpp
+/run/media/survari/Survari/Projekte/C++/test/Variables.hpp
+../CPPSource.hpp
+/run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
+
+/run/media/survari/Survari/Projekte/C++/test/cmds/StringOps.hpp
 iostream
 -
 vector

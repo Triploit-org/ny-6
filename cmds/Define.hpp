@@ -20,6 +20,12 @@ void define_string(std::vector<std::string> args)
     std::string value = args[2];
     std::string name = args[1];
 
+    if (Variables.existsStringVariable(name) || Variables.existsIntegerVariable(name))
+    {
+        std::cout << "[ MAIN ]:[ DEFS ]:[ REDEFINITION_OF:" << name << " ] Variable bereits deklariert!" << std::endl;
+        exit(0);
+    }
+
     if (value.substr(0, 1) == "\"" && value.substr(value.length() - 1, value.length() - 2) == "\"")
     {
         CPPSource.addSource("std::string "+name+" = "+value);
@@ -60,6 +66,12 @@ void define_int(std::vector<std::string> args)
     std::string Nvalue = args[2];
     std::string name = args[1];
     int value = 0;
+
+    if (Variables.existsStringVariable(name) || Variables.existsIntegerVariable(name))
+    {
+        std::cout << "[ MAIN ]:[ DEFI ]:[ REDEFINITION_OF:" << name << " ] Variable bereits deklariert!" << std::endl;
+        exit(0);
+    }
 
     // std::cout << ">> DEFI gefunden! " << Nvalue << name << std::endl;
 

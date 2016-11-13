@@ -9,15 +9,56 @@
 
 int main(int argc, char *args[])
 {
+    System.initCommands();
+    Variables.initStrings();
+    Variables.initInteger();
+
+    Integer fos;
+    fos.setIntValue(System.getOSNumber());
+    fos.setName("_fos");
+    fos.setWriteAble(false);
+    Variables.addInteger(fos);
+
     std::ifstream infile;
     std::string fname;
-    CPPSource.addRawSource("#include <iostream>");
 
+    CPPSource.addRawSource("#include <iostream>");
     CPPSource.addRawSource("#include <cstdlib>");
     CPPSource.addRawSource("#include <cstdio>\n");
+    CPPSource.addRawSource("");
+
+    CPPSource.addRawSource("int _fos;\n#ifdef _WIN32");
+    CPPSource.addRawSource("_fos = 0;");
+    CPPSource.addRawSource("#elif _WIN64");
+    CPPSource.addRawSource("_fos = 1;");
+    CPPSource.addRawSource("#elif __unix || __unix__");
+    CPPSource.addRawSource("_fos = 2;");
+    CPPSource.addRawSource("#elif __APPLE__ || __MACH__");
+    CPPSource.addRawSource("_fos = 3;");
+    CPPSource.addRawSource("#elif __linux__");
+    CPPSource.addRawSource("_fos = 4;");
+    CPPSource.addRawSource("#elif __FreeBSD__");
+    CPPSource.addRawSource("_fos = 5;");
+    CPPSource.addRawSource("#else");
+    CPPSource.addRawSource("_fos = 6;");
+    CPPSource.addRawSource("#endif");
+    CPPSource.addRawSource("");
 
     CPPSource.addRawSource("std::string _SN = \"\";");
     CPPSource.addRawSource("int _IN = 0;");
+    CPPSource.addRawSource("");
+
+    CPPSource.addRawSource("int _axi = 0;");
+    CPPSource.addRawSource("int _cxi = 0;");
+    CPPSource.addRawSource("int _dxi = 0;");
+    CPPSource.addRawSource("int _exi = 0;");
+    CPPSource.addRawSource("");
+
+    CPPSource.addRawSource("std::string _axs = \"\";");
+    CPPSource.addRawSource("std::string _cxs = \"\";");
+    CPPSource.addRawSource("std::string _dxs = \"\";");
+    CPPSource.addRawSource("std::string _exs = \"\";");
+    CPPSource.addRawSource("");
 
     /*
      * TODO ============================== BEGIN
@@ -56,6 +97,63 @@ int main(int argc, char *args[])
             exit(0);
         }
     }
+    else if (argc == 0 || argc < 2)
+    {
+        std::string code = "";
+        std::string line;
+
+        while(true)
+        {
+            std::cout << "> ";
+            std::getline(std::cin, line);
+
+            if (line == "q" || line == "quit" || line == "exit")
+                exit(0);
+            else if (line == "end")
+            {}
+            else if (line == "clear")
+            {
+                code = "";
+            }
+            else if (line == "help")
+            {
+                std::cout << "Dies ist eine shellartige Umgebung in der du Ny++6-Befehle und" << std::endl
+                          << "sogenannte Debug-Befehle eingeben kannst. Wenn ein eingegebener Befehl" << std::endl
+                          << "kein Debug-Befehl ist, wird es zu der Liste eingegebenen der Ny++6-Befehle" << std::endl
+                          << "hinzugefuegt. Hier alle Debug-Befehle:" << std::endl << std::endl
+                          << " >> clear >> Loescht die Liste der Ny++6-befehle " << std::endl
+                          << " >> help  >> Zeigt diese Hilfeseite an" << std::endl
+                          << " >> quit  >> Shell beenden" << std::endl
+                          << " >> run   >> Liste der Ny++6-Befehle ausfuehren" << std::endl << std::endl
+                          << "Info: Alle End-Ny++-Befehle werden ignoriert!" << std::endl
+                          << "Info: Falls ein Error auftritt, wird die Shell beendet."
+                << std::endl;
+            }
+            else if (line == "run")
+            {
+                std::string ans;
+                std::cout << "[ WARN ] Danach wird der temporaere Speicher..." << std::endl << "[ WARN ] ...mit allen Befehlen geloescht, fortfahren? j/n :: ";
+                std::cin >> ans;
+
+                if (ans == "j" || ans == "J")
+                {
+                    Tokenizer t;
+                    t.setCode(code);
+
+                    Parser p;
+                    p.setCode(t.doTokenize());
+                    p.parseAll();
+                    code = "";
+                }
+            }
+            else
+            {
+                code = code + line + " [NL:97:LN] ";
+                line = "";
+            }
+
+        }
+    }
     else if (argc == 3)
     {
         if (strcmp(args[1], "-cc") == 0)
@@ -80,10 +178,6 @@ int main(int argc, char *args[])
 
     std::string code = "";
     std::string line;
-
-    System.initCommands();
-    Variables.initStrings();
-    Variables.initInteger();
 
     if (infile)
     {

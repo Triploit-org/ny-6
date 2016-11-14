@@ -6,8 +6,8 @@
 #define TEST_VARIABLES_HPP
 
 #include <vector>
-#include "String.hpp"
-#include "Integer.hpp"
+#include "objects/String.hpp"
+#include "objects/Integer.hpp"
 
 class Variables
 {

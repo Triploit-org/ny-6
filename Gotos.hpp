@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <vector>
-#include "Goto.hpp"
+#include "objects/Goto.hpp"
 
 class Gotos
 {

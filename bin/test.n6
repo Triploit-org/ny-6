@@ -1,5 +1,8 @@
 defi    z1, [1];
 defi    z2, [46];
+%def    lala;
+%undef  lala;
+%def    lala;
 {main}
         mos     "Hallo Welt", _exs;
 
@@ -7,5 +10,6 @@ defi    z2, [46];
         prv     _cxs;@
 
         prv     _fos;@
+        %err    "Wiederholung!";
         gt      main;
         end;

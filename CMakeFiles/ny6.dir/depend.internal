@@ -3,22 +3,25 @@
 
 CMakeFiles/ny6.dir/main.cpp.o
  /run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
- /run/media/survari/Survari/Projekte/C++/test/Command.hpp
- /run/media/survari/Survari/Projekte/C++/test/Goto.hpp
  /run/media/survari/Survari/Projekte/C++/test/Gotos.hpp
- /run/media/survari/Survari/Projekte/C++/test/Integer.hpp
  /run/media/survari/Survari/Projekte/C++/test/LangVars.hpp
- /run/media/survari/Survari/Projekte/C++/test/Parser.hpp
- /run/media/survari/Survari/Projekte/C++/test/String.hpp
+ /run/media/survari/Survari/Projekte/C++/test/PraeVars.hpp
  /run/media/survari/Survari/Projekte/C++/test/StringCheck.hpp
- /run/media/survari/Survari/Projekte/C++/test/Tokenizer.hpp
  /run/media/survari/Survari/Projekte/C++/test/Variables.hpp
  /run/media/survari/Survari/Projekte/C++/test/cmds/Define.hpp
  /run/media/survari/Survari/Projekte/C++/test/cmds/EqualsInt.hpp
  /run/media/survari/Survari/Projekte/C++/test/cmds/EqualsString.hpp
+ /run/media/survari/Survari/Projekte/C++/test/cmds/IfDefInc.hpp
  /run/media/survari/Survari/Projekte/C++/test/cmds/Input.hpp
  /run/media/survari/Survari/Projekte/C++/test/cmds/Maths.hpp
  /run/media/survari/Survari/Projekte/C++/test/cmds/Mov.hpp
  /run/media/survari/Survari/Projekte/C++/test/cmds/Output.hpp
  /run/media/survari/Survari/Projekte/C++/test/cmds/StringOps.hpp
  /run/media/survari/Survari/Projekte/C++/test/main.cpp
+ /run/media/survari/Survari/Projekte/C++/test/objects/Command.hpp
+ /run/media/survari/Survari/Projekte/C++/test/objects/Goto.hpp
+ /run/media/survari/Survari/Projekte/C++/test/objects/Integer.hpp
+ /run/media/survari/Survari/Projekte/C++/test/objects/PVariable.hpp
+ /run/media/survari/Survari/Projekte/C++/test/objects/Parser.hpp
+ /run/media/survari/Survari/Projekte/C++/test/objects/String.hpp
+ /run/media/survari/Survari/Projekte/C++/test/objects/Tokenizer.hpp

@@ -4,8 +4,8 @@
 #include <stdlib.h>
 
 #include "LangVars.hpp"
-#include "Tokenizer.hpp"
-#include "Parser.hpp"
+#include "objects/Tokenizer.hpp"
+#include "objects/Parser.hpp"
 
 int main(int argc, char *args[])
 {

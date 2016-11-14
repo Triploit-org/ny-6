@@ -162,9 +162,7 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... windows"
 .PHONY : help
-
 
 
 

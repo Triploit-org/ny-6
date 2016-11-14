@@ -5,11 +5,11 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
-#include "LangVars.hpp"
-#include "CPPSource.hpp"
+#include "../LangVars.hpp"
+#include "../CPPSource.hpp"
 #include "Goto.hpp"
-#include "Gotos.hpp"
-#include "StringCheck.hpp"
+#include "../Gotos.hpp"
+#include "../StringCheck.hpp"
 
 #ifndef TEST_PARSER_HPP
 #define TEST_PARSER_HPP
@@ -40,7 +40,7 @@ public:
             {
                 std::string marke = code[i].substr(1, code[i].length() - 2);
 
-                /*
+
                 if (StringCH.isNumber(marke))
                 {
                     std::cout << "[ MAIN ]:[ PRAE ]:[ INVALID_GOTO_LABEL:" << marke
@@ -58,7 +58,7 @@ public:
                     }
                 }
 
-                if (isfm && marke != "main")
+                /*if (isfm && marke != "main")
                 {
                     std::cout << "[ MAIN ]:[ PRAE ]:[ FIRST_IS_NOT_MAIN:" << marke
                               << " ] Die erste Sprungmarke die deklariert wird muss \"main\" heißen!" << std::endl;
@@ -67,8 +67,7 @@ public:
                 else if (isfm && marke == "main")
                 {
                     isfm = false;
-                }
-                */
+                }*/
 
                 Goto g;
                 g.setName(marke);
@@ -92,10 +91,6 @@ public:
             Gotos.setI((Gotos.getI() + 1));
         }
 
-        if (Gotos.getGoto(aktgoto).getIndex() != -999)
-        {
-        }
-
         CPPSource.addRawSource("");
         aktgoto = "";
 
@@ -109,6 +104,7 @@ public:
 
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
+
             if (code[i].substr(0, 1) == "{" && code[i].substr(code[i].length() - 1, code[i].length() - 2) == "}")
             {
                 std::string marke = code[i].substr(1, code[i].length() - 2);

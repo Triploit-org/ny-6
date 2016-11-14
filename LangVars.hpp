@@ -7,16 +7,17 @@
 
 #include <iostream>
 #include <vector>
-#include "Command.hpp"
+#include "objects/Command.hpp"
 #include "cmds/Define.hpp"
 #include "cmds/Mov.hpp"
 #include "cmds/Output.hpp"
-#include "Goto.hpp"
+#include "objects/Goto.hpp"
 #include "cmds/Maths.hpp"
 #include "cmds/EqualsInt.hpp"
 #include "cmds/EqualsString.hpp"
 #include "cmds/Input.hpp"
 #include "cmds/StringOps.hpp"
+#include "cmds/IfDefInc.hpp"
 
 class System
 {
@@ -184,6 +185,36 @@ public:
         gca.setFunction(gca_string);
         gca.setArgCount(3);
 
+        Command ifnd;
+        ifnd.setName("%ifnd");
+        ifnd.setFunction(prae_ifndef);
+        ifnd.setArgCount(2);
+
+        Command ifd;
+        ifd.setName("%ifd");
+        ifd.setFunction(prae_ifdef);
+        ifd.setArgCount(2);
+
+        Command undef;
+        undef.setName("%undef");
+        undef.setFunction(prae_undef);
+        undef.setArgCount(1);
+
+        Command inc;
+        inc.setName("%inc");
+        inc.setFunction(include_file);
+        inc.setArgCount(1);
+
+        Command err;
+        err.setName("%err");
+        err.setFunction(prae_error);
+        err.setArgCount(1);
+
+        Command pdef;
+        pdef.setName("%def");
+        pdef.setFunction(prae_define);
+        pdef.setArgCount(1);
+
         commands.push_back(moi);
         commands.push_back(mos);
         commands.push_back(defi);
@@ -205,6 +236,12 @@ public:
         commands.push_back(inp);
         commands.push_back(sti);
         commands.push_back(gca);
+        commands.push_back(err);
+        commands.push_back(ifnd);
+        commands.push_back(ifd);
+        commands.push_back(pdef);
+        commands.push_back(undef);
+        commands.push_back(inc);
     }
 } System;
 

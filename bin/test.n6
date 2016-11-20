@@ -1,15 +1,3 @@
-defi    z1, [1];
-defi    z2, [46];
-%def    lala;
-%undef  lala;
-%def    lala;
-{main}
-        mos     "Hallo Welt", _exs;
-
-        gca     _exs, z1, _cxs;
-        prv     _cxs;@
-
-        prv     _fos;@
-        %err    "Wiederholung!";
-        gt      main;
+{main}  say     "Hallo Welt!";
         end;
+        endf;

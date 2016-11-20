@@ -90,6 +90,7 @@ void gca_string(std::vector<std::string> args)
     std::string val;
 
     val = Variables.getStringVariable(name).getStringValue()[iindex];
+    //std::cout << "GCA >> INDEX=" << iindex << " STR=\"" << Variables.getStringVariable(name).getStringValue() << "\"" << std::endl;
     Variables.setStringVariable(ovar, val);
 }
 #endif //TEST_STRINGOPS_HPP

@@ -3,6 +3,7 @@
 
 CMakeFiles/ny6.dir/main.cpp.o
  /run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
+ /run/media/survari/Survari/Projekte/C++/test/Error.hpp
  /run/media/survari/Survari/Projekte/C++/test/Gotos.hpp
  /run/media/survari/Survari/Projekte/C++/test/LangVars.hpp
  /run/media/survari/Survari/Projekte/C++/test/PraeVars.hpp
@@ -23,5 +24,6 @@ CMakeFiles/ny6.dir/main.cpp.o
  /run/media/survari/Survari/Projekte/C++/test/objects/Integer.hpp
  /run/media/survari/Survari/Projekte/C++/test/objects/PVariable.hpp
  /run/media/survari/Survari/Projekte/C++/test/objects/Parser.hpp
+ /run/media/survari/Survari/Projekte/C++/test/objects/Scope.hpp
  /run/media/survari/Survari/Projekte/C++/test/objects/String.hpp
  /run/media/survari/Survari/Projekte/C++/test/objects/Tokenizer.hpp

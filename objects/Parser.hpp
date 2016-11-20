@@ -20,7 +20,7 @@ private:
     std::vector<std::string> args;
     std::vector<Command> cmds = System.getCommands();
     int i = Gotos.getI();
-    std::string aktgoto;
+    std::string aktgoto = "public__aXX";
     std::vector<std::string> code;
 
 public:
@@ -32,7 +32,6 @@ public:
     void parseAll()
     {
         bool isfm = true;
-        CPPSource.addRawSource("int main()\n{");
 
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
@@ -77,13 +76,20 @@ public:
 
                 // std::cout << "Sprungmarke(PRAE):\t" << code[i] << " -> " << marke << " || " << i << std::endl;
                 aktgoto = marke;
+
+                Scope n;
+                n.setName(marke);
+                // std::cout << "Scope(PRAE):\t" << n.getName() << std::endl;
+
+                Variables.addScope(n);
+                CPPSource.addRawSource("int " + marke + "();");
             }
             else
             {
-
                 if (code[i] == "endf")
                 {
-                    std::cout << Gotos.getGoto(aktgoto).isClosed() << std::endl;
+                    Gotos.setGotoClosed(aktgoto, true);
+                    //std::cout << "Closed? " << aktgoto << " " << Gotos.getGoto(aktgoto).isClosed() << std::endl;
                 }
             }
 
@@ -92,27 +98,43 @@ public:
         }
 
         CPPSource.addRawSource("");
-        aktgoto = "";
+        aktgoto = "public__aXX";
 
         Gotos.setI(0);
-        // else
-        // {
-        //     std::cout << "[ MAIN ]:[ COMPILER ]:[ C++ ]:[ MAIN_NOT_FOUND ] Es muss eine Main-Funktion geben!"
-        //               << std::endl;
-        //     exit(0);
-        // }
+        bool gmain;
+
+        if (Gotos.findGoto("main"))
+        {
+            gmain = true;
+        }
+        else
+        {
+            std::cout << "[ MAIN ]:[ COMPILER ]:[ CPP ]:[ MAIN_NOT_FOUND ] Es muss eine Main-Funktion geben!"
+                      << std::endl;
+            exit(0);
+        }
 
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
-
             if (code[i].substr(0, 1) == "{" && code[i].substr(code[i].length() - 1, code[i].length() - 2) == "}")
             {
+                if (gmain && !Variables.isCpp())
+                {
+                    i = Gotos.getGoto("main").getIndex();
+                    Gotos.setI(i);
+                    gmain = false;
+
+                    Scope n;
+                    n.setName("main");
+                    Variables.setAktScope(n);
+                }
+
                 std::string marke = code[i].substr(1, code[i].length() - 2);
                 //std::cout << "Sprungmarke:\t\t" << code[i] << " -> " << marke << " || " << i << std::endl;
 
                 if (!Gotos.getGoto(marke).isAlreadyDefined())
                 {
-                    CPPSource.addRawSource(marke+":");
+                    CPPSource.addRawSource("int " + marke + "()\n{");
                     Gotos.getGoto(marke).setAlreadyDefined(true);
 
                     aktgoto = marke;
@@ -134,7 +156,8 @@ public:
 
             for (int j = 0; j < cmds.size(); j++)
             {
-                if (code[i] == cmds[j].getName())
+                if (code[i] ==
+                    cmds[j].getName()) //&& aktgoto != "public__aXX" && (code[i] != "defi" || code[i] != "defs"))
                 {
                     for (int ar = 0; ar <= cmds[j].getArgCount(); ar++)
                     {
@@ -152,16 +175,19 @@ public:
                         std::string err = "[ MAIN ]:[ PARSER ]:[ MISSING_SEMICOLON ] Fehlendes Semikolon/Schlusszeichen! ";
                         err += "\n";
                         System.printError(err);
+                        exit(0);
                     }
                 }
 
                 if (code[i] == "[NL:97:LN]")
                 {
                     System.addLineCount();
+                    Gotos.addLineCount();
+                    Variables.addLineCount();
                 }
                 else
                 {
-                    if (code[i] == "gt")
+                    if (code[i] == "cl" && aktgoto != "public_aXX")
                     {
                         std::string gt = code[i + 1];
                         Gotos.setLJ(i);
@@ -179,20 +205,29 @@ public:
                                 Gotos.setI(Gotos.getGoto(gt).getIndex());
                             }
 
-
-
                             CPPSource.addSource(gt + "()");
                             CPPSource.addRawSource("");
-                            //std::cout << "BEGINNE :: " << gt << std::endl;
-                            //aktgoto = gt;
+
+                            Variables.setAktScope(Variables.getScope(gt));
+                            //Variables.listScopes();
+
+                            // std::cout << ">>  " << Variables.getScope("main").getIntegers().size() << std::endl;
+                            // std::cout << "BEGINNE :: " << gt << std::endl;
+
+                            // aktgoto = gt;
                             break;
                         }
                     }
-                    else if (code[i] == "end")
+                    else if (code[i] == "end" && aktgoto != "public_aXX")
                     {
                         if (!Variables.isCpp())
                             exit(0);
                         CPPSource.addSource("exit(0)");
+                        break;
+                    }
+                    else if (code[i] == "endf")
+                    {
+                        CPPSource.addRawSource("}");
                         break;
                     }
                 }
@@ -202,7 +237,7 @@ public:
             //std::cout << Gotos.getI() << std::endl;
         }
 
-        CPPSource.addRawSource("\n\treturn 0;\n}");
+        //CPPSource.addRawSource("\n\treturn 0;\n}");
     }
 };
 

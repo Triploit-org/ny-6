@@ -29,7 +29,7 @@ void print_value(std::vector<std::string> args)
     }
     else
     {
-        std::cout << "[ MAIN ]:[ DEFS ]:[ VALUE_NOT_FOUND:"<< args[1] <<" ] Die angegebene Variable existiert nicht!" << std::endl;
+        std::cout << "[ MAIN ]:[ PRV ]:[ VALUE_NOT_FOUND:"<< args[1] <<" ] Die angegebene Variable existiert nicht!" << std::endl;
         exit(0);
     }
 }

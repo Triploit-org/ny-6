@@ -9,6 +9,12 @@
 
 int main(int argc, char *args[])
 {
+    Scope public__aXX;
+    public__aXX.setName("public__aXX");
+
+    Variables.addScope(public__aXX);
+    Variables.setAktScope(public__aXX);
+
     System.initCommands();
     Variables.initStrings();
     Variables.initInteger();
@@ -25,22 +31,23 @@ int main(int argc, char *args[])
     CPPSource.addRawSource("#include <iostream>");
     CPPSource.addRawSource("#include <cstdlib>");
     CPPSource.addRawSource("#include <cstdio>\n");
+    CPPSource.addRawSource("#include <cmath>\n");
     CPPSource.addRawSource("");
 
-    CPPSource.addRawSource("int _fos;\n#ifdef _WIN32");
-    CPPSource.addRawSource("_fos = 0;");
+    CPPSource.addRawSource("#ifdef _WIN32");
+    CPPSource.addRawSource("int _fos = 0;");
     CPPSource.addRawSource("#elif _WIN64");
-    CPPSource.addRawSource("_fos = 1;");
+    CPPSource.addRawSource("int _fos = 1;");
     CPPSource.addRawSource("#elif __unix || __unix__");
-    CPPSource.addRawSource("_fos = 2;");
+    CPPSource.addRawSource("int _fos = 2;");
     CPPSource.addRawSource("#elif __APPLE__ || __MACH__");
-    CPPSource.addRawSource("_fos = 3;");
+    CPPSource.addRawSource("int _fos = 3;");
     CPPSource.addRawSource("#elif __linux__");
-    CPPSource.addRawSource("_fos = 4;");
+    CPPSource.addRawSource("int _fos = 4;");
     CPPSource.addRawSource("#elif __FreeBSD__");
-    CPPSource.addRawSource("_fos = 5;");
+    CPPSource.addRawSource("int _fos = 5;");
     CPPSource.addRawSource("#else");
-    CPPSource.addRawSource("_fos = 6;");
+    CPPSource.addRawSource("int _fos = 6;");
     CPPSource.addRawSource("#endif");
     CPPSource.addRawSource("");
 
@@ -63,21 +70,21 @@ int main(int argc, char *args[])
     /*
      * TODO ============================== BEGIN
      *
-     *  TODO >> NQI   COMMAND                  |   | >>  Equals
+     *  TODO >> NQI   COMMAND                  | X | >>  Equals
      *  TODO >> EQI   COMMAND                  | X | >>  Equals
-     *  TODO >> GQI   COMMAND                  |   | >>  Equals
-     *  TODO >> LQI   COMMAND                  |   | >>  Equals
+     *  TODO >> GQI   COMMAND                  | X | >>  Equals
+     *  TODO >> LQI   COMMAND                  | X | >>  Equals
      *
-     *  TODO >> NQS   COMMAND                  |   | >>  Equals
-     *  TODO >> EQS   COMMAND                  |   | >>  Equals
-     *  TODO >> GQS   COMMAND                  |   | >>  Equals
-     *  TODO >> LQS   COMMAND                  |   | >>  Equals
+     *  TODO >> NQS   COMMAND                  | X | >>  Equals
+     *  TODO >> EQS   COMMAND                  | X | >>  Equals
+     *  TODO >> GQS   COMMAND                  | X | >>  Equals
+     *  TODO >> LQS   COMMAND                  | X | >>  Equals
      *
      *  TODO >> SLEEP COMMAND                  |   | >>  Maths
-     *  TODO >> GCA   COMMAND                  |   | >>  StringOps
-     *  TODO >> STI   COMMAND                  |   | >>  StringOps
+     *  TODO >> GCA   COMMAND                  | X | >>  StringOps
+     *  TODO >> STI   COMMAND                  | X | >>  StringOps
      *
-     *  TODO >> INCLUDE FUNCTION               |   | >>  Tokenizer
+     *  TODO >> INCLUDE FUNCTION               | / | >>  Tokenizer
      *
      * TODO ================================= END
      */
@@ -102,7 +109,7 @@ int main(int argc, char *args[])
         std::string code = "";
         std::string line;
 
-        while(true)
+        while (true)
         {
             std::cout << "> ";
             std::getline(std::cin, line);
@@ -127,12 +134,13 @@ int main(int argc, char *args[])
                           << " >> run   >> Liste der Ny++6-Befehle ausfuehren" << std::endl << std::endl
                           << "Info: Alle End-Ny++-Befehle werden ignoriert!" << std::endl
                           << "Info: Falls ein Error auftritt, wird die Shell beendet."
-                << std::endl;
+                          << std::endl;
             }
             else if (line == "run")
             {
                 std::string ans;
-                std::cout << "[ WARN ] Danach wird der temporaere Speicher..." << std::endl << "[ WARN ] ...mit allen Befehlen geloescht, fortfahren? j/n :: ";
+                std::cout << "[ WARN ] Danach wird der temporaere Speicher..." << std::endl
+                          << "[ WARN ] ...mit allen Befehlen geloescht, fortfahren? j/n :: ";
                 std::cin >> ans;
 
                 if (ans == "j" || ans == "J")
@@ -183,9 +191,21 @@ int main(int argc, char *args[])
     {
         while (std::getline(infile, line))
         {
+            if (line.substr(0, 4) == "%inc")
+            {
+                line = line.substr(5, line.size());
+                std::ifstream f = std::ifstream(line);
 
-            code = code + line + " [NL:97:LN] ";
-            line = "";
+                while (std::getline(f, line))
+                {
+                    code = code + line + " [NL:97:LN] ";
+                }
+            }
+            else
+            {
+                code = code + line + " [NL:97:LN] ";
+                line = "";
+            }
         }
 
 

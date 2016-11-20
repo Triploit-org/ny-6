@@ -8,16 +8,58 @@
 #include <vector>
 #include "objects/String.hpp"
 #include "objects/Integer.hpp"
+#include "objects/Scope.hpp"
 
 class Variables
 {
 private:
-    std::vector<String> strings;
-    std::vector<Integer> integer;
+    std::vector<Scope> scopes;
+    Scope aktscope;
 
     bool iscpp = false;
+    int line = 1;
 
 public:
+    void listScopes()
+    {
+        for (int i = 0; i < scopes.size(); i++)
+        {
+            std::cout << scopes[i].getName() << std::endl;
+
+            for (int j = 0; j < scopes[i].getIntegers().size(); j++)
+            {
+                std::cout << "\tINT:" << scopes[i].getIntegers()[j].getName() << std::endl;
+            }
+
+            std::cout << std::endl;
+
+            for (int j = 0; j < scopes[i].getStrings().size(); j++)
+            {
+                std::cout << "\tSTR:" << scopes[i].getStrings()[j].getName() << std::endl;
+            }
+        }
+    }
+
+    void addLineCount()
+    {
+        line = line + 1;
+    }
+
+    int getLine()
+    {
+        return line;
+    }
+
+    std::vector<Scope> getScopes()
+    {
+        return scopes;
+    }
+
+    void addScope(Scope s)
+    {
+        scopes.push_back(s);
+    }
+
     bool isCpp()
     {
         return iscpp;
@@ -26,6 +68,39 @@ public:
     void setCpp(bool b)
     {
         iscpp = b;
+    }
+
+    Scope getAktScope()
+    {
+        return aktscope;
+    }
+
+    Scope getScope(std::string n)
+    {
+        for (int i = 0; i < scopes.size(); i++)
+        {
+            if (scopes[i].getName() == n)
+            {
+                return scopes[i];
+            }
+        }
+
+        std::cout << "[ MAIN ]:[ SYS ]:[ FATAL ]:[ SCOPE_NOT_FOUND:" << n << " ] Bereich nicht gefunden!" << std::endl;
+    }
+
+    void setAktScope(Scope s)
+    {
+        for (int i = 0; i < scopes.size(); i++)
+        {
+            if (scopes[i].getName() == aktscope.getName())
+            {
+                scopes[i].setIntegers(aktscope.getIntegers());
+                scopes[i].setStrings(aktscope.getStrings());
+            }
+        }
+
+        aktscope = s;
+        //std::cout << "SET SCOPE TO >> " << s.getName() << std::endl;
     }
 
     void initStrings()
@@ -61,12 +136,12 @@ public:
         exs.setWriteAble(true);
 
 
-        strings.push_back(snull);
-        strings.push_back(axs);
-        strings.push_back(bxs);
-        strings.push_back(cxs);
-        strings.push_back(dxs);
-        strings.push_back(exs);
+        aktscope.addStr(snull);
+        aktscope.addStr(axs);
+        aktscope.addStr(bxs);
+        aktscope.addStr(cxs);
+        aktscope.addStr(dxs);
+        aktscope.addStr(exs);
     }
 
     void initInteger()
@@ -101,19 +176,28 @@ public:
         exi.setIntValue(0);
         exi.setWriteAble(true);
 
-        integer.push_back(inull);
-        integer.push_back(axi);
-        integer.push_back(bxi);
-        integer.push_back(cxi);
-        integer.push_back(dxi);
-        integer.push_back(exi);
+        aktscope.addInt(inull);
+        aktscope.addInt(axi);
+        aktscope.addInt(bxi);
+        aktscope.addInt(cxi);
+        aktscope.addInt(dxi);
+        aktscope.addInt(exi);
     }
 
     bool existsStringVariable(std::string name)
     {
-        for (int i = 0; i < strings.size(); i++)
+        for (int i = 0; i < aktscope.getStrings().size(); i++)
         {
-            if (strings[i].getName() == name)
+            if (aktscope.getStrings()[i].getName() == name)
+            {
+                return true;
+            }
+        }
+
+        Scope p = getScope("public__aXX");
+        for (int i = 0; i < p.getStrings().size(); i++)
+        {
+            if (p.getStrings()[i].getName() == name)
             {
                 return true;
             }
@@ -123,9 +207,18 @@ public:
 
     bool existsIntegerVariable(std::string name)
     {
-        for (int i = 0; i < integer.size(); i++)
+        for (int i = 0; i < aktscope.getIntegers().size(); i++)
         {
-            if (integer[i].getName() == name)
+            if (aktscope.getIntegers()[i].getName() == name)
+            {
+                return true;
+            }
+        }
+
+        Scope p = getScope("public__aXX");
+        for (int i = 0; i < p.getIntegers().size(); i++)
+        {
+            if (p.getIntegers()[i].getName() == name)
             {
                 return true;
             }
@@ -135,15 +228,27 @@ public:
 
     String getStringVariable(std::string name)
     {
-        for (int i = 0; i < strings.size(); i++)
+        for (int i = 0; i < aktscope.getStrings().size(); i++)
         {
-            if (strings[i].getName() == name)
+            if (aktscope.getStrings()[i].getName() == name)
             {
-                return strings[i];
+                return aktscope.getStrings()[i];
             }
         }
 
-        std::cout << "[ MAIN ]:[ VARSYS:STR ]:[ NOT_FOUND:" << name << " ] String-Variable nicht gefunden!" << std::endl;
+        Scope p = getScope("public__aXX");
+        for (int i = 0; i < p.getStrings().size(); i++)
+        {
+            if (p.getStrings()[i].getName() == name)
+            {
+                // std::cout << "!! GETSTRING " << name << " == " << p.getStrings()[i].getName() << std::endl;
+                return p.getStrings()[i];
+            }
+            // std::cout << "GETSTRING " << name << " != " << p.getStrings()[i].getName() << std::endl;
+        }
+
+        std::cout << "[ MAIN ]:[ VARSYS:STR ]:[ NOT_FOUND:" << name << " ] String-Variable nicht gefunden!"
+                  << std::endl;
 
         String str;
         str.setName("[NotFound]");
@@ -153,53 +258,82 @@ public:
 
     void setStringVariable(std::string name, std::string value)
     {
-        for (int i = 0; i < strings.size(); i++)
+        for (int i = 0; i < aktscope.getStrings().size(); i++)
         {
-            if (strings[i].getName() == name)
+            if (aktscope.getStrings()[i].getName() == name)
             {
-                strings[i].setStringValue(value);
-                //std::cout << "NAME >> " << strings[i].getStringValue() << std::endl;
+                aktscope.setStr(name, value);
+                //std::cout << "NAME >> " << aktscope.getStrings()[i].getStringValue() << std::endl;
+            }
+        }
+
+        for (int i = 0; i < scopes.size(); i++)
+        {
+            if (scopes[i].getName() == "public__aXX")
+            {
+                scopes[i].setStr(name, value);
             }
         }
     }
 
     Integer getIntegerVariable(std::string name)
     {
-        for (int i = 0; i < integer.size(); i++)
+        for (int i = 0; i < aktscope.getIntegers().size(); i++)
         {
-            if (integer[i].getName() == name)
+            if (aktscope.getIntegers()[i].getName() == name)
             {
-                return integer[i];
+                return aktscope.getIntegers()[i];
             }
         }
 
-        std::cout << "[ MAIN ]:[ VARSYS:INT ]:[ NOT_FOUND:" << name << " ] Integer-Variable nicht gefunden!" << std::endl;
+        Scope p = getScope("public__aXX");
+        for (int i = 0; i < p.getIntegers().size(); i++)
+        {
+            if (p.getIntegers()[i].getName() == name)
+            {
+                return p.getIntegers()[i];
+            }
+        }
 
-        Integer it;
-        it.setName("[NotFound]");
-        it.setIntValue(-23);
-        return it;
+        std::cout << "[ MAIN ]:[ VARSYS:STR ]:[ NOT_FOUND:" << name << " ] String-Variable nicht gefunden!"
+                  << std::endl;
+
+        Integer str;
+        str.setName("[NotFound]");
+        str.setIntValue(-999);
+        return str;
     }
 
     void setIntegerVariable(std::string name, int value)
     {
-        for (int j = 0; j < integer.size(); j++)
+        for (int i = 0; i < aktscope.getStrings().size(); i++)
         {
-            if (integer[j].getName() == name)
+            if (aktscope.getStrings()[i].getName() == name)
             {
-                integer[j].setIntValue(value);
+                aktscope.setInt(name, value);
+                //std::cout << "NAME >> " << aktscope.getStrings()[i].getStringValue() << std::endl;
+            }
+        }
+
+        for (int i = 0; i < scopes.size(); i++)
+        {
+            if (scopes[i].getName() == "public__aXX")
+            {
+                scopes[i].setInt(name, value);
             }
         }
     }
 
     void addString(String s)
     {
-        strings.push_back(s);
+        aktscope.addStr(s);
+        //std::cout << " ADD:STR >> " << s.getName() << std::endl;
     }
 
     void addInteger(Integer i)
     {
-        integer.push_back(i);
+        aktscope.addInt(i);
+        //std::cout << " ADD:INT >> " << i.getName() << std::endl;
     }
 
     bool checkGoto(std::string g)
@@ -208,12 +342,12 @@ public:
 
     std::vector<Integer> getIntegerVariables()
     {
-        return integer;
+        return aktscope.getIntegers();
     }
 
     std::vector<String> getStringVariables()
     {
-        return strings;
+        return aktscope.getStrings();
     }
 
 } Variables;

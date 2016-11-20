@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include "../Variables.hpp"
 #include "../CPPSource.hpp"
+#include "../Error.hpp"
 
 void define_string(std::vector<std::string> args)
 {
@@ -22,28 +23,28 @@ void define_string(std::vector<std::string> args)
 
     if (Variables.existsStringVariable(name) || Variables.existsIntegerVariable(name))
     {
-        std::cout << "[ MAIN ]:[ DEFS ]:[ REDEFINITION_OF:" << name << " ] Variable bereits deklariert!" << std::endl;
+        Error.printErr("[ MAIN ]:[ DEFS ]:[ REDEFINITION_OF:", name, " ] Variable bereits deklariert!");
         exit(0);
     }
 
     if (value.substr(0, 1) == "\"" && value.substr(value.length() - 1, value.length() - 2) == "\"")
     {
-        CPPSource.addSource("std::string "+name+" = "+value);
+        CPPSource.addSource("std::string " + name + " = " + value);
         value = value.substr(1, value.length() - 2);
     }
     else
     {
         if (Variables.existsIntegerVariable(value))
         {
-            std::cout << "[ MAIN ]:[ DEFS ]:[ VALUE_IS_INTEGER ] Die angegebene Variable beinhaltet eine Zahl!"
-                      << std::endl;
+            Error.printErr("[ MAIN ]:[ DEFS ]:[ VALUE_IS_INTEGER ] Die angegebene Variable beinhaltet eine Zahl!");
             exit(0);
         }
 
         if (!Variables.existsStringVariable(value))
         {
-            std::cout << "[ MAIN ]:[ DEFS ]:[ VALUE_NOT_FOUND:" << value
-                      << " ] Die angegebene Variable existiert nicht!" << std::endl;
+            //std::cout << "OUT >> " << value << std::endl;
+            Error.printErr("[ MAIN ]:[ DEFS ]:[ VALUE_NOT_FOUND:", value,
+                           " ] Die angegebene Variable existiert nicht!");
             exit(0);
         }
         else
@@ -69,7 +70,7 @@ void define_int(std::vector<std::string> args)
 
     if (Variables.existsStringVariable(name) || Variables.existsIntegerVariable(name))
     {
-        std::cout << "[ MAIN ]:[ DEFI ]:[ REDEFINITION_OF:" << name << " ] Variable bereits deklariert!" << std::endl;
+        Error.printErr("[ MAIN ]:[ DEFI ]:[ REDEFINITION_OF:", name, " ] Variable bereits deklariert!");
         exit(0);
     }
 
@@ -77,8 +78,7 @@ void define_int(std::vector<std::string> args)
 
     if (Nvalue.substr(0, 1) == "\"" && Nvalue.substr(Nvalue.length() - 1, Nvalue.length() - 2) == "\"")
     {
-        std::cout << "[ MAIN ]:[ DEFI ]:[ VALUE_IS_INTEGER:" + Nvalue + " ] Der angegebene Wert ist ein String!"
-                  << std::endl;
+        Error.printErr("[ MAIN ]:[ DEFI ]:[ VALUE_IS_INTEGER:" + Nvalue + " ] Der angegebene Wert ist ein String!");
         exit(0);
     }
     else if (Nvalue.substr(0, 1) == "[" && Nvalue.substr(Nvalue.length() - 1, Nvalue.length() - 2) == "]")
@@ -90,16 +90,15 @@ void define_int(std::vector<std::string> args)
     {
         if (Variables.existsStringVariable(Nvalue))
         {
-            std::cout << "[ MAIN ]:[ DEFI ]:[ VALUE_IS_STRING:" + Nvalue +
-                         " ] Die angegebene Variable beinhaltet einen String!"
-                      << std::endl;
+            Error.printErr("[ MAIN ]:[ DEFI ]:[ VALUE_IS_STRING:" + Nvalue +
+                           " ] Die angegebene Variable beinhaltet einen String!");
             exit(0);
         }
 
         if (!Variables.existsIntegerVariable(Nvalue))
         {
-            std::cout << "[ MAIN ]:[ DEFI ]:[ VALUE_NOT_FOUND:" << Nvalue
-                      << " ] Die angegebene Variable existiert nicht!" << std::endl;
+            Error.printErr("[ MAIN ]:[ DEFI ]:[ VALUE_NOT_FOUND:", Nvalue,
+                           " ] Die angegebene Variable existiert nicht!");
             exit(0);
         }
         else

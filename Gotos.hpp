@@ -13,11 +13,24 @@ class Gotos
 {
 private:
     std::vector<Goto> gotos;
+    std::vector<Goto> labels;
     std::vector<int> goto_index;
     int i;
     int lj;
+    int line = 1;
 
 public:
+
+    void addLineCount()
+    {
+        line = line + 1;
+    }
+
+    int getLine()
+    {
+        return line;
+    }
+
     int getI()
     {
         return i;

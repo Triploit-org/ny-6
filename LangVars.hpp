@@ -185,25 +185,10 @@ public:
         gca.setFunction(gca_string);
         gca.setArgCount(3);
 
-        Command ifnd;
-        ifnd.setName("%ifnd");
-        ifnd.setFunction(prae_ifndef);
-        ifnd.setArgCount(2);
-
-        Command ifd;
-        ifd.setName("%ifd");
-        ifd.setFunction(prae_ifdef);
-        ifd.setArgCount(2);
-
         Command undef;
         undef.setName("%undef");
         undef.setFunction(prae_undef);
         undef.setArgCount(1);
-
-        Command inc;
-        inc.setName("%inc");
-        inc.setFunction(include_file);
-        inc.setArgCount(1);
 
         Command err;
         err.setName("%err");
@@ -214,6 +199,16 @@ public:
         pdef.setName("%def");
         pdef.setFunction(prae_define);
         pdef.setArgCount(1);
+
+        Command poi;
+        poi.setName("poi");
+        poi.setFunction(poi_variable);
+        poi.setArgCount(2);
+
+        Command mod;
+        mod.setName("mod");
+        mod.setFunction(mod_variable);
+        mod.setArgCount(2);
 
         commands.push_back(moi);
         commands.push_back(mos);
@@ -237,11 +232,10 @@ public:
         commands.push_back(sti);
         commands.push_back(gca);
         commands.push_back(err);
-        commands.push_back(ifnd);
-        commands.push_back(ifd);
+        commands.push_back(poi);
         commands.push_back(pdef);
         commands.push_back(undef);
-        commands.push_back(inc);
+        commands.push_back(mod);
     }
 } System;
 

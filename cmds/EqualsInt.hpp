@@ -41,7 +41,7 @@ void equals_equals_int(std::vector<std::string> args)
 
             if (v == v2)
             {
-                Gotos.setLJ(Gotos.getI());
+                Gotos.addLJ(Gotos.getI());
                 Gotos.setI(Gotos.getGoto(gtn).getIndex());
             }
         }
@@ -69,7 +69,7 @@ void equals_equals_int(std::vector<std::string> args)
 
                 if (v == v2)
                 {
-                    Gotos.setLJ(Gotos.getI());
+                    Gotos.addLJ(Gotos.getI());
                     Gotos.setI(Gotos.getGoto(gtn).getIndex());
                 }
             }
@@ -111,7 +111,7 @@ void not_equals_int(std::vector<std::string> args)
 
             if (v != v2)
             {
-                Gotos.setLJ(Gotos.getI());
+                Gotos.addLJ(Gotos.getI());
                 Gotos.setI(Gotos.getGoto(gtn).getIndex());
             }
         }
@@ -139,7 +139,7 @@ void not_equals_int(std::vector<std::string> args)
 
                 if (v != v2)
                 {
-                    Gotos.setLJ(Gotos.getI());
+                    Gotos.addLJ(Gotos.getI());
                     Gotos.setI(Gotos.getGoto(gtn).getIndex());
                 }
             }
@@ -181,7 +181,7 @@ void less_equals_int(std::vector<std::string> args)
 
             if (v < v2)
             {
-                Gotos.setLJ(Gotos.getI());
+                Gotos.addLJ(Gotos.getI());
                 Gotos.setI(Gotos.getGoto(gtn).getIndex());
             }
         }
@@ -209,7 +209,7 @@ void less_equals_int(std::vector<std::string> args)
 
                 if (v < v2)
                 {
-                    Gotos.setLJ(Gotos.getI());
+                    Gotos.addLJ(Gotos.getI());
                     Gotos.setI(Gotos.getGoto(gtn).getIndex());
                 }
             }
@@ -251,7 +251,7 @@ void greater_equals_int(std::vector<std::string> args)
 
             if (v > v2)
             {
-                Gotos.setLJ(Gotos.getI());
+                Gotos.addLJ(Gotos.getI());
                 Gotos.setI(Gotos.getGoto(gtn).getIndex());
             }
         }
@@ -279,7 +279,7 @@ void greater_equals_int(std::vector<std::string> args)
 
                 if (v > v2)
                 {
-                    Gotos.setLJ(Gotos.getI());
+                    Gotos.addLJ(Gotos.getI());
                     Gotos.setI(Gotos.getGoto(gtn).getIndex());
                 }
             }

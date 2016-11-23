@@ -1,2 +1,4 @@
+%def a2
+
 {ok}	say	"Dann halt ein OK!";
-	endf;
+	    endf;

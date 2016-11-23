@@ -193,13 +193,112 @@ int main(int argc, char *args[])
         {
             if (line.substr(0, 4) == "%inc")
             {
+                // std::cout << "INC!" << std::endl;
+
                 line = line.substr(5, line.size());
                 std::ifstream f = std::ifstream(line);
 
                 while (std::getline(f, line))
                 {
-                    code = code + line + " [NL:97:LN] ";
+                    if (line.substr(0, 4) == "%def")
+                    {
+                        line = line.substr(5, line.size());
+
+                        PVariable p;
+                        p.setName(line);
+                        PraeVars.addPVar(p);
+                    }
+                    else if (line.substr(0, 4) == "%undef")
+                    {
+                        line = line.substr(7, line.size());
+
+                        PVariable p;
+                        p.setName(line);
+                        PraeVars.removePVar(p.getName());
+                    }
+                    else
+                    {
+                        code = code + line + " [NL:97:LN] ";
+                    }
                 }
+            }
+            else if (line.substr(0, 6) == "%indic")
+            {
+                // std::cout << "INDIC!" << std::endl;
+
+                line = line.substr(7, line.size());
+                std::string file = "";
+                std::string var = "";
+
+                int ind = 0;
+
+                for (int i = 0; line[i] != ' '; i++)
+                {
+                    var += line[i];
+                    ind = i + 1;
+                }
+                ind++;
+
+                // std::cout << "WEITER" << std::endl;
+                // std::cout << ind << " < " << line.size() << std::endl;
+
+                for (int i = ind; line[i] != ' ' && i < line.size(); i++)
+                {
+                    file += line[i];
+                    // std::cout << "FILE=" << file << std::endl;
+                }
+
+                // %indic var test.n6 -> var test.txt
+
+                if (!PraeVars.existsVar(var))
+                {
+                    std::ifstream f = std::ifstream(file);
+
+                    while (std::getline(f, line))
+                    {
+                        if (line.substr(0, 4) == "%def")
+                        {
+                            line = line.substr(5, line.size());
+
+                            PVariable p;
+                            p.setName(line);
+                            PraeVars.addPVar(p);
+                            std::cout << "def " << p.getName() << std::endl;
+                        }
+                        else if (line.substr(0, 6) == "%undef")
+                        {
+                            line = line.substr(7, line.size());
+
+                            PVariable p;
+                            p.setName(line);
+                            PraeVars.removePVar(p.getName());
+                        }
+                        else
+                        {
+                            //std::cout << var << " " << file << "] " << line << std::endl;
+                            code = code + line + " [NL:97:LN] ";
+                        }
+                    }
+
+                }
+            }
+            else if (line.substr(0, 4) == "%def")
+            {
+                // std::cout << "DEF!" << std::endl;
+                line = line.substr(5, line.size());
+
+                PVariable p;
+                p.setName(line);
+                PraeVars.addPVar(p);
+            }
+            else if (line.substr(0, 4) == "%undef")
+            {
+                // std::cout << "UNDEF!" << std::endl;
+                line = line.substr(7, line.size());
+
+                PVariable p;
+                p.setName(line);
+                PraeVars.removePVar(p.getName());
             }
             else
             {

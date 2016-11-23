@@ -185,20 +185,10 @@ public:
         gca.setFunction(gca_string);
         gca.setArgCount(3);
 
-        Command undef;
-        undef.setName("%undef");
-        undef.setFunction(prae_undef);
-        undef.setArgCount(1);
-
         Command err;
         err.setName("%err");
         err.setFunction(prae_error);
         err.setArgCount(1);
-
-        Command pdef;
-        pdef.setName("%def");
-        pdef.setFunction(prae_define);
-        pdef.setArgCount(1);
 
         Command poi;
         poi.setName("poi");
@@ -233,8 +223,6 @@ public:
         commands.push_back(gca);
         commands.push_back(err);
         commands.push_back(poi);
-        commands.push_back(pdef);
-        commands.push_back(undef);
         commands.push_back(mod);
     }
 } System;

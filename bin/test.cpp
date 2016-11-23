@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <cstdio>
 
+#include <cmath>
+
 
 #ifdef _WIN32
 int _fos = 0;
@@ -32,30 +34,21 @@ std::string _cxs = "";
 std::string _dxs = "";
 std::string _exs = "";
 
+int ok();
 int main();
 
-	int z1 = 1;
-	int z2 = 46;
+int ok()
+{
+	std::cout << "Dann halt ein OK!";
+}
 int main()
 {
-	_exs = "Hallo Welt";
-	z1 = 1;
-	_cxs = _exs[1];
-	std::cout << "_CXS: ";
-	std::cout << _cxs;
+	std::cout << "Hallo Welt!";
 	std::cout << std::endl;
-	std::cout << "_EXS: ";
-	std::cout << _exs;
+	ok();
+
+	std::cout << "MAIN!";
 	std::cout << std::endl;
-	std::cout << "Z1:   ";
-	std::cout << z1;
-	std::cout << std::endl;
-	std::cout << "FOS:  ";
-	std::cout << _fos;
-	std::cout << std::endl;
-	std::string s2 = "Hallo 2";
-	_exs = _exs + s2;
-	std::cout << _exs;
 	exit(0);
 }
 

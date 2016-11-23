@@ -190,7 +190,6 @@ public:
                     if (code[i] == "cl" && aktgoto != "public_aXX")
                     {
                         std::string gt = code[i + 1];
-                        Gotos.setLJ(i);
 
                         if (Gotos.getGoto(gt).getIndex() == -999)
                         {
@@ -199,6 +198,9 @@ public:
                         }
                         else
                         {
+                            Gotos.addLJ(i);
+                            // std::cout << "ADDI: " << i << std::endl;
+
                             if (!Variables.isCpp())
                             {
                                 i = Gotos.getGoto(gt).getIndex();
@@ -218,6 +220,14 @@ public:
                             break;
                         }
                     }
+                    else if (code[i] == "return" && aktgoto != "public_aXX")
+                    {
+                        if (!Variables.isCpp())
+                            Gotos.setI(Gotos.getLJ());
+
+                        CPPSource.addSource("return 0");
+                        break;
+                    }
                     else if (code[i] == "end" && aktgoto != "public_aXX")
                     {
                         if (!Variables.isCpp())
@@ -228,6 +238,14 @@ public:
                     else if (code[i] == "endf")
                     {
                         CPPSource.addRawSource("}");
+
+                        if (!Variables.isCpp())
+                        {
+                            if (aktgoto == "main")
+                                exit(0);
+                            else
+                                Gotos.setI(Gotos.getLJ());
+                        }
                         break;
                     }
                 }

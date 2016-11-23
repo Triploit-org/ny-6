@@ -36,6 +36,18 @@ void print_value(std::vector<std::string> args)
 
 void say_text(std::vector<std::string> args)
 {
+    std::string ic = "[NL:97:LN]";
+
+    if (args[1] == ic) //|| !args[1].find(ic))
+    {
+        //std::cout << "SAY: " << args[1] << std::endl;
+        args[1] = "";
+    }
+    else if (args[1].substr(0, ic.size()) == ic)
+    {
+        args[1] = args[1].substr(ic.size(), args.size());
+    }
+
     if ((args[1].substr(0, 1) == "\"" && args[1].substr(args[1].length() - 1, args[1].length() - 2) == "\"") || (args[1].substr(0, 1) == "[" && args[1].substr(args[1].length() - 1, args[1].length() - 2) == "]"))
     {
         if (!Variables.isCpp())

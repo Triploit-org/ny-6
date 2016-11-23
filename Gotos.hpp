@@ -16,7 +16,7 @@ private:
     std::vector<Goto> labels;
     std::vector<int> goto_index;
     int i;
-    int lj;
+    std::vector<int> lj;
     int line = 1;
 
 public:
@@ -43,12 +43,13 @@ public:
 
     int getLJ()
     {
-        return lj;
+        lj.erase(lj.end()-1);
+        return lj[lj.size()-1];
     }
 
-    void setLJ(int l)
+    void addLJ(int l)
     {
-        lj = l;
+        lj.push_back(l);
     }
 
     Goto getGoto(std::string name)

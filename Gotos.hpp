@@ -43,12 +43,15 @@ public:
 
     int getLJ()
     {
+        int r = lj[lj.size()-1];
+        //std::cout << "\t>> " << r << std::endl;
         lj.erase(lj.end()-1);
-        return lj[lj.size()-1];
+        return r;
     }
 
     void addLJ(int l)
     {
+       // std::cout << "ADDI: " << l << std::endl;
         lj.push_back(l);
     }
 

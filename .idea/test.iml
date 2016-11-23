@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Gotos.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LangVars.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/objects/Goto.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/objects/PVariable.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/objects/Parser.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/objects/Command.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/objects/Tokenizer.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/objects/Scope.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/objects/String.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/objects/Integer.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PraeVars.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Variables.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmds/StringOps.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmds/Input.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmds/IfDefInc.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmds/EqualsInt.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmds/Mov.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmds/EqualsString.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmds/Maths.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmds/Define.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cmds/Output.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CPPSource.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Error.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/StringCheck.hpp" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file:///usr/lib/gcc/x86_64-pc-linux-gnu/6.2.1/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-pc-linux-gnu/6.2.1/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/lib/gcc/x86_64-pc-linux-gnu/6.2.1/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-pc-linux-gnu/6.2.1/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>

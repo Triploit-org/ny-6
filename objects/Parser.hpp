@@ -198,8 +198,7 @@ public:
                         }
                         else
                         {
-                            Gotos.addLJ(i);
-                            // std::cout << "ADDI: " << i << std::endl;
+                            Gotos.addLJ(i+1);
 
                             if (!Variables.isCpp())
                             {
@@ -225,6 +224,9 @@ public:
                         if (!Variables.isCpp())
                             Gotos.setI(Gotos.getLJ());
 
+                        //std::cout << "RETURN TO >> " << Gotos.getI() << std::endl;
+                        i = Gotos.getI();
+
                         CPPSource.addSource("return 0");
                         break;
                     }
@@ -242,9 +244,14 @@ public:
                         if (!Variables.isCpp())
                         {
                             if (aktgoto == "main")
+                            {
+                                //std::cout << "XXX" << std::endl;
                                 exit(0);
+                            }
                             else
+                            {
                                 Gotos.setI(Gotos.getLJ());
+                            }
                         }
                         break;
                     }

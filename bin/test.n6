@@ -1,17 +1,21 @@
+%indic a2 a2.n6
+
 {main}  say     "Hallo Welt!";@
         say     "MAIN!";@
 
-        cl	ok;
-        say	"Wieder MAIN!";@
+        cl	    ok;
+        cl      ok2;
+        say	    "Wieder MAIN!";@
 
         end;
         endf;
-	
-{ok}	mos	"Hallo", _axs;
-        mos	"Hallo", _cxs;
 
-        say	"Schleife?";@
-        nqs	_axs, _cxs, ok;
+{ok2}   mos	    "Hallo", _axs;
+        mos	    "Hallo", _cxs;
 
+        say	    "Schleife?";@
+        nqs	    _axs, _cxs, ok;
+
+        prv     _cxs;@
         return;
         endf;

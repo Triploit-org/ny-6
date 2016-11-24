@@ -4,6 +4,8 @@ Erstmal: Nein ich denke nicht das Ny++6 das Ende sein wird. Es wird vorraussicht
 
 -----------------------
 
+**Notiz:** Kapitel 4-7 und 8-12 sind in Arbeit.
+
 Ny++6, die vorerst letzte, große Version von Ny++. Es hat sich viel geändert und es ist viel dazugekommen.
 Ny++6 ist viel typisierter, hat aber dadurch auch mehr Funktionen.
 
@@ -207,18 +209,57 @@ Um eine String Variable direkt zu setzen, benutzen wir den Befehl `mos`:
 Damit wird der Wert `Hallo Welt` in die Variable `s` geschrieben.
 ##4 Rechnen
 ###Addition
+Damit wir in Ny++6 Variablen (Integer) addieren können, nutzen wir den Befehl `add`:
+
+	add [5], a;
+
+Auch mit Strings ist dies Möglich, dort wird der String einfach ans Ende rangehangen:
+
+	add "Hallo", s;
+
+"Was? -> Wohin?" ist die Frage.
 
 ###Division
+Damit wir in Ny++6 Variablen (Integer) dividieren können, nutzen wir den Befehl `add`:
+
+	div [5], a;
+
 ###Subtraktion
+Damit wir in Ny++6 Variablen (Integer) subtrahieren können, nutzen wir den Befehl `add`:
+
+	sub [5], a;
+
 ###Multiplikation
+Damit wir in Ny++6 Variablen (Integer) multiplitieren können, nutzen wir den Befehl `add`:
+
+	mul [5], a;
 
 ##5 Ausgabe
 
 ###Say - Sätze ausgeben
+
+Der Output ist sehr einfach gehalten, der Befehl lautet `say`:
+
+	say "Hallo Welt!";
+Und schon gibt es eine Ausgabe `Hallo Welt!`!
+
 ###Prv	- Variablen ausgeben
+
+Mit Say ist es nur möglich Strings und Integer auszugeben, mit dem Befehl `prv` geben wir Werte von Variablen aus:
+
+	prv a;
+
+###Zeilenumbruch
+Einen Zeilenumbruch rufen wir mit einem (oder mehreren) @ am Befehlsende hervor:
+
+	prv a;@
 
 ##6 Eingabe
 ###Inp - Input
+
+Um einen Input einer Variable entgegenzunehmen nutzen wir den Befehl `inp`. Dieser kann Strings als auch Variablen entgegennehmen:
+
+	inp a;
 
 ##7 Funktionen
 ###Grundaufbau
@@ -243,11 +284,12 @@ Um nun eine Funktion aufzurufen, nutzen wir `cl`, dies steht für "call":
 
 	{args}
 		prv _axs;@
+		return;
 		endf;
 
-###Funktion im Verlauf verlassen
+###Funktionen verlassen
 
-`endf`  beendet wie gesagt die Funktion und steht immer als letzter Befehl einer Funktion. Um früher schon aus der Funktion zu springen, benutzt man den Befehl `return` (Siehe nutzung Befehlsstambaum am Ende der Datei):
+`endf`  beendet wie gesagt die Funktion und steht immer als letzter Befehl einer Funktion. Um aus der Funktion zu springen, benutzt man den Befehl `return` (Siehe nutzung Befehlsstambaum am Ende der Datei):
 
 	{main}
 		defs s, "H";
@@ -262,40 +304,118 @@ Damit erstellen wir eine Variable `s` mit dem Wert `H` und verlassen die Funktio
 Direkte Argumente gibt es nicht, aber es ist möglich die System-/"besonderen" Variablen zu benutzen.
 
 ##8 Erweitert Rechnen(Potenzen und Rest)
-###Grundaufbau
-###Funktion im Verlauf verlassen
-###Argumente
+
+###Mod - Rest berechnen
+
+Den Rest kann man so berechnen, zu dem Aufbau ist wieder der Stammbaum am Ende der Datei da:
+
+	{main}
+		moi     [2], _axi;
+		moi     [8], _cxi;
+
+		mod     _axi, _cxi;
+		prv     _cxi;@
+
+		return;
+		endf;
 
 ##9 Werte vergleichen
 
+Werte vergleichen ist wie wir wissen das so ziemlich wichtigste in Programmiersprachen. Zwischen den vergleichen bei Strings und Integern besteht absolut kein Unterschied, außer der Befehlsname.
+
 ###Strings
 ####Eqs - Gleichheit
+
+Um die Gleichheit bei Strings zu prüfen nutzen wir den Befehl `eqs`:
+
+	eqs s, "Hallo Welt", funktion;
+Wenn s den Wert `Hallo Welt` hat, dann wird die Funktion `funktion` ausgeführt.
+Es ist dabei nur möglich einen String (`""`) als zweites Argument anzugeben!
+
 ####Nqs - Ungleichheit
+
+Um die Ungleichheit bei Strings zu prüfen nutzen wir den Befehl `nqs`:
+
+	nqs s, "Hallo Welt", funktion;
+Wenn s nicht den Wert `Hallo Welt` hat, dann wird die Funktion `funktion` ausgeführt.
+Es ist dabei nur möglich einen String (`""`) als zweites Argument anzugeben!
 ####Gqs - Größer
+
+Um die Länge bei Strings zu prüfen (größer) nutzen wir den Befehl `gqs`:
+
+	gqs s, "Hallo Welt", funktion;
+Wenn die Länge von s großer als die Länge von `Hallo Welt` ist, wird die Funktion `funktion`  ausgeführt.
 ####Lqs - Keiner
+
+Um die Länge bei Strings zu prüfen (kleiner) nutzen wir den Befehl `lqs`:
+
+	lqs s, "Hallo Welt", funktion;
+Wenn die Länge von s kleiner als die Länge von `Hallo Welt` ist, wird die Funktion `funktion` ausgeführt.
+Es ist dabei nur möglich einen String (`""`) als zweites Argument anzugeben!
+
 ###Integer
 ####Eqi - Gleichheit
+
+Auch hier nur wenig unterschied zum String. `eqi` prüft auf Gleichheit:
+
+	eqi a, [5], funktion;
+
+Wenn a gleich `5` ist, dann wird die Funktion `funktion` ausgeführt.
+
 ####Nqi - Ungleichheit
+
+`nqi` prüft auf Ungleichheit:
+
+	nqi a, [5], funktion;
+
+Wenn a nicht den Wert `5` hat, dann wird die Funktion `funktion` ausgeführt.
+
 ####Gqi - Größer
-####Lqi - Keiner
+`gqi` prüft auf einen größeren Wert:
+
+	gqi a, [5], funktion;
+
+Wenn a größer `5` ist, dann wird die Funktion `funktion` ausgeführt.
+####Lqi - Kleiner
+`lqi` prüft auf einen kleineren Wert:
+
+	lqi a, [5], funktion;
+
+Wenn a kleiner `5` ist, dann wird die Funktion `funktion` ausgeführt.
 
 ## 10 Dateien einbinden
-Inc - Einbinden von Dateien
-Indic - Einbinden nach Verlangen
+###Inc - Einbinden von Dateien
+
+Hier könnnen wir, wie in C++ mit `#include`, mit `%inc datei.n6` eine Datei einbinden und deren Code an dieser Zeile einfügen.
+
+###Indic - Einbinden nach Verlangen
+
+Damit dies dann nicht zu Errors kommt, gibt es den Befehl `%indic`, er überprüft ob eine Praeprozessorvariable existiert und wenn dies nicht der Fall ist, wird die Datei eingebunden, sonnst wird der Befehl ignoriert:
+
+test.n6:
+
+	%indic a2 a2.n6
+	...
+
+a2.n6:
+
+	%def a2
+
 
 ##11 Präprozessorbefehle
 
 ###Def
 
+Mit `%def` definieren wir eine Praeprozessorvariable erstellt. Diese Variablen haben, außer bei den Includes, keine weitere Beeinflusung auf den Programmverlauf.
+
 ###Undef
 
-###Indic
+Mit `%undef` löschen wir eine Praeprozessorvariable, damit man sie, falls notwendig, später wieder verwenden kann.
 
 ##12 Zusatzbefehle & Extras
-###Das Betriebssystem ermitteln
 ###Stringmanipulation
-###GCA - Get Char At
-###STI - String to Int
+####GCA - Get Char At
+####STI - String to Int
 
 #Befehlsstammbaum
 

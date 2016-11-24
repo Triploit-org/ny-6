@@ -247,8 +247,10 @@ void mod_variable(std::vector<std::string> args)
     {
         value = value.substr(1, value.length() - 2);
 
+        int i = Variables.getIntegerVariable(name).getIntValue() % std::stoi(value);
+
         if (!Variables.isCpp())
-            Variables.setIntegerVariable(name, Variables.getIntegerVariable(name).getIntValue() % std::stoi(value));
+            Variables.setIntegerVariable(name, i);
         CPPSource.addSource(name + " = " + name + " % " + value);
         return;
     }
@@ -259,8 +261,10 @@ void mod_variable(std::vector<std::string> args)
             Integer v = Variables.getIntegerVariable(value);
             int i = v.getIntValue();
 
+            i = Variables.getIntegerVariable(name).getIntValue() % i;
+
             if (!Variables.isCpp())
-                Variables.setIntegerVariable(name, Variables.getIntegerVariable(name).getIntValue() % i);
+                Variables.setIntegerVariable(name, i);
             CPPSource.addSource(name + " = " + name + " % " + value);
         }
         else
@@ -271,5 +275,6 @@ void mod_variable(std::vector<std::string> args)
         }
     }
 }
+
 
 #endif //TEST_MATHS_HPP

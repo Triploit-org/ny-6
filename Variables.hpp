@@ -86,6 +86,8 @@ public:
         }
 
         std::cout << "[ MAIN ]:[ SYS ]:[ FATAL ]:[ SCOPE_NOT_FOUND:" << n << " ] Bereich nicht gefunden!" << std::endl;
+        exit(0);
+        return Scope();
     }
 
     void setAktScope(Scope s)
@@ -338,6 +340,8 @@ public:
 
     bool checkGoto(std::string g)
     {
+        std::cout << "Not an implementet function: ny6:headers:cpp:variables:variables.hpp:(341:bool:checkGoto)!" << std::endl;
+        return false;
     }
 
     std::vector<Integer> getIntegerVariables()

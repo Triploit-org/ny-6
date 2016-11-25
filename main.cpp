@@ -263,7 +263,7 @@ int main(int argc, char *args[])
                             PVariable p;
                             p.setName(line);
                             PraeVars.addPVar(p);
-                            std::cout << "def " << p.getName() << std::endl;
+                            // std::cout << "def " << p.getName() << std::endl;
                         }
                         else if (line.substr(0, 6) == "%undef")
                         {
@@ -352,7 +352,7 @@ int main(int argc, char *args[])
 
             if (ans == "n" || ans == "No" || ans == "NO" || ans == "nO" || ans == "no")
             {
-                std::cout << "Nicht kompiliert. >> ENDE" << std::endl;
+                std::cout << "Nicht kompiliert >> ENDE" << std::endl;
                 return 0;
             }
         }

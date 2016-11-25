@@ -7,6 +7,7 @@
 
 #include <cctype>
 #include <iostream>
+#include <vector>
 
 class StringCheck
 {
@@ -16,6 +17,51 @@ public:
         std::string::const_iterator it = s.begin();
         while (it != s.end() && std::isdigit(*it)) ++it;
         return !s.empty() && it == s.end();
+    }
+
+    bool containsIllegalVariableCharacter(std::string s)
+    {
+        std::vector<char> il;
+
+        il.push_back('!');
+        il.push_back('\"');
+        il.push_back('\'');
+        il.push_back('$');
+        il.push_back('%');
+        il.push_back('&');
+        il.push_back('/');
+        il.push_back('(');
+        il.push_back(')');
+        il.push_back('=');
+        il.push_back('?');
+        il.push_back('\\');
+        il.push_back('}');
+        il.push_back('[');
+        il.push_back(']');
+        il.push_back('{');
+        il.push_back('.');
+        il.push_back(':');
+        il.push_back(',');
+        il.push_back(';');
+        il.push_back('<');
+        il.push_back('>');
+        il.push_back('|');
+        il.push_back('+');
+        il.push_back('*');
+        il.push_back('~');
+        il.push_back('#');
+        il.push_back('`');
+        il.push_back('^');
+
+        for (int i = 0; i < s.size(); i++)
+        {
+            for (int j = 0; j < il.size(); j++)
+            {
+                if (s[i] == il[j])
+                    return true;
+            }
+        }
+        return false;
     }
 } StringCH;
 

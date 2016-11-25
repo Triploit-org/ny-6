@@ -2,20 +2,17 @@
 
 {main}  say     "Hallo Welt!";@
         say     "MAIN!";@
-
         cl	    ok;
         cl      ok2;
         say	    "Wieder MAIN!";@
-
         end;
         endf;
 
 {ok2}   mos	    "Hallo", _axs;
         mos	    "Hallo", _cxs;
-
         say	    "Schleife?";@
         nqs	    _axs, _cxs, ok;
-
         prv     _cxs;@
         return;
         endf;
+

@@ -84,8 +84,11 @@ public:
             if (name == gotos[i].getName())
             {
                 gotos[i].setClosed(b);
+                return true;
             }
         }
+
+        return false;
     }
 
     bool findGoto(std::string name)

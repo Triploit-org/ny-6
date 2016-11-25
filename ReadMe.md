@@ -4,8 +4,6 @@ Erstmal: Nein ich denke nicht das Ny++6 das Ende sein wird. Es wird vorraussicht
 
 -----------------------
 
-**Notiz:** Kapitel 4-7 und 8-12 sind in Arbeit.
-
 Ny++6, die vorerst letzte, große Version von Ny++. Es hat sich viel geändert und es ist viel dazugekommen.
 Ny++6 ist viel typisierter, hat aber dadurch auch mehr Funktionen.
 

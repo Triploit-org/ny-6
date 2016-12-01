@@ -73,6 +73,8 @@ int ok2()
 	std::cout << std::endl;
 	if (_axs != _cxs)
 		ok();;
+	std::cout << _cxs;
+	std::cout << std::endl;
 	return 0;
 }
 

@@ -318,7 +318,7 @@ int main(int argc, char *args[])
     }
     else
     {
-        std::cout << "[ MAIN ] Konnte die Datei " << args[1] << " nicht öffnen!" << std::endl;
+        std::cout << "[ MAIN ] Konnte die Datei " << args[1] << " nicht oeffnen!" << std::endl;
         return 1;
     }
 

@@ -1,6 +1,9 @@
 #Ny++6 - Das Ende?
 
-Erstmal: Nein ich denke nicht das Ny++6 das Ende sein wird. Es wird vorraussichtlich die letzte große Version mit den letzten Änderungen sein, aber die Entwicklung wird hier nicht abruppt stoppen. So... nun aber zum Prolog ;).
+Erstmal: Nein ich denke nicht das Ny++6 das Ende sein wird. Es wird vorraussichtlich die letzte große Version mit den letzten Änderungen sein, aber die Entwicklung wird hier nicht abruppt stoppen.
+
+Falls Bugs in der Sprache gefunden werden, können diese mir mit einem Issue hier in der Repo gemeldet werden.
+So... nun aber zum Prolog ;).
 
 -----------------------
 

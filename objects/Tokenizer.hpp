@@ -67,10 +67,17 @@ public:
                         ecode.push_back(tmp);
                         tmp = ";";
                     }
-                    i++;
+
+                    if (code[i] == '@')
+                    {
+                        ecode.push_back(tmp);
+                        tmp = "@";
+                    }
 
                     ecode.push_back(tmp);
                     tmp = "";
+
+                    i++;
                 }
             }
 

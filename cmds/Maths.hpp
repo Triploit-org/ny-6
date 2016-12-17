@@ -70,7 +70,7 @@ void sub_variable(std::vector<std::string> args)
     std::string value = args[1];
     std::string name = args[2];
 
-    std::cout << "SUB_VARIABLE!" << std::endl;
+    // std::cout << "SUB_VARIABLE!" << std::endl;
 
     if (value.substr(0, 1) == "\"" && value.substr(value.length() - 1, value.length() - 2) == "\"")
     {
@@ -237,6 +237,8 @@ void mod_variable(std::vector<std::string> args)
     std::string value = args[1];
     std::string name = args[2];
 
+    // std::cout << "SUB_VARIABLE!" << std::endl;
+
     if (value.substr(0, 1) == "\"" && value.substr(value.length() - 1, value.length() - 2) == "\"")
     {
         std::cout << "[ MAIN ]:[ MOD ]:[ VALUE_IS_STRING:" << value << " ] Der Wert muss ein Integer sein!"
@@ -247,11 +249,12 @@ void mod_variable(std::vector<std::string> args)
     {
         value = value.substr(1, value.length() - 2);
 
-        int i = Variables.getIntegerVariable(name).getIntValue() % std::stoi(value);
-
         if (!Variables.isCpp())
-            Variables.setIntegerVariable(name, i);
+            Variables.setIntegerVariable(name, Variables.getIntegerVariable(name).getIntValue() % std::stoi(value));
         CPPSource.addSource(name + " = " + name + " % " + value);
+
+        //std::cout << "SUB_VARIABLE_NUMBER >> " <<  Variables.getIntegerVariable(name).getIntValue()-std::stoi(value) << " = " << Variables.getIntegerVariable(name).getIntValue() << " - " << std::stoi(value) << std::endl;
+
         return;
     }
     else
@@ -261,11 +264,12 @@ void mod_variable(std::vector<std::string> args)
             Integer v = Variables.getIntegerVariable(value);
             int i = v.getIntValue();
 
-            i = Variables.getIntegerVariable(name).getIntValue() % i;
-
             if (!Variables.isCpp())
-                Variables.setIntegerVariable(name, i);
+                Variables.setIntegerVariable(name, Variables.getIntegerVariable(name).getIntValue() % i);
             CPPSource.addSource(name + " = " + name + " % " + value);
+
+            //std::cout << "SUB_VARIABLE_VARIABLE >> " <<  Variables.getIntegerVariable(name).getIntValue()-std::stoi(value) << " = " << Variables.getIntegerVariable(name).getIntValue() << " - " << std::stoi(value) << std::endl;
+
         }
         else
         {

@@ -137,6 +137,11 @@ public:
         exs.setStringValue("");
         exs.setWriteAble(true);
 
+        String newl;
+        exs.setName("_NL");
+        exs.setStringValue("\n");
+        exs.setWriteAble(false);
+
 
         aktscope.addStr(snull);
         aktscope.addStr(axs);
@@ -144,6 +149,7 @@ public:
         aktscope.addStr(cxs);
         aktscope.addStr(dxs);
         aktscope.addStr(exs);
+        aktscope.addStr(newl);
     }
 
     void initInteger()
@@ -265,7 +271,6 @@ public:
             if (aktscope.getStrings()[i].getName() == name)
             {
                 aktscope.setStr(name, value);
-                //std::cout << "NAME >> " << aktscope.getStrings()[i].getStringValue() << std::endl;
             }
         }
 
@@ -297,7 +302,7 @@ public:
             }
         }
 
-        std::cout << "[ MAIN ]:[ VARSYS:STR ]:[ NOT_FOUND:" << name << " ] String-Variable nicht gefunden!"
+        std::cout << "[ MAIN ]:[ VARSYS:INT ]:[ NOT_FOUND:" << name << " ] Integer-Variable nicht gefunden!"
                   << std::endl;
 
         Integer str;
@@ -308,12 +313,14 @@ public:
 
     void setIntegerVariable(std::string name, int value)
     {
-        for (int i = 0; i < aktscope.getStrings().size(); i++)
+        // std::cout << aktscope.getIntegers()[aktscope.getIntegers().size()-1].getName() << " != " << name << std::endl;
+        for (int i = 0; i < aktscope.getIntegers().size(); i++)
         {
-            if (aktscope.getStrings()[i].getName() == name)
+            if (aktscope.getIntegers()[i].getName() == name)
             {
                 aktscope.setInt(name, value);
-                //std::cout << "NAME >> " << aktscope.getStrings()[i].getStringValue() << std::endl;
+                // std::cout << "NAME >> " << aktscope.getIntegerVariable(name).getIntValue() << std::endl;
+                return;
             }
         }
 
@@ -322,6 +329,7 @@ public:
             if (scopes[i].getName() == "public__aXX")
             {
                 scopes[i].setInt(name, value);
+                // std::cout << "NAME >> " <<name << " << " << aktscope.getIntegerVariable(name).getIntValue() << std::endl;
             }
         }
     }

@@ -26,7 +26,7 @@ void move_string(std::vector<std::string> s)
     }
     else if (value.substr(0, 1) == "[" && value.substr(value.length() - 1, value.length() - 2) == "]")
     {
-        std::cout << "[ MAIN ]:[ MOS ]:[ VALUE_IS_INT:" << value << " ] Der Wert muss ein Integer sein!" << std::endl;
+        std::cout << "[ MAIN ]:[ MOS ]:[ VALUE_IS_INT:" << value << " ] Der Wert muss ein String sein!" << std::endl;
         return;
     }
     else
@@ -39,14 +39,14 @@ void move_string(std::vector<std::string> s)
         }
         else
         {
-            std::cout << "[ MAIN ]:[ MOS ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es diese Integer Variable nicht!" << std::endl;
+            std::cout << "[ MAIN ]:[ MOS ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es gibt diese String Variable nicht!" << std::endl;
         }
     }
 }
 
 void move_integer(std::vector<std::string> s)
 {
-    //std::cout << ">> MOI gefunden!" << std::endl;
+    // std::cout << ">> MOI gefunden!" << std::endl;
     std::string value = s[1];
     std::string name = s[2];
 
@@ -59,8 +59,7 @@ void move_integer(std::vector<std::string> s)
     {
         value = value.substr(1, value.length() - 2);
 
-        if (!Variables.isCpp())
-            Variables.setIntegerVariable(name, std::stoi(value));
+        Variables.setIntegerVariable(name, std::stoi(value));
         CPPSource.addSource(name+" = "+value);
         return;
     }
@@ -71,9 +70,7 @@ void move_integer(std::vector<std::string> s)
             Integer v = Variables.getIntegerVariable(value);
             int i = v.getIntValue();
 
-            Variables.getIntegerVariable(name).setIntValue(i);
-            if (!Variables.isCpp())
-                Variables.setIntegerVariable(name, i);
+            Variables.setIntegerVariable(name, i);
             CPPSource.addSource(name+" = "+value);
         }
         else

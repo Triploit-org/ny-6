@@ -84,11 +84,14 @@ public:
         {
             if (integer[j].getName() == name)
             {
-                //std::cout << scopename << " SETINT INT:" << name << " = " << value << std::endl;
+                //std::cout << "SCOPE::" << scopename << " SETINT INT:" << name << " ==>> " << value << " ";
                 integer[j].setIntValue(value);
                 //std::cout << " == " << integer[j].getIntValue() << std::endl;
+                return;
             }
         }
+        std::cout << "[ MAIN ]:[ VARSYS:INT ]:[ SCOPE ]:[ NOT_FOUND:" << name << " IN " << scopename << "] Integer-Variable im Scope nicht gefunden!" << std::endl;
+        exit(0);
     }
 
     void setStr(std::string name, std::string value)
@@ -97,9 +100,9 @@ public:
         {
             if (strings[j].getName() == name)
             {
-                //std::cout << scopename << " SETSTR STR:" << name << " = " << value << std::endl;
+                // std::cout << scopename << " SETSTR STR:" << name << " = " << value << std::endl;
                 strings[j].setStringValue(value);
-                //std::cout << " == " << strings[j].getStringValue() << std::endl;
+                // std::cout << " == " << strings[j].getStringValue() << std::endl;
             }
         }
     }

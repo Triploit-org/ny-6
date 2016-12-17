@@ -29,6 +29,7 @@ public:
         code = c;
     }
 
+
     void parseAll()
     {
         bool isfm = true;
@@ -126,7 +127,8 @@ public:
 
                     Scope n;
                     n.setName("main");
-                    Variables.setAktScope(n);
+                    Variables.addScope(n);
+                    Variables.setAktScope(Variables.getScope(n.getName()));
                 }
 
                 std::string marke = code[i].substr(1, code[i].length() - 2);
@@ -144,14 +146,22 @@ public:
                 Gotos.setI(i);
             }
 
-            else if (code[i] == "@")
+            char ab = 13;
+            char ac = 64;
+            char arr[2] = {ab, ac};
+            std::string at(arr);
+
+            //  --->> code[i] == at) // Geht Nicht
+            if (code[i].find('@') == 0 && code[i].find('"') != 0)// SCHWERSTE AUFGABE IM PARSER...
             {
                 if (!Variables.isCpp())
                     std::cout << std::endl;
                 CPPSource.addSource("std::cout << std::endl");
+                //std::cout << "Aha!! ]] " << (int) code[i].at(code[i].size()-1) << " + " << (int) code[i].at(code[i].size()-2) << std::endl;
 
                 i++;
                 Gotos.setI(i);
+
             }
 
             for (int j = 0; j < cmds.size(); j++)

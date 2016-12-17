@@ -1,18 +1,20 @@
-%indic a2 a2.n6
+{main}  defi    h, [90];
+        defi    h2, [10];
 
-{main}  say     "Hallo Welt!";@
-        say     "MAIN!";@
-        cl	    ok;
+        div     h2, h;
+        prv     h;@
+
+        say     "Hallo Welt! von Main";@
         cl      ok2;
-        say	    "Wieder MAIN!";@
+        say     "Wieder MAIN!";@
+
         end;
         endf;
 
-{ok2}   mos	    "Hallo", _axs;
-        mos	    "Hallo", _cxs;
-        say	    "Schleife?";@
-        nqs	    _axs, _cxs, ok;
+{ok2}   mos     "Hallo", _axs;
+        mos     "Hallo von OK2!", _cxs;
+        say     "Schleife?";@
+
         prv     _cxs;@
         return;
         endf;
-

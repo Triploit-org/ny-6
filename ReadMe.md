@@ -67,7 +67,18 @@ Das jedoch größte, was geändert wurde, ist die Programmiersprache in der Ny++
 
 ##0.1 Changelog
 
-###Kein vermerk.
+###17.12.2016 –– 21:54 | 9:54 PM –– Survari
+
+Notiz: Etwas größeres Update, man könnte Ny++6.1 meinen ;)!
+
+* Bugfix Scopes
+* Bugfix Werte
+* Bugfix Integer-Variablen
+* Bugfix Mod-Funktion
+* Bugfix Input
+* Bugfix Poi-Funktion
+* Bugfix Output (@, _NL);
+* Bugfix C++-Compiler
 
 ## 0.2 Source Code kompilieren
 
@@ -165,13 +176,15 @@ Dies sind beschreibbare Stringvariablen, angelehnt an die Register in Assembler.
 	_dxi
 	_exi
 
-Und hier die Integer-Form. Diese sind auch beschreibbar. Dann haben wir nur noch drei weitere:
+Und hier die Integer-Form. Diese sind auch beschreibbar. Dann haben wir nur noch vier weitere:
 
 	_SN
 	_IN
 	_fos
+  _NL
 
 `_SN` beinhaltet nichts und ist auch nicht beschreibbar. `_IN` beinhaltet auch `0` und ist, wie `_SN`, nicht beschreibbar.
+`_NL` steht für "New Line" und erzeugt eine neue Zeile wenn es ausgegeben wird.
 
 `_fos` ist hier etwas ganz besonderes. FOS beinhaltet die Nummer des aktuellen Betriebssystems, diese Zahlen stehen für dieses Betriebssystem:
 

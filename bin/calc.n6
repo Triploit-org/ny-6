@@ -1,0 +1,60 @@
+{main}    defi  z1, _IN;
+          defi  z2, _IN;
+
+          say   "--- Taschenrechner in Ny++6";@
+          say   "1. Zahl: ";
+          inp   z1;
+
+          say   "2. Zahl: ";
+          inp   z2;
+          prv   _NL;
+
+          say   "Zahl 1: ";
+          prv   z1;@
+
+          say   "Zahl 2: ";
+          prv   z2;@
+          prv   _NL;
+
+          say   "Addition       ::  ";
+            moi   z1, _axi;
+            moi   z2, _cxi;
+
+            add   _cxi, _axi;
+            prv   _axi;@
+
+          say   "Subtraktion    ::  ";
+            moi   z1, _axi;
+            moi   z2, _cxi;
+
+            sub   _cxi, _axi;
+            prv   _axi;@
+
+          say   "Multiplikation ::  ";
+            moi   z1, _axi;
+            moi   z2, _cxi;
+
+            mul   _cxi, _axi;
+            prv   _axi;@
+
+          say   "Division       ::  ";
+            moi   z1, _axi;
+            moi   z2, _cxi;
+
+            div   _cxi, _axi;
+            prv   _axi;
+
+            say   " R ";
+              moi   z1, _axi;
+              moi   z2, _cxi;
+
+              mod   _cxi, _axi;
+              prv   _axi;@
+
+          say   "Potenz         ::  ";
+            moi   z1, _axi;
+            moi   z2, _cxi;
+
+            poi   _cxi, _axi;
+            prv   _axi;@
+ 	        endf;

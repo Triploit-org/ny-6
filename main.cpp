@@ -65,6 +65,7 @@ int main(int argc, char *args[])
     CPPSource.addRawSource("std::string _cxs = \"\";");
     CPPSource.addRawSource("std::string _dxs = \"\";");
     CPPSource.addRawSource("std::string _exs = \"\";");
+    CPPSource.addRawSource("std::string _NL = \"\\n\";");
     CPPSource.addRawSource("");
 
     /*

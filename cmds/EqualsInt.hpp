@@ -12,7 +12,6 @@
 #include "../CPPSource.hpp"
 #include "../Gotos.hpp"
 
-
 void equals_equals_int(std::vector<std::string> args)
 {
     std::string value = args[2];

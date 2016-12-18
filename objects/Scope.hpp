@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include "String.hpp"
 #include "Integer.hpp"
+#include "RealGoto.h"
+#include "../Error.hpp"
 
 class Scope
 {
@@ -17,8 +19,59 @@ private:
     std::vector<String> strings;
     std::vector<Integer> integer;
     std::string scopename;
+    std::vector<RealGoto> gotos;
 
 public:
+    RealGoto getRealGoto(std::string name)
+    {
+        for (int i = 0; i < gotos.size(); i++)
+        {
+            if (gotos[i].getName() == name)
+                return gotos[i];
+        }
+
+        return RealGoto("[NotFound]", -999);
+    }
+
+    bool existsRealGoto(std::string name)
+    {
+        for (int i = 0; i < gotos.size(); i++)
+        {
+            // std::cout << "EXGT? ]] " << gotos[i].getName() << " != " << name << std::endl;
+
+            if (gotos[i].getName() == name)
+                return true;
+        }
+
+        // std::cout << "EXGTI ]] "<< gotos.size() << std::endl;
+        return false;
+    }
+
+    void addRealGoto(RealGoto rg)
+    {
+        if (existsRealGoto(rg.getName()) == false)
+        {
+            gotos.push_back(rg);
+            // std::cout << "ADDGT ]] Add RealGoto to "<<scopename<<" >> " << rg.getName() << " AT " << rg.getIndex() << std::endl;
+            return;
+        }
+        else
+        {
+            Error.printErr("[ MAIN ]:[ SYS ]:[ SCOPE:",scopename," ]:[ ALREADYEXISTSGOTO:", rg.getName(), " ] Goto existiert bereits!");
+            exit(0);
+        }
+     }
+
+    std::vector<RealGoto> getRealGotos()
+    {
+        return gotos;
+    }
+
+    void setRealGotos(std::vector<RealGoto> gs)
+    {
+        gotos = gs;
+    }
+
     void setName(std::string s)
     {
         scopename = s;

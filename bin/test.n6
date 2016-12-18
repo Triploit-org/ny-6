@@ -11,10 +11,16 @@
         end;
         endf;
 
-{ok2}   mos     "Hallo", _axs;
+{ok2}   (begOk2)
+        mos     "Hallo", _axs;
         mos     "Hallo von OK2!", _cxs;
         say     "Schleife?";@
 
         prv     _cxs;@
+        add     [1], _cxi;
+        prv     _cxi;@
+        nqi     _cxi, [1], <begOk2>;
+
+        (endOk2)
         return;
         endf;

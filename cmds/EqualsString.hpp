@@ -17,10 +17,11 @@ void equals_equals_str(std::vector<std::string> args)
     std::string value = args[2];
     std::string name = args[1];
     std::string gtn = args[3];
+    std::string gtnaz = gtn.substr(1, gtn.size()-2);
 
-    if (!Gotos.findGoto(gtn))
+    if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
-        std::cout << "[ MAIN ]:[ EQS ]:[ GOTO_NOT_FOUND:" << gtn << " ] Es gibt diese Sprungmarke nicht!"
+        std::cout << "[ MAIN ]:[ EQS ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
         exit(0);
     }
@@ -36,8 +37,21 @@ void equals_equals_str(std::vector<std::string> args)
 
             if (v == v2)
             {
-                Gotos.addLJ(Gotos.getI());
-                Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                char gtn1 = gtn.at(0);
+                char gtn2 = ' ';
+                gtn2 = gtn.at(gtn.length()-1);
+
+                if (gtn1 == '<' && gtn2 == '>')
+                {
+                    Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                }
+                else
+                {
+                    // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                    Gotos.addLJ(Gotos.getI());
+                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                }
             }
         }
 
@@ -89,8 +103,9 @@ void not_equals_str(std::vector<std::string> args)
     std::string value = args[2];
     std::string name = args[1];
     std::string gtn = args[3];
+    std::string gtnaz = gtn.substr(1, gtn.size()-2);
 
-    if (!Gotos.findGoto(gtn))
+    if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
         std::cout << "[ MAIN ]:[ NQS ]:[ GOTO_NOT_FOUND:" << gtn << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
@@ -108,8 +123,21 @@ void not_equals_str(std::vector<std::string> args)
 
             if (v != v2)
             {
-                Gotos.addLJ(Gotos.getI());
-                Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                char gtn1 = gtn.at(0);
+                char gtn2 = ' ';
+                gtn2 = gtn.at(gtn.length()-1);
+
+                if (gtn1 == '<' && gtn2 == '>')
+                {
+                    Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                }
+                else
+                {
+                    // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                    Gotos.addLJ(Gotos.getI());
+                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                }
             }
         }
 
@@ -161,8 +189,9 @@ void less_equals_str(std::vector<std::string> args)
     std::string value = args[2];
     std::string name = args[1];
     std::string gtn = args[3];
+    std::string gtnaz = gtn.substr(1, gtn.size()-2);
 
-    if (!Gotos.findGoto(gtn))
+    if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
         std::cout << "[ MAIN ]:[ GQS ]:[ GOTO_NOT_FOUND:" << gtn << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
@@ -180,8 +209,21 @@ void less_equals_str(std::vector<std::string> args)
 
             if (v.length() < v2.length())
             {
-                Gotos.addLJ(Gotos.getI());
-                Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                char gtn1 = gtn.at(0);
+                char gtn2 = ' ';
+                gtn2 = gtn.at(gtn.length()-1);
+
+                if (gtn1 == '<' && gtn2 == '>')
+                {
+                    Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                }
+                else
+                {
+                    // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                    Gotos.addLJ(Gotos.getI());
+                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                }
             }
         }
 
@@ -233,8 +275,9 @@ void greater_equals_str(std::vector<std::string> args)
     std::string value = args[2];
     std::string name = args[1];
     std::string gtn = args[3];
+    std::string gtnaz = gtn.substr(1, gtn.size()-2);
 
-    if (!Gotos.findGoto(gtn))
+    if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
         std::cout << "[ MAIN ]:[ GQS ]:[ GOTO_NOT_FOUND:" << gtn << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
@@ -252,8 +295,21 @@ void greater_equals_str(std::vector<std::string> args)
 
             if (v.length() > v2.length())
             {
-                Gotos.addLJ(Gotos.getI());
-                Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                char gtn1 = gtn.at(0);
+                char gtn2 = ' ';
+                gtn2 = gtn.at(gtn.length()-1);
+
+                if (gtn1 == '<' && gtn2 == '>')
+                {
+                    Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                }
+                else
+                {
+                    // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                    Gotos.addLJ(Gotos.getI());
+                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                }
             }
         }
 

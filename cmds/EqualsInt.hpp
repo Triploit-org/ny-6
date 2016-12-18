@@ -17,10 +17,11 @@ void equals_equals_int(std::vector<std::string> args)
     std::string value = args[2];
     std::string name = args[1];
     std::string gtn = args[3];
+    std::string gtnaz = gtn.substr(1, gtn.size()-2);
 
-    if (!Gotos.findGoto(gtn))
+    if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
-        std::cout << "[ MAIN ]:[ EQ ]:[ GOTO_NOT_FOUND:" << gtn << " ] Es gibt diese Sprungmarke nicht!"
+        std::cout << "[ MAIN ]:[ EQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
         exit(0);
     }
@@ -40,8 +41,22 @@ void equals_equals_int(std::vector<std::string> args)
 
             if (v == v2)
             {
-                Gotos.addLJ(Gotos.getI());
-                Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                char gtn1 = gtn.at(0);
+                char gtn2 = ' ';
+                gtn2 = gtn.at(gtn.length()-1);
+
+                if (gtn1 == '<' && gtn2 == '>')
+                {
+                    Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                }
+                else
+                {
+                    // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                    Gotos.addLJ(Gotos.getI());
+                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                }
+
             }
         }
 
@@ -68,14 +83,27 @@ void equals_equals_int(std::vector<std::string> args)
 
                 if (v == v2)
                 {
-                    Gotos.addLJ(Gotos.getI());
-                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                    char gtn1 = gtn.at(0);
+                    char gtn2 = ' ';
+                    gtn2 = gtn.at(gtn.length()-1);
+
+                    if (gtn1 == '<' && gtn2 == '>')
+                    {
+                        Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                    }
+                    else
+                    {
+                        // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                        Gotos.addLJ(Gotos.getI());
+                        Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                    }
                 }
             }
         }
         else
         {
-            std::cout << "[ MAIN ]:[ EQ ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es gibt diese Integer Variable nicht!"
+            std::cout << "[ MAIN ]:[ EQI ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es gibt diese Integer Variable nicht!"
                       << std::endl;
             exit(0);
         }
@@ -87,17 +115,18 @@ void not_equals_int(std::vector<std::string> args)
     std::string value = args[2];
     std::string name = args[1];
     std::string gtn = args[3];
+    std::string gtnaz = gtn.substr(1, gtn.size()-2);
 
-    if (!Gotos.findGoto(gtn))
+    if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
-        std::cout << "[ MAIN ]:[ EQ ]:[ GOTO_NOT_FOUND:" << gtn << " ] Es gibt diese Sprungmarke nicht!"
+        std::cout << "[ MAIN ]:[ EQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
         exit(0);
     }
 
     if (value.substr(0, 1) == "\"" && value.substr(value.length() - 1, value.length() - 2) == "\"")
     {
-        std::cout << "[ MAIN ]:[ EQI ]:[ VARIABLE_IS_STRING ] Die Variable(\") ist ein String!" << std::endl;
+        std::cout << "[ MAIN ]:[ NQI ]:[ VARIABLE_IS_STRING ] Die Variable(\") ist ein String!" << std::endl;
     }
     else if (value.substr(0, 1) == "[" && value.substr(value.length() - 1, value.length() - 2) == "]")
     {
@@ -110,8 +139,21 @@ void not_equals_int(std::vector<std::string> args)
 
             if (v != v2)
             {
-                Gotos.addLJ(Gotos.getI());
-                Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                char gtn1 = gtn.at(0);
+                char gtn2 = ' ';
+                gtn2 = gtn.at(gtn.length()-1);
+
+                if (gtn1 == '<' && gtn2 == '>')
+                {
+                    Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                }
+                else
+                {
+                    // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                    Gotos.addLJ(Gotos.getI());
+                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                }
             }
         }
 
@@ -120,7 +162,7 @@ void not_equals_int(std::vector<std::string> args)
     }
     else if (name.substr(0, 1) == "[" && value.substr(value.length() - 1, name.length() - 2) == "]")
     {
-        std::cout << "[ MAIN ]:[ EQI ]:[ INVALID_ARGUMENT:" << name << " ] Nur das erste Argument darf eine frei waehlbare Zahl sein! " << std::endl;
+        std::cout << "[ MAIN ]:[ NQI ]:[ INVALID_ARGUMENT:" << name << " ] Nur das erste Argument darf eine frei waehlbare Zahl sein! " << std::endl;
     }
     else
     {
@@ -138,14 +180,27 @@ void not_equals_int(std::vector<std::string> args)
 
                 if (v != v2)
                 {
-                    Gotos.addLJ(Gotos.getI());
-                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                    char gtn1 = gtn.at(0);
+                    char gtn2 = ' ';
+                    gtn2 = gtn.at(gtn.length()-1);
+
+                    if (gtn1 == '<' && gtn2 == '>')
+                    {
+                        Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                    }
+                    else
+                    {
+                        // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                        Gotos.addLJ(Gotos.getI());
+                        Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                    }
                 }
             }
         }
         else
         {
-            std::cout << "[ MAIN ]:[ EQ ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es gibt diese Integer Variable nicht!"
+            std::cout << "[ MAIN ]:[ NQI ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es gibt diese Integer Variable nicht!"
                       << std::endl;
             exit(0);
         }
@@ -157,17 +212,19 @@ void less_equals_int(std::vector<std::string> args)
     std::string value = args[2];
     std::string name = args[1];
     std::string gtn = args[3];
+    std::string gtnaz = gtn.substr(1, gtn.size()-2);
 
-    if (!Gotos.findGoto(gtn))
+    if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
-        std::cout << "[ MAIN ]:[ EQ ]:[ GOTO_NOT_FOUND:" << gtn << " ] Es gibt diese Sprungmarke nicht!"
+        std::cout << "[ MAIN ]:[ EQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
         exit(0);
     }
 
     if (value.substr(0, 1) == "\"" && value.substr(value.length() - 1, value.length() - 2) == "\"")
     {
-        std::cout << "[ MAIN ]:[ EQI ]:[ VARIABLE_IS_STRING ] Die Variable(\") ist ein String!" << std::endl;
+        std::cout << "[ MAIN ]:[ LQI ]:[ VARIABLE_IS_STRING ] Die Variable(\") ist ein String!" << std::endl;
+        exit(0);
     }
     else if (value.substr(0, 1) == "[" && value.substr(value.length() - 1, value.length() - 2) == "]")
     {
@@ -180,8 +237,21 @@ void less_equals_int(std::vector<std::string> args)
 
             if (v < v2)
             {
-                Gotos.addLJ(Gotos.getI());
-                Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                char gtn1 = gtn.at(0);
+                char gtn2 = ' ';
+                gtn2 = gtn.at(gtn.length()-1);
+
+                if (gtn1 == '<' && gtn2 == '>')
+                {
+                    Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                }
+                else
+                {
+                    // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                    Gotos.addLJ(Gotos.getI());
+                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                }
             }
         }
 
@@ -190,7 +260,8 @@ void less_equals_int(std::vector<std::string> args)
     }
     else if (name.substr(0, 1) == "[" && value.substr(value.length() - 1, name.length() - 2) == "]")
     {
-        std::cout << "[ MAIN ]:[ EQI ]:[ INVALID_ARGUMENT:" << name << " ] Nur das erste Argument darf eine frei waehlbare Zahl sein! " << std::endl;
+        std::cout << "[ MAIN ]:[ LQI ]:[ INVALID_ARGUMENT:" << name << " ] Nur das erste Argument darf eine frei waehlbare Zahl sein! " << std::endl;
+        exit(0);
     }
     else
     {
@@ -208,14 +279,27 @@ void less_equals_int(std::vector<std::string> args)
 
                 if (v < v2)
                 {
-                    Gotos.addLJ(Gotos.getI());
-                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                    char gtn1 = gtn.at(0);
+                    char gtn2 = ' ';
+                    gtn2 = gtn.at(gtn.length()-1);
+
+                    if (gtn1 == '<' && gtn2 == '>')
+                    {
+                        Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                    }
+                    else
+                    {
+                        // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                        Gotos.addLJ(Gotos.getI());
+                        Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                    }
                 }
             }
         }
         else
         {
-            std::cout << "[ MAIN ]:[ EQ ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es gibt diese Integer Variable nicht!"
+            std::cout << "[ MAIN ]:[ LQI ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es gibt diese Integer Variable nicht!"
                       << std::endl;
             exit(0);
         }
@@ -227,17 +311,18 @@ void greater_equals_int(std::vector<std::string> args)
     std::string value = args[2];
     std::string name = args[1];
     std::string gtn = args[3];
+    std::string gtnaz = gtn.substr(1, gtn.size()-2);
 
-    if (!Gotos.findGoto(gtn))
+    if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
-        std::cout << "[ MAIN ]:[ EQ ]:[ GOTO_NOT_FOUND:" << gtn << " ] Es gibt diese Sprungmarke nicht!"
+        std::cout << "[ MAIN ]:[ EQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
         exit(0);
     }
 
     if (value.substr(0, 1) == "\"" && value.substr(value.length() - 1, value.length() - 2) == "\"")
     {
-        std::cout << "[ MAIN ]:[ EQI ]:[ VARIABLE_IS_STRING ] Die Variable(\") ist ein String!" << std::endl;
+        std::cout << "[ MAIN ]:[ GQI ]:[ VARIABLE_IS_STRING ] Die Variable(\") ist ein String!" << std::endl;
     }
     else if (value.substr(0, 1) == "[" && value.substr(value.length() - 1, value.length() - 2) == "]")
     {
@@ -250,8 +335,21 @@ void greater_equals_int(std::vector<std::string> args)
 
             if (v > v2)
             {
-                Gotos.addLJ(Gotos.getI());
-                Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                char gtn1 = gtn.at(0);
+                char gtn2 = ' ';
+                gtn2 = gtn.at(gtn.length()-1);
+
+                if (gtn1 == '<' && gtn2 == '>')
+                {
+                    Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                }
+                else
+                {
+                    // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                    Gotos.addLJ(Gotos.getI());
+                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                }
             }
         }
 
@@ -260,7 +358,7 @@ void greater_equals_int(std::vector<std::string> args)
     }
     else if (name.substr(0, 1) == "[" && value.substr(value.length() - 1, name.length() - 2) == "]")
     {
-        std::cout << "[ MAIN ]:[ EQI ]:[ INVALID_ARGUMENT:" << name << " ] Nur das erste Argument darf eine frei waehlbare Zahl sein! " << std::endl;
+        std::cout << "[ MAIN ]:[ GQI ]:[ INVALID_ARGUMENT:" << name << " ] Nur das erste Argument darf eine frei waehlbare Zahl sein! " << std::endl;
     }
     else
     {
@@ -278,14 +376,27 @@ void greater_equals_int(std::vector<std::string> args)
 
                 if (v > v2)
                 {
-                    Gotos.addLJ(Gotos.getI());
-                    Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                    char gtn1 = gtn.at(0);
+                    char gtn2 = ' ';
+                    gtn2 = gtn.at(gtn.length()-1);
+
+                    if (gtn1 == '<' && gtn2 == '>')
+                    {
+                        Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
+                    }
+                    else
+                    {
+                        // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
+                        Gotos.addLJ(Gotos.getI());
+                        Gotos.setI(Gotos.getGoto(gtn).getIndex());
+                    }
                 }
             }
         }
         else
         {
-            std::cout << "[ MAIN ]:[ EQ ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es gibt diese Integer Variable nicht!"
+            std::cout << "[ MAIN ]:[ GQI ]:[ VARIABLE_NOT_FOUND:" << value << " ] Es gibt diese Integer Variable nicht!"
                       << std::endl;
             exit(0);
         }

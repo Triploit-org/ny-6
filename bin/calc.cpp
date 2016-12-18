@@ -37,6 +37,7 @@ std::string _NL = "\n";
 
 int main();
 
+
 int main()
 {
 	int z1 = _IN;

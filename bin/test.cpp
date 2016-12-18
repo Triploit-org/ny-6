@@ -33,48 +33,42 @@ std::string _axs = "";
 std::string _cxs = "";
 std::string _dxs = "";
 std::string _exs = "";
+std::string _NL = "\n";
 
-int ok();
 int main();
 int ok2();
 
-int ok()
-{
-	std::cout << "Dann halt ein OK!";
-	std::cout << std::endl;
-	int t = 2;
-	int t2 = 8;
-	t2 = t2 % t;
-	std::cout << t2;
-	std::cout << std::endl;
-	std::cout << t;
-	std::cout << std::endl;
-	return 0;
-}
+
 int main()
 {
-	std::cout << "Hallo Welt!";
+	int h = 90;
+	int h2 = 10;
+	h = h / h2;
+	std::cout << h;
 	std::cout << std::endl;
-	std::cout << "MAIN!";
+	std::cout << "Hallo Welt! von Main";
 	std::cout << std::endl;
-	ok();
-
 	ok2();
 
 	std::cout << "Wieder MAIN!";
 	std::cout << std::endl;
 	exit(0);
 }
+
 int ok2()
 {
+begOk2:
 	_axs = "Hallo";
-	_cxs = "Hallo";
+	_cxs = "Hallo von OK2!";
 	std::cout << "Schleife?";
 	std::cout << std::endl;
-	if (_axs != _cxs)
-		ok();;
 	std::cout << _cxs;
 	std::cout << std::endl;
+	_cxi = _cxi + 1;
+	std::cout << _cxi;
+	std::cout << std::endl;
+	goto begOk2;
+endOk2:
 	return 0;
 }
 

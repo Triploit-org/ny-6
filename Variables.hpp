@@ -98,6 +98,7 @@ public:
             {
                 scopes[i].setIntegers(aktscope.getIntegers());
                 scopes[i].setStrings(aktscope.getStrings());
+                scopes[i].setRealGotos(aktscope.getRealGotos());
             }
         }
 
@@ -362,6 +363,20 @@ public:
         return aktscope.getStrings();
     }
 
+    bool existsRealGoto(std::string name)
+    {
+        return aktscope.existsRealGoto(name);
+    }
+
+    void addRealGoto(RealGoto rg)
+    {
+        aktscope.addRealGoto(rg);
+    }
+
+    RealGoto getRealGoto(std::string name)
+    {
+        return aktscope.getRealGoto(name);
+    }
 } Variables;
 
 #endif //TEST_VARIABLES_HPP

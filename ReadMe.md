@@ -42,6 +42,7 @@ Das jedoch größte, was geändert wurde, ist die Programmiersprache in der Ny++
     * Grundaufbau
     * Funktion im Verlauf verlassen
     * Argumente
+    * Sprungmarken in Funktionen
 * 8 Erweitert Rechnen (Potenzen und Rest)
     * Poi - Integer Potenzieren
     * Mod - Rest berechnen
@@ -70,18 +71,29 @@ Das jedoch größte, was geändert wurde, ist die Programmiersprache in der Ny++
 
 ##0.1 Changelog
 
+###18.12.2016 –– 12:34 | 12:34 PM –– Survari
+
+Notiz: Da die ersten Gotos zu eher richtigen Funktionen geworden sind, hab ich jetzt noch einmal andere Sprungmarken hinzugefügt, die NICHT mit Return zurückverfolgt werden können und auch nur inerhalb einer Funktion (bspw. {main}) genutzt werden können.
+
+* Bugfix    Equals Integer
+* Bugifx    Equals String
+* Added     Sprungmarken 2.0
+* Added     Sprungmarken zu EQI, NQI, GQI und LQI
+* Added     Sprungmarken zu EQS, NQS, GQS und LQS
+* Added     Readme-Eintrag Sprungmarken in Kapitel 7
+
 ###17.12.2016 –– 21:54 | 9:54 PM –– Survari
 
 Notiz: Etwas größeres Update, man könnte Ny++6.1 meinen ;)!
 
-* Bugfix Scopes
-* Bugfix Werte
-* Bugfix Integer-Variablen
-* Bugfix Mod-Funktion
-* Bugfix Input
-* Bugfix Poi-Funktion
-* Bugfix Output (@, _NL);
-* Bugfix C++-Compiler
+* Bugfix    Scopes
+* Bugfix    Werte
+* Bugfix    Integer-Variablen
+* Bugfix    Mod-Funktion
+* Bugfix    Input
+* Bugfix    Poi-Funktion
+* Bugfix    Output (@, _NL);
+* Bugfix    C++-Compiler
 
 ## 0.2 Source Code kompilieren
 
@@ -333,6 +345,56 @@ Den Rest kann man so berechnen, zu dem Aufbau ist wieder der Stammbaum am Ende d
 		return;
 		endf;
 
+###Sprungmarken in Funktionen
+
+Um in Funktionen hin und her springen zu können, gibt es die Sprungmarken. Eigentlich sollten Funktionen allein Sprungmarken sein, haben dann aber einen größeren Umfang als erst gedacht erhalten und so wurden jetzt Sprungmarken nachgereicht.
+
+Sprungmarken deklarieren wir indem wir es wie mit Funktionen machen, bloß dass wir statt geschweiften Klammern `{marke}` nun runde verwenden `(marke)`:
+
+  {main}
+    (punk1)
+    moi     [2], _axi;
+    moi     [8], _cxi;
+
+    mod     _axi, _cxi;
+    prv     _cxi;@
+    (punkt2)
+
+    return;
+    endf;
+
+Um zu diesen Sprungmarken zu springen, können wir den Befehl `gt` nutzen:
+
+  {main}
+    (punk1)
+    moi     [2], _axi;
+    moi     [8], _cxi;
+
+    mod     _axi, _cxi;
+    prv     _cxi;@
+
+    gt      punk1t;
+
+    (punkt2)
+    return;
+    endf;
+
+Sprungmarken haben ihren Gültigkeitspbereich in der dementsprechenden Funktion, also können wir zwei Sprungmarken mit dem gleichen Namen in unterschiedlichen Funktionen erzeugen:
+
+  {main}
+    (punkt1)
+    say   "Ich bin in Main!";@
+    gt    punkt1;
+
+  {ok}
+    (punkt1)
+    say   "Diese Funktion wird niemals aufgerufen!";@
+    gt    punkt1;
+
+Dort wird die Main aufgerufen und dann wird immer wieder zu Punkt 1 in der Main gesprungen, da der Interpreter sich derzeit in dem Gültigkeitsbereich der Main-Funktion befindet und desswegen auch nur in der Main-Funktion anch Sprungmarken sucht.
+
+Bei Sprungmakren ist es nciht möglich mit dem Befehl Return zurückzukehren!
+
 ##9 Werte vergleichen
 
 Werte vergleichen ist wie wir wissen das so ziemlich wichtigste in Programmiersprachen. Zwischen den vergleichen bei Strings und Integern besteht absolut kein Unterschied, außer der Befehlsname.
@@ -396,6 +458,17 @@ Wenn a größer `5` ist, dann wird die Funktion `funktion` ausgeführt.
 	lqi a, [5], funktion;
 
 Wenn a kleiner `5` ist, dann wird die Funktion `funktion` ausgeführt.
+
+###Anmerkung
+
+Um Sprungmarken anzusteuern, muss derjenige Sprungmarkenname in <> stehen:
+
+  {main}
+    (anfang)
+    add   [1], _cxi;
+    gqi   _cxi, 1, <anfang>;
+
+Damit wird zu der Funktion anfang gesprungen, es ist nicht möglich mit einem Return zurückzukehren.
 
 ## 10 Dateien einbinden
 ###Inc - Einbinden von Dateien
@@ -490,6 +563,9 @@ Mit `%undef` löschen wir eine Praeprozessorvariable, damit man sie, falls notwe
 ###cl - Funktion()
 	cl [Funktion];
 	cl ok;
+###gt - goto Sprungmarke
+	gt [Sprungmarke];
+	gt punkt1;
 ###sub - Ziel = Ziel - Quelle
 	sub [Quelle:INT], [Ziel:INT];
 	sub 5, a;

@@ -2,6 +2,9 @@
 // Created by survari on 06.11.16.
 //
 
+#ifndef TEST_PARSER_HPP
+#define TEST_PARSER_HPP
+
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
@@ -10,9 +13,7 @@
 #include "Goto.hpp"
 #include "../Gotos.hpp"
 #include "../StringCheck.hpp"
-
-#ifndef TEST_PARSER_HPP
-#define TEST_PARSER_HPP
+#include <sstream>
 
 class Parser
 {
@@ -34,6 +35,7 @@ public:
     {
         bool isfm = true;
 
+        // Praeprozessor
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
             if (code[i].substr(0, 1) == "{" && code[i].substr(code[i].length() - 1, code[i].length() - 2) == "}")
@@ -58,17 +60,6 @@ public:
                     }
                 }
 
-                /*if (isfm && marke != "main")
-                {
-                    std::cout << "[ MAIN ]:[ PRAE ]:[ FIRST_IS_NOT_MAIN:" << marke
-                              << " ] Die erste Sprungmarke die deklariert wird muss \"main\" heißen!" << std::endl;
-                    exit(0);
-                }
-                else if (isfm && marke == "main")
-                {
-                    isfm = false;
-                }*/
-
                 Goto g;
                 g.setName(marke);
 
@@ -80,26 +71,46 @@ public:
 
                 Scope n;
                 n.setName(marke);
-                // std::cout << "Scope(PRAE):\t" << n.getName() << std::endl;
 
                 Variables.addScope(n);
+                Variables.setAktScope(Variables.getScope(n.getName()));
                 CPPSource.addRawSource("int " + marke + "();");
             }
             else
             {
-                if (code[i] == "endf")
+                std::string gtn = code[i].substr(1, code[i].size()-3);
+
+                char gtn1 = code[i].at(0);
+                char gtn2 = ' ';
+
+                if (code[i].size() > 1)
+                    gtn2 = code[i].at(code[i].length()-2);
+
+                if (gtn1 == '(' && gtn2 == ')')
+                {
+                    if (!Variables.existsRealGoto(gtn))
+                    {
+                        RealGoto rg(gtn, i);
+                        Variables.addRealGoto(rg);
+                        // std::cout << "ADD RGOTO S:" << Variables.getAktScope().getRealGotos().size() << " >> \"" << rg.getName() << "\" AT " << rg.getIndex() << std::endl;
+                    }
+                    else
+                    {
+                        Error.printErr("[ MAIN ]:[ PRAE ]:[ RGOTO ]:[ ALREADYEXISTS:",gtn," ] Goto (!=func) existiert schon!");
+                    }
+                }
+                else if (code[i] == "endf")
                 {
                     Gotos.setGotoClosed(aktgoto, true);
-                    //std::cout << "Closed? " << aktgoto << " " << Gotos.getGoto(aktgoto).isClosed() << std::endl;
                 }
             }
 
-            // std::cout << "MAIN: " << i << " == " << Gotos.getI() << std::endl;
             Gotos.setI((Gotos.getI() + 1));
         }
 
         CPPSource.addRawSource("");
         aktgoto = "public__aXX";
+        Variables.setAktScope(Variables.getScope(aktgoto));
 
         Gotos.setI(0);
         bool gmain;
@@ -115,8 +126,17 @@ public:
             exit(0);
         }
 
+        // Command Parser & Executor
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
+            std::string gtn = code[i].substr(1, code[i].size()-3);
+
+            char gtn1 = code[i].at(0);
+            char gtn2 = ' ';
+
+            if (code[i].size() > 1)
+                gtn2 = code[i].at(code[i].length()-2);
+
             if (code[i].substr(0, 1) == "{" && code[i].substr(code[i].length() - 1, code[i].length() - 2) == "}")
             {
                 if (gmain && !Variables.isCpp())
@@ -136,14 +156,35 @@ public:
 
                 if (!Gotos.getGoto(marke).isAlreadyDefined())
                 {
-                    CPPSource.addRawSource("int " + marke + "()\n{");
+                    CPPSource.addRawSource("\nint " + marke + "()\n{");
                     Gotos.getGoto(marke).setAlreadyDefined(true);
 
                     aktgoto = marke;
                 }
 
-                i++;
-                Gotos.setI(i);
+                // i++;
+                // Gotos.setI(i);
+            }
+
+            if (gtn1 == '(' && gtn2 == ')')
+            {
+                if (Variables.existsRealGoto(gtn))
+                {
+                    CPPSource.addRawSource(gtn+":");
+                    //std::cout << "ADD RGOTO S:" << Variables.getAktScope().getRealGotos().size() << " >> \"" << gtn << "\" AT " << i << std::endl;
+                    //std::cout << CPPSource.getSource() << std::endl;
+                    //exit(0);
+                }
+                else
+                {
+                    Error.printErr("[ MAIN ]:[ PRAE ]:[ RGOTO ]:[ ALREADYEXISTS:",gtn," ] Goto (!=func) existiert schon!");
+                }
+            }
+            else
+            {
+                // std::cout << "GT? ]] " << gtn << std::endl;
+                // std::cout << "    >> " << gtn1 << std::endl;
+                // std::cout << "    >> " << gtn2 << std::endl;
             }
 
             char ab = 13;
@@ -151,8 +192,7 @@ public:
             char arr[2] = {ab, ac};
             std::string at(arr);
 
-            //  --->> code[i] == at) // Geht Nicht
-            if (code[i].find('@') == 0 && code[i].find('"') != 0)// SCHWERSTE AUFGABE IM PARSER...
+            if (code[i].find('@') == 0 && code[i].find('"') != 0) // DAS IST SCHWERSTE AUFGABE IM PARSER GEWESEN...
             {
                 if (!Variables.isCpp())
                     std::cout << std::endl;
@@ -227,6 +267,28 @@ public:
 
                             // aktgoto = gt;
                             break;
+                        }
+                    }
+                    else if (code[i] == "gt" && aktgoto != "public_aXX")
+                    {
+                        std::string gt = code[i + 1];
+
+                        if (Variables.getAktScope().existsRealGoto(gt))
+                        {
+                            if (!Variables.isCpp())
+                            {
+                                Gotos.setI(Variables.getRealGoto(gt).getIndex());
+                                i = Gotos.getI();
+                            }
+
+                            CPPSource.addSource("goto "+gt);
+                            break;
+                        }
+                        else
+                        {
+                            Error.printErr("[ MAIN ]:[ PARSER ]:[ GOTO ]:[ GT ]:[ NOTFOUND:", gt, " IN:",Variables.getAktScope().getName()," ] Sprungmarke (!=func) nicht gefunden!");
+                            //std::cout << "S: ]] " << Variables.getRealGoto("begOk2").getIndex() << std::endl;
+                            exit(0);
                         }
                     }
                     else if (code[i] == "return" && aktgoto != "public_aXX")

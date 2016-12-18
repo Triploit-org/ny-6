@@ -23,6 +23,7 @@ CMakeFiles/ny6.dir/main.cpp.o: objects/Goto.hpp
 CMakeFiles/ny6.dir/main.cpp.o: objects/Integer.hpp
 CMakeFiles/ny6.dir/main.cpp.o: objects/PVariable.hpp
 CMakeFiles/ny6.dir/main.cpp.o: objects/Parser.hpp
+CMakeFiles/ny6.dir/main.cpp.o: objects/RealGoto.h
 CMakeFiles/ny6.dir/main.cpp.o: objects/Scope.hpp
 CMakeFiles/ny6.dir/main.cpp.o: objects/String.hpp
 CMakeFiles/ny6.dir/main.cpp.o: objects/Tokenizer.hpp

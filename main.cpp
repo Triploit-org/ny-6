@@ -194,13 +194,12 @@ int main(int argc, char *args[])
         {
             if (line.substr(0, 4) == "%inc")
             {
-                // std::cout << "INC!" << std::endl;
-
-                line = line.substr(5, line.size());
-                std::ifstream f = std::ifstream(line);
+                std::string filename = line.substr(5, line.size());
+                std::ifstream f = std::ifstream(filename);
 
                 while (std::getline(f, line))
                 {
+                    std::cout << "ADD ]] " << line << std::endl;
                     if (line.substr(0, 4) == "%def")
                     {
                         line = line.substr(5, line.size());

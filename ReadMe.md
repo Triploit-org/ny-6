@@ -71,7 +71,15 @@ Das jedoch größte, was geändert wurde, ist die Programmiersprache in der Ny++
 
 ##0.1 Changelog
 
-###18.12.2016 –– 12:34 | 12:34 PM –– Survari
+
+###18.12.2016 –– 13:00 | 1:00 PM –– Survari
+
+Notiz: Da hab ich wohl einen Bug im C++ Compiler übersehen, EQ wurde nun erfolgreich entbuggt :)
+
+* Bugfix    Equals Integer Sprungmarken
+* Bugfix    Equals String Sprungmarken
+
+###18.12.2016 –– 12:34 | 12:34 AM –– Survari
 
 Notiz: Da die ersten Gotos zu eher richtigen Funktionen geworden sind, hab ich jetzt noch einmal andere Sprungmarken hinzugefügt, die NICHT mit Return zurückverfolgt werden können und auch nur inerhalb einer Funktion (bspw. {main}) genutzt werden können.
 

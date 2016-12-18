@@ -67,7 +67,8 @@ begOk2:
 	_cxi = _cxi + 1;
 	std::cout << _cxi;
 	std::cout << std::endl;
-	goto begOk2;
+	if (_cxi != 1)
+		goto begOk2;
 endOk2:
 	return 0;
 }

@@ -18,6 +18,9 @@ void equals_equals_str(std::vector<std::string> args)
     std::string name = args[1];
     std::string gtn = args[3];
     std::string gtnaz = gtn.substr(1, gtn.size()-2);
+    char gtn1 = gtn.at(0);
+    char gtn2 = ' ';
+    gtn2 = gtn.at(gtn.length()-1);
 
     if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
@@ -37,9 +40,6 @@ void equals_equals_str(std::vector<std::string> args)
 
             if (v == v2)
             {
-                char gtn1 = gtn.at(0);
-                char gtn2 = ' ';
-                gtn2 = gtn.at(gtn.length()-1);
 
                 if (gtn1 == '<' && gtn2 == '>')
                 {
@@ -55,7 +55,15 @@ void equals_equals_str(std::vector<std::string> args)
             }
         }
 
-        CPPSource.addSource("if (" + name + " == \"" + value + "\")\n\t\t" + gtn + "();");
+
+        if (gtn1 == '<' && gtn2 == '>')
+        {
+            CPPSource.addSource("if (" + name + " == " + value + ")\n\t\tgoto "+gtnaz);
+        }
+        else
+        {
+            CPPSource.addSource("if (" + name + " == " + value + ")\n\t\t" + gtn + "();");
+        }
         return;
     }
     else if (value.substr(0, 1) == "[" && value.substr(value.length() - 1, value.length() - 2) == "]")
@@ -74,7 +82,15 @@ void equals_equals_str(std::vector<std::string> args)
             String v = Variables.getStringVariable(value);
             std::string i = v.getStringValue();
 
-            CPPSource.addSource("if (" + name + " == " + value + ")\n\t\t" + gtn + "();");
+
+            if (gtn1 == '<' && gtn2 == '>')
+            {
+                CPPSource.addSource("if (" + name + " == " + value + ")\n\t\tgoto "+gtnaz);
+            }
+            else
+            {
+                CPPSource.addSource("if (" + name + " == " + value + ")\n\t\t" + gtn + "();");
+            }
 
             if (!Variables.isCpp())
             {
@@ -104,6 +120,9 @@ void not_equals_str(std::vector<std::string> args)
     std::string name = args[1];
     std::string gtn = args[3];
     std::string gtnaz = gtn.substr(1, gtn.size()-2);
+    char gtn1 = gtn.at(0);
+    char gtn2 = ' ';
+    gtn2 = gtn.at(gtn.length()-1);
 
     if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
@@ -123,10 +142,6 @@ void not_equals_str(std::vector<std::string> args)
 
             if (v != v2)
             {
-                char gtn1 = gtn.at(0);
-                char gtn2 = ' ';
-                gtn2 = gtn.at(gtn.length()-1);
-
                 if (gtn1 == '<' && gtn2 == '>')
                 {
                     Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
@@ -141,7 +156,14 @@ void not_equals_str(std::vector<std::string> args)
             }
         }
 
-        CPPSource.addSource("if (" + name + " != \"" + value + "\")\n\t\t" + gtn + "();");
+        if (gtn1 == '<' && gtn2 == '>')
+        {
+            CPPSource.addSource("if (" + name + " != " + value + ")\n\t\tgoto "+gtnaz);
+        }
+        else
+        {
+            CPPSource.addSource("if (" + name + " != " + value + ")\n\t\t" + gtn + "();");
+        }
         return;
     }
     else if (value.substr(0, 1) == "[" && value.substr(value.length() - 1, value.length() - 2) == "]")
@@ -160,7 +182,14 @@ void not_equals_str(std::vector<std::string> args)
             String v = Variables.getStringVariable(value);
             std::string i = v.getStringValue();
 
-            CPPSource.addSource("if (" + name + " != " + value + ")\n\t\t" + gtn + "();");
+            if (gtn1 == '<' && gtn2 == '>')
+            {
+                CPPSource.addSource("if (" + name + " != " + value + ")\n\t\tgoto "+gtnaz);
+            }
+            else
+            {
+                CPPSource.addSource("if (" + name + " != " + value + ")\n\t\t" + gtn + "();");
+            }
 
             if (!Variables.isCpp())
             {
@@ -190,6 +219,9 @@ void less_equals_str(std::vector<std::string> args)
     std::string name = args[1];
     std::string gtn = args[3];
     std::string gtnaz = gtn.substr(1, gtn.size()-2);
+    char gtn1 = gtn.at(0);
+    char gtn2 = ' ';
+    gtn2 = gtn.at(gtn.length()-1);
 
     if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
@@ -209,9 +241,6 @@ void less_equals_str(std::vector<std::string> args)
 
             if (v.length() < v2.length())
             {
-                char gtn1 = gtn.at(0);
-                char gtn2 = ' ';
-                gtn2 = gtn.at(gtn.length()-1);
 
                 if (gtn1 == '<' && gtn2 == '>')
                 {
@@ -227,7 +256,15 @@ void less_equals_str(std::vector<std::string> args)
             }
         }
 
-        CPPSource.addSource("if (" + name + ".length() < std::string(" + value + ").length())\n\t\t" + gtn + "();");
+        if (gtn1 == '<' && gtn2 == '>')
+        {
+            // CPPSource.addSource("if (" + name + " == " + value + ")\n\t\tgoto "+gtnaz);
+            CPPSource.addSource("if (" + name + ".length() < std::string(" + value + ").length())\n\t\tgoto " + gtn + ";");
+        }
+        else
+        {
+            CPPSource.addSource("if (" + name + ".length() < std::string(" + value + ").length())\n\t\t" + gtn + "();");
+        }
         return;
     }
     else if (value.substr(0, 1) == "[" && value.substr(value.length() - 1, value.length() - 2) == "]")
@@ -246,7 +283,15 @@ void less_equals_str(std::vector<std::string> args)
             String v = Variables.getStringVariable(value);
             std::string i = v.getStringValue();
 
-            CPPSource.addSource("if (" + name + ".length() < " + value + ".length())\n\t\t" + gtn + "();");
+            if (gtn1 == '<' && gtn2 == '>')
+            {
+                // CPPSource.addSource("if (" + name + " == " + value + ")\n\t\tgoto "+gtnaz);
+                CPPSource.addSource("if (" + name + ".length() < std::string(" + value + ").length())\n\t\tgoto " + gtn + ";");
+            }
+            else
+            {
+                CPPSource.addSource("if (" + name + ".length() < std::string(" + value + ").length())\n\t\t" + gtn + "();");
+            }
 
             if (!Variables.isCpp())
             {
@@ -276,6 +321,9 @@ void greater_equals_str(std::vector<std::string> args)
     std::string name = args[1];
     std::string gtn = args[3];
     std::string gtnaz = gtn.substr(1, gtn.size()-2);
+    char gtn1 = gtn.at(0);
+    char gtn2 = ' ';
+    gtn2 = gtn.at(gtn.length()-1);
 
     if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
@@ -295,9 +343,6 @@ void greater_equals_str(std::vector<std::string> args)
 
             if (v.length() > v2.length())
             {
-                char gtn1 = gtn.at(0);
-                char gtn2 = ' ';
-                gtn2 = gtn.at(gtn.length()-1);
 
                 if (gtn1 == '<' && gtn2 == '>')
                 {
@@ -312,8 +357,15 @@ void greater_equals_str(std::vector<std::string> args)
                 }
             }
         }
-
-        CPPSource.addSource("if (" + name + ".length() > std::string(" + value + ").length())\n\t\t" + gtn + "();");
+        if (gtn1 == '<' && gtn2 == '>')
+        {
+            // CPPSource.addSource("if (" + name + " == " + value + ")\n\t\tgoto "+gtnaz);
+            CPPSource.addSource("if (" + name + ".length() > std::string(" + value + ").length())\n\t\tgoto " + gtn + ";");
+        }
+        else
+        {
+            CPPSource.addSource("if (" + name + ".length() > std::string(" + value + ").length())\n\t\t" + gtn + "();");
+        }
         return;
     }
     else if (value.substr(0, 1) == "[" && value.substr(value.length() - 1, value.length() - 2) == "]")
@@ -332,7 +384,15 @@ void greater_equals_str(std::vector<std::string> args)
             String v = Variables.getStringVariable(value);
             std::string i = v.getStringValue();
 
-            CPPSource.addSource("if (" + name + ".length() > " + value + ".length())\n\t\t" + gtn + "();");
+            if (gtn1 == '<' && gtn2 == '>')
+            {
+                // CPPSource.addSource("if (" + name + " == " + value + ")\n\t\tgoto "+gtnaz);
+                CPPSource.addSource("if (" + name + ".length() > std::string(" + value + ").length())\n\t\tgoto " + gtn + ";");
+            }
+            else
+            {
+                CPPSource.addSource("if (" + name + ".length() > std::string(" + value + ").length())\n\t\t" + gtn + "();");
+            }
 
             if (!Variables.isCpp())
             {

@@ -30,9 +30,11 @@ int main(int argc, char *args[])
 
     CPPSource.addRawSource("#include <iostream>");
     CPPSource.addRawSource("#include <cstdlib>");
-    CPPSource.addRawSource("#include <cstdio>\n");
+    CPPSource.addRawSource("#include <cstdio>");
     CPPSource.addRawSource("#include <cmath>\n");
-    CPPSource.addRawSource("");
+    CPPSource.addRawSource("#include <unistd.h>");
+    CPPSource.addRawSource("#include <fstream>");
+    CPPSource.addRawSource("#include <sys/stat.h>");
 
     CPPSource.addRawSource("#ifdef _WIN32");
     CPPSource.addRawSource("int _fos = 0;");
@@ -66,6 +68,8 @@ int main(int argc, char *args[])
     CPPSource.addRawSource("std::string _dxs = \"\";");
     CPPSource.addRawSource("std::string _exs = \"\";");
     CPPSource.addRawSource("std::string _NL = \"\\n\";");
+    CPPSource.addRawSource("\nstd::fstream f;");
+    CPPSource.addRawSource("std::string c = \"\";");
     CPPSource.addRawSource("");
 
     /*

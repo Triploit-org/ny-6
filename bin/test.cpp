@@ -1,10 +1,11 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
-
 #include <cmath>
 
-
+#include <unistd.h>
+#include <fstream>
+#include <sys/stat.h>
 #ifdef _WIN32
 int _fos = 0;
 #elif _WIN64
@@ -35,6 +36,9 @@ std::string _dxs = "";
 std::string _exs = "";
 std::string _NL = "\n";
 
+std::fstream f;
+std::string c = "";
+
 int main();
 int ok2();
 
@@ -43,6 +47,33 @@ int main()
 {
 	int h = 90;
 	int h2 = 10;
+	std::string td = "/home/survari/test.txt";
+	std::string text = "Gib eine Zahl ein: ";
+	std::string tx = _SN;
+	f.open(td, std::ios::out);
+	f << "[CBN6]:[FS]:[NOERR]" << std::endl;
+	f.close();
+
+	f.open(td, std::ios::out);
+	f << text << std::endl;
+	f.close();
+	
+	std::string line = td;
+	std::string filename49 = line;
+	std::ifstream f49 = std::ifstream(filename49);
+
+	while (std::getline(f49, line))
+	{
+
+		c = c + line;
+	}
+
+	f49.close();
+	tx = c;
+	std::cout << tx;
+	std::cin >> h;
+	remove(td.c_str());;
+	exit(0);
 	h = h / h2;
 	std::cout << h;
 	std::cout << std::endl;

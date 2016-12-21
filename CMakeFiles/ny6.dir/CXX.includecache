@@ -51,6 +51,8 @@ cmds/StringOps.hpp
 /run/media/survari/Survari/Projekte/C++/test/cmds/StringOps.hpp
 cmds/IfDefInc.hpp
 /run/media/survari/Survari/Projekte/C++/test/cmds/IfDefInc.hpp
+cmds/FileSystem.h
+/run/media/survari/Survari/Projekte/C++/test/cmds/FileSystem.h
 
 /run/media/survari/Survari/Projekte/C++/test/PraeVars.hpp
 vector
@@ -123,6 +125,26 @@ stdlib.h
 /run/media/survari/Survari/Projekte/C++/test/Variables.hpp
 ../CPPSource.hpp
 /run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
+
+/run/media/survari/Survari/Projekte/C++/test/cmds/FileSystem.h
+iostream
+-
+vector
+-
+stdlib.h
+-
+../Error.hpp
+/run/media/survari/Survari/Projekte/C++/test/Error.hpp
+../Variables.hpp
+/run/media/survari/Survari/Projekte/C++/test/Variables.hpp
+../CPPSource.hpp
+/run/media/survari/Survari/Projekte/C++/test/CPPSource.hpp
+unistd.h
+-
+fstream
+-
+sys/stat.h
+-
 
 /run/media/survari/Survari/Projekte/C++/test/cmds/IfDefInc.hpp
 iostream

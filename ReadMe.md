@@ -71,6 +71,24 @@ Das jedoch größte, was geändert wurde, ist die Programmiersprache in der Ny++
 
 ##0.1 Changelog
 
+###21.12.2016 –– 17:48 | 5:48 PM –– Survari
+
+Notiz: Großes **Dateisystem-Update**. Es sind noch keine Einträge zu den neuen Funktionen in der Readme eingetragen, das muss ich machen wenn ich mehr Zeit habe. Bin trotzdem stolz das Ny++6 jetzt auch endlich lesen und scheiben gelehrnt hat ;)
+
+* Added     Dateien erstellen
+* Added     Dateien löschen
+* Added     Verzeichnisse erstellen
+* Added     Verzeichnisse löschen
+* Added     Verzeichnis wechseln - Nicht getestet
+* Added     Dateien einlesen
+* Added     Dateien schreiben
+* Added     C++-Compiler Dateien lesen
+* Added     C++-Compiler Dateien schreiben
+* Added     C++-Compiler Dateien löschen
+* Added     C++-Compiler Dateien erstellen
+* Added     C++-Compiler Verzeichnisse erstellen
+* Added     C++-Compiler Verzeichnisse löschen
+* Added     C++-Compiler Verzeichniss wechseln - Nicht getestet
 
 ###18.12.2016 –– 13:00 | 1:00 PM –– Survari
 

@@ -18,6 +18,7 @@
 #include "cmds/Input.hpp"
 #include "cmds/StringOps.hpp"
 #include "cmds/IfDefInc.hpp"
+#include "cmds/FileSystem.h"
 
 class System
 {
@@ -200,6 +201,41 @@ public:
         mod.setFunction(mod_variable);
         mod.setArgCount(2);
 
+        Command cnd;
+        cnd.setName("cnd");
+        cnd.setFunction(create_new_directory);
+        cnd.setArgCount(1);
+
+        Command cnf;
+        cnf.setName("cnf");
+        cnf.setFunction(create_new_file);
+        cnf.setArgCount(1);
+
+        Command dd;
+        dd.setName("dd");
+        dd.setFunction(delete_directory);
+        dd.setArgCount(1);
+
+        Command df;
+        df.setName("df");
+        df.setFunction(delete_file);
+        df.setArgCount(1);
+
+        Command rtf;
+        rtf.setName("rtf");
+        rtf.setFunction(read_all_text_from_file);
+        rtf.setArgCount(2);
+
+        Command wrf;
+        wrf.setName("wrf");
+        wrf.setFunction(write_all_text_to_file);
+        wrf.setArgCount(2);
+
+        Command chd;
+        chd.setName("chd");
+        chd.setFunction(change_directory);
+        chd.setArgCount(1);
+
         commands.push_back(moi);
         commands.push_back(mos);
         commands.push_back(defi);
@@ -224,6 +260,13 @@ public:
         commands.push_back(err);
         commands.push_back(poi);
         commands.push_back(mod);
+        commands.push_back(cnf);
+        commands.push_back(cnd);
+        commands.push_back(dd);
+        commands.push_back(df);
+        commands.push_back(wrf);
+        commands.push_back(rtf);
+        commands.push_back(chd);
     }
 } System;
 

@@ -142,11 +142,15 @@ void create_new_directory(std::vector<std::string> args)
         if (!Variables.isCpp())
         {
             name = name.substr(1, name.size() - 2);
-            mkdir(name.c_str(), 755);
+            #ifdef _WIN32 || _WIN64
+                mkdir(name.c_str());
+            #else
+                mkdir(name.c_str(), 755);
+            #endif
         }
 
 
-    #ifdef _WIN32
+    #ifdef _WIN32 || _WIN64
         CPPSource.addSource("mkdir("+name+")");
     #else
         CPPSource.addSource("mkdir("+name+", 755)");
@@ -168,9 +172,16 @@ void create_new_directory(std::vector<std::string> args)
 
     else if (Variables.existsStringVariable(name))
     {
-        mkdir(Variables.getStringVariable(name).getStringValue().c_str(), 755);
+        if (!Variables.isCpp())
+        {
+            #ifdef _WIN32 || _WIN64
+                mkdir(Variables.getStringVariable(name).getStringValue().c_str());
+            #else
+                mkdir(Variables.getStringVariable(name).getStringValue().c_str(), 755);
+            #endif
+        }
 
-        #ifdef _WIN32
+        #ifdef _WIN32 || _WIN64
             CPPSource.addSource("mkdir("+name+".c_str())");
         #else
             CPPSource.addSource("mkdir("+name+".c_str(), 755)");

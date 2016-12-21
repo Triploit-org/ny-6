@@ -73,7 +73,7 @@ Das jedoch größte, was geändert wurde, ist die Programmiersprache in der Ny++
 
 ###21.12.2016 –– 17:48 | 5:48 PM –– Survari
 
-Notiz: Großes **Dateisystem-Update**. Es sind noch keine Einträge zu den neuen Funktionen in der Readme eingetragen, das muss ich machen wenn ich mehr Zeit habe. Bin trotzdem stolz das Ny++6 jetzt auch endlich lesen und scheiben gelehrnt hat ;)
+Notiz: Großes **Dateisystem-Update**. Es sind noch keine Einträge zu den neuen Funktionen in der Readme eingetragen, das muss ich machen wenn ich mehr Zeit habe. Bin trotzdem stolz das Ny++6 jetzt auch endlich lesen und scheiben gelernt hat ;)
 
 * Added     Dateien erstellen
 * Added     Dateien löschen

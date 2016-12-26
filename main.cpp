@@ -174,6 +174,11 @@ int main(int argc, char *args[])
             Variables.setCpp(true);
             std::cout << Variables.isCpp() << std::endl;
         }
+        else if (strcmp(args[1], "-v") == 0)
+        {
+            std::cout << "0.4" << std::endl;
+            return 0;
+        }
 
         fname = args[2];
         fname = fname.substr(fname.length() - 2, fname.length());
@@ -328,8 +333,16 @@ int main(int argc, char *args[])
 
     if (Variables.isCpp())
     {
-        // std::string src = CPPSource.getSource();
+        StringCheck sc;
+        std::string tmp = CPPSource.getSource();
 
+        sc.replaceStringFromTo(tmp, "%nX", "\\n");
+        sc.replaceStringFromTo(tmp, "%tX", "\\t");
+
+        sc.replaceStringFromTo(tmp, "%aX", "\\\"");
+        sc.replaceStringFromTo(tmp, "%eX", "\\\'");
+
+        CPPSource.setSource(tmp);
         std::cout << CPPSource.getSource() << std::endl;
         std::string n;
         std::string n2;

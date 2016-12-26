@@ -91,10 +91,15 @@ public:
                     isStr = false;
 
                     StringCheck sc;
-                    sc.replaceStringFromTo(tmp, "%nX", "\n");
-                    sc.replaceStringFromTo(tmp, "%tX", "\t");
-                    sc.replaceStringFromTo(tmp, "%aX", "\"");
-                    sc.replaceStringFromTo(tmp, "%eX", "\'");
+
+                    if (!Variables.isCpp())
+                    {
+                        sc.replaceStringFromTo(tmp, "%nX", "\n");
+                        sc.replaceStringFromTo(tmp, "%tX", "\t");
+                        sc.replaceStringFromTo(tmp, "%aX", "\"");
+                        sc.replaceStringFromTo(tmp, "%eX", "\'");
+                    }
+
                     sc.replaceStringFromTo(tmp, "[NL:97:LN]", "");
 
                     /*

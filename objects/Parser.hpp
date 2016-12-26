@@ -38,6 +38,16 @@ public:
         // Praeprozessor
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
+            if (i == (code.size()-1))
+            {
+                if (!Gotos.getGoto(aktgoto).isClosed())
+                {
+                    std::cout << "[ MAIN ]:[ PRAE ]:[ NOT_CLOSED:" << aktgoto
+                              << " ] Dieser Sprungmarkenbereich wurde nicht geschlossen!" << std::endl;
+                    exit(0);
+                }
+            }
+
             if (code[i].substr(0, 1) == "{" && code[i].substr(code[i].length() - 1, code[i].length() - 2) == "}")
             {
                 std::string marke = code[i].substr(1, code[i].length() - 2);
@@ -129,6 +139,7 @@ public:
         // Command Parser & Executor
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
+
             std::string gtn = code[i].substr(1, code[i].size()-3);
 
             char gtn1 = code[i].at(0);

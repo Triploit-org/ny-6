@@ -1,0 +1,8 @@
+#!/usr/bin/ny6
+
+{main}	add			[1], _cxi;
+				prv			_cxi;@
+				lqi			_cxi, [99999], main;
+
+				end;
+				endf;

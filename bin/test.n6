@@ -4,7 +4,7 @@
         div     h2, h;
         prv     h;@
 
-        say     "Hallo Welt! von Main";@
+        say     "Hallo Welt! von%tX%tX%aXMain%aX%nX%nX";@
         cl      ok2;
         say     "Wieder MAIN!";@
 

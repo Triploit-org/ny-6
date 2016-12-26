@@ -328,6 +328,8 @@ int main(int argc, char *args[])
 
     if (Variables.isCpp())
     {
+        // std::string src = CPPSource.getSource();
+
         std::cout << CPPSource.getSource() << std::endl;
         std::string n;
         std::string n2;

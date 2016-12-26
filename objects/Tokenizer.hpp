@@ -87,9 +87,26 @@ public:
             if (code[i] == '\"')
             {
                 if (isStr)
+                {
                     isStr = false;
+
+                    StringCheck sc;
+                    sc.replaceStringFromTo(tmp, "%nX", "\n");
+                    sc.replaceStringFromTo(tmp, "%tX", "\t");
+                    sc.replaceStringFromTo(tmp, "%aX", "\"");
+                    sc.replaceStringFromTo(tmp, "%eX", "\'");
+
+                    /*
+                    %aX >> "
+                    %eX >> '
+                    %tX >> \t
+                    %nX >> \n
+                     */
+                }
                 else
+                {
                     isStr = true;
+                }
             }
         }
 

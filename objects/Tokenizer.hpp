@@ -95,6 +95,7 @@ public:
                     sc.replaceStringFromTo(tmp, "%tX", "\t");
                     sc.replaceStringFromTo(tmp, "%aX", "\"");
                     sc.replaceStringFromTo(tmp, "%eX", "\'");
+                    sc.replaceStringFromTo(tmp, "[NL:97:LN]", "");
 
                     /*
                     %aX >> "

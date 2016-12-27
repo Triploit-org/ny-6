@@ -240,14 +240,6 @@ public:
 
                     cmds[j].runFunction(args);
                     args.clear();
-
-                    if (code[i] != ";" && code[i] != "[NL:97:LN]" && code[i] != "")
-                    {
-                        std::string err = "[ MAIN ]:[ PARSER ]:[ MISSING_SEMICOLON ] Fehlendes Semikolon/Schlusszeichen! ";
-                        err += "\n";
-                        System.printError(err);
-                        exit(0);
-                    }
                 }
 
                 if (code[i] == "[NL:97:LN]")

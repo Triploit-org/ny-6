@@ -114,6 +114,16 @@ public:
                     isStr = true;
                 }
             }
+            else if (code[i] == '?')
+            {
+                for (int j = i; j < code.size(); j++)
+                {
+                    if (code[j] == '?')
+                        break;
+
+                    i = j + 1;
+                }
+            }
         }
 
         return ecode;

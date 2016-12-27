@@ -23,6 +23,8 @@ vector
 -
 objects/Goto.hpp
 /run/media/survari/Survari/Projekte/C++/test/objects/Goto.hpp
+Variables.hpp
+/run/media/survari/Survari/Projekte/C++/test/Variables.hpp
 
 /run/media/survari/Survari/Projekte/C++/test/LangVars.hpp
 iostream
@@ -74,6 +76,8 @@ vector
 
 /run/media/survari/Survari/Projekte/C++/test/Variables.hpp
 vector
+-
+stdlib.h
 -
 objects/String.hpp
 /run/media/survari/Survari/Projekte/C++/test/objects/String.hpp

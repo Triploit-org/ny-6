@@ -1,12 +1,24 @@
 {main}  defi    h, [90];
         defi    h2, [10];
 
+        (start)
+
+        moi     [90], h;
+        moi     [10], h2;
+        sti     h, _axs;
+
         div     h2, h;
         prv     h;@
 
-        say     "Hallo Welt! von%tX%tX%aXMain%aX%nX%nX";@
+        say     "Hallo Welt! von %aXMain%aX";@
         cl      ok2;
         say     "Wieder MAIN!";@
+
+        add     [4], _axi;
+        prv     _NL;
+        eqi     _axi, [4], <start>;
+        nqi     _axi, [4], <ende>;
+        (ende)
 
         end;
         endf;
@@ -17,7 +29,7 @@
         say     "Schleife?";@
 
         prv     _cxs;@
-        add     [1], _cxi;
+        moi     [1], _cxi;
         prv     _cxi;@
         nqi     _cxi, [1], <begOk2>;
 

@@ -38,6 +38,8 @@ public:
         // Praeprozessor
         for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
         {
+            // std::cout << "]] " << code[i] << std::endl;
+
             if (i == (code.size()-1))
             {
                 if (!Gotos.getGoto(aktgoto).isClosed())
@@ -53,10 +55,10 @@ public:
                 std::string marke = code[i].substr(1, code[i].length() - 2);
 
 
-                if (StringCH.isNumber(marke))
+                if (StringCH.isNumber(marke) || StringCH.containsIllegalVariableCharacter(marke))
                 {
                     std::cout << "[ MAIN ]:[ PRAE ]:[ INVALID_GOTO_LABEL:" << marke
-                              << " ] Die Sprungmarke besteht nur aus Zahlen!"
+                              << " ] Die Sprungmarke besteht nur aus Zahlen oder enthält nicht zugelassene Zeichen!"
                               << std::endl;
                 }
 
@@ -182,9 +184,17 @@ public:
                 if (Variables.existsRealGoto(gtn))
                 {
                     CPPSource.addRawSource(gtn+":");
+
                     //std::cout << "ADD RGOTO S:" << Variables.getAktScope().getRealGotos().size() << " >> \"" << gtn << "\" AT " << i << std::endl;
-                    //std::cout << CPPSource.getSource() << std::endl;
-                    //exit(0);
+
+                    /*std::vector<RealGoto> rgs = Variables.getRealGotos();
+                    for (int i = 0; i < rgs.size(); i++)
+                    {
+                        std::cout << i << "/" << rgs.size()-1 << "]] " << rgs[i].getName() << std::endl;
+                    }
+
+                     std::cout << CPPSource.getSource() << std::endl;
+                    exit(0);*/
                 }
                 else
                 {
@@ -307,7 +317,9 @@ public:
                         if (!Variables.isCpp())
                             Gotos.setI(Gotos.getLJ());
 
-                        //std::cout << "RETURN TO >> " << Gotos.getI() << std::endl;
+                        std::string gt = Gotos.getLM();
+                        Variables.setAktScope(Variables.getScope(gt));
+                        //std::cout << "RETURN TO >> " << Gotos.getI() << "|" << gt << std::endl;
                         i = Gotos.getI();
 
                         CPPSource.addSource("return 0");

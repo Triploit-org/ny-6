@@ -6,6 +6,7 @@
 #define TEST_VARIABLES_HPP
 
 #include <vector>
+#include <stdlib.h>
 #include "objects/String.hpp"
 #include "objects/Integer.hpp"
 #include "objects/Scope.hpp"
@@ -38,6 +39,11 @@ public:
                 std::cout << "\tSTR:" << scopes[i].getStrings()[j].getName() << std::endl;
             }
         }
+    }
+
+    std::vector<RealGoto> getRealGotos()
+    {
+        return aktscope.getRealGotos();
     }
 
     void addLineCount()
@@ -103,7 +109,8 @@ public:
         }
 
         aktscope = s;
-        //std::cout << "SET SCOPE TO >> " << s.getName() << std::endl;
+        //std::cout << "[VARS:SETAKTSCOPE] SET SCOPE TO >> " << s.getName() << std::endl;
+        Gotos.setAktGoto(s.getName());
     }
 
     void initStrings()

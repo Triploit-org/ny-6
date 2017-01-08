@@ -87,9 +87,31 @@ public:
             if (code[i] == '\"')
             {
                 if (isStr)
+                {
                     isStr = false;
+
+                    if (!Variables.isCpp())
+                    {
+                        for (int x = 0; x < tmp.size(); x++)
+                        {
+                            StringCH.replaceString(tmp, "%tX", "\t");
+                            StringCH.replaceString(tmp, "%nX", "\n");
+                            StringCH.replaceString(tmp, "%aX", "\"");
+
+                        }
+
+                        for (int x = 0; x < tmp.size(); x++)
+                        {
+                            StringCH.replaceString(tmp, "%ttX", "%tX");
+                            StringCH.replaceString(tmp, "%nnX", "%nX");
+                            StringCH.replaceString(tmp, "%aaX", "%aX");
+                        }
+                    }
+                }
                 else
+                {
                     isStr = true;
+                }
             }
         }
 

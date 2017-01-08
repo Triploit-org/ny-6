@@ -305,6 +305,26 @@ int main(int argc, char *args[])
             }
         }
 
+        // %tX => Tab
+        // %nX => NewLine
+        // %aX => "
+
+        if (CPPSource.isCpp())
+        {
+            for (int x = 0; x < code.size(); x++)
+            {
+                StringCH.replaceString(code, "%tX", "\\t");
+                StringCH.replaceString(code, "%nX", "\\n");
+                StringCH.replaceString(code, "%aX", "\\\"");
+            }
+
+            for (int x = 0; x < code.size(); x++)
+            {
+                StringCH.replaceString(code, "%ttX", "%tX");
+                StringCH.replaceString(code, "%nnX", "%nX");
+                StringCH.replaceString(code, "%aaX", "%aX");
+            }
+        }
 
         Tokenizer t;
         t.setCode(code);

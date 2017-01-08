@@ -49,7 +49,7 @@ beb:
 	h = h / h2;
 	std::cout << h;
 	std::cout << std::endl;
-	std::cout << "[ MAIN ] X = ";
+	std::cout << "[ MAIN\t]\tX = ";
 	std::cout << x;
 	std::cout << std::endl;
 	std::cout << "Hallo Welt! von Main";
@@ -60,6 +60,7 @@ beb:
 	std::cout << std::endl;
 	if (x < 10)
 		goto beb;
+	std::cout << "\t(TAB) = %tX";
 	exit(0);
 }
 
@@ -74,7 +75,7 @@ begOk2:
 	std::cout << _cxs;
 	std::cout << std::endl;
 	x = x + 1;
-	std::cout << "[ OK2  ] X = ";
+	std::cout << "[ OK2\t]\tX = ";
 	std::cout << x;
 	std::cout << std::endl;
 	if (x != 1)

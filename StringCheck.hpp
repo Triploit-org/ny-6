@@ -12,6 +12,17 @@
 class StringCheck
 {
 public:
+    bool replaceString(std::string& string, const std::string& from, const std::string& to)
+    {
+        size_t start_pos = string.find(from);
+
+        if(start_pos == std::string::npos)
+            return false;
+
+        string.replace(start_pos, from.length(), to);
+        return true;
+    }
+
     bool isNumber(const std::string& s) // Function by Charles Salvia on http://stackoverflow.com/questions/4654636/how-to-determine-if-a-string-is-a-number-with-c
     {
         std::string::const_iterator it = s.begin();

@@ -3,21 +3,26 @@
         defi    x, [0];
 
         (beb)
+        moi     [90], h;
+        moi     [10], h2;
+
         add     [1], x;
         div     h2, h;
         prv     h;@
-        say     "[ MAIN ] X = ";
+        say     "[ MAIN%tX]%tXX = ";
         prv     x;@
 
         say     "Hallo Welt! von Main";@
         cl      ok2;
         say     "Wieder MAIN!";@
-        lqi     x, [10], <beb>;
+        lqi     x, h2, <beb>;
 
+        say     "%tX(TAB) = %ttX";@
         end;
         endf;
 
-{ok2}   defi    x, [0];
+{ok2}   say     "OK2";@
+        defi    x, [0];
 
         (begOk2)
         mos     "Hallo", _axs;
@@ -26,7 +31,7 @@
 
         prv     _cxs;@
         add     [1], x;
-        say     "[ OK2  ] X = ";
+        say     "[ OK2%tX]%tXX = ";
         prv     x;@
         nqi     x, [1], <begOk2>;
 

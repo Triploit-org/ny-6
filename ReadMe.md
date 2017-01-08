@@ -71,6 +71,12 @@ Das jedoch größte, was geändert wurde, ist die Programmiersprache in der Ny++
 
 ##0.1 Changelog
 
+###8.1.2017 –– 13:22 | 1:22 PM –– Survari
+
+Notiz: C++ Compiler gefixt. Es wurden die neuen Sprungmarken ausgebessert. Keine weiteren neuen Features angemerkt.
+
+* Bugfix    Sprungarmken
+* Bugfix    C++ Compiler
 
 ###18.12.2016 –– 13:00 | 1:00 PM –– Survari
 

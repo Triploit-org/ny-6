@@ -1,3 +1,0 @@
-/run/media/survari/Survari/Projekte/C++/test/CMakeFiles/edit_cache.dir
-/run/media/survari/Survari/Projekte/C++/test/CMakeFiles/rebuild_cache.dir
-/run/media/survari/Survari/Projekte/C++/test/CMakeFiles/ny6.dir

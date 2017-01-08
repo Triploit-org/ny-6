@@ -11,7 +11,18 @@ class CPPSource
 {
 private:
     std::string source = "";
+    bool iscpp = false;
 public:
+    bool isCpp()
+    {
+        return iscpp;
+    }
+
+    void setCpp(bool b)
+    {
+        iscpp = b;
+    }
+
     void addSource(std::string s)
     {
         source = source + "\t" + s + ";\n";

@@ -7,6 +7,8 @@
 #include "objects/Tokenizer.hpp"
 #include "objects/Parser.hpp"
 
+#define __VERSION "4.0.3"
+
 int main(int argc, char *args[])
 {
     Scope public__aXX;
@@ -71,20 +73,6 @@ int main(int argc, char *args[])
     /*
      * TODO ============================== BEGIN
      *
-     *  TODO >> NQI   COMMAND                  | X | >>  Equals
-     *  TODO >> EQI   COMMAND                  | X | >>  Equals
-     *  TODO >> GQI   COMMAND                  | X | >>  Equals
-     *  TODO >> LQI   COMMAND                  | X | >>  Equals
-     *
-     *  TODO >> NQS   COMMAND                  | X | >>  Equals
-     *  TODO >> EQS   COMMAND                  | X | >>  Equals
-     *  TODO >> GQS   COMMAND                  | X | >>  Equals
-     *  TODO >> LQS   COMMAND                  | X | >>  Equals
-     *
-     *  TODO >> SLEEP COMMAND                  |   | >>  Maths
-     *  TODO >> GCA   COMMAND                  | X | >>  StringOps
-     *  TODO >> STI   COMMAND                  | X | >>  StringOps
-     *
      *  TODO >> INCLUDE FUNCTION               | / | >>  Tokenizer
      *
      * TODO ================================= END
@@ -92,17 +80,25 @@ int main(int argc, char *args[])
 
     if (argc == 2)
     {
-        fname = args[1];
-        fname = fname.substr(fname.length() - 2, fname.length());
-
-        if (fname == "n6")
+        if (strcmp(args[1], "-v") == 0 || strcmp(args[1], "--version") == 0)
         {
-            infile = std::ifstream(args[1]);
+            std::cout << __VERSION << std::endl;
+            exit(0);
         }
         else
         {
-            std::cout << "[ MAIN ] Falsche Dateiendung(" << fname << ")! Erwartet: *.n6" << std::endl;
-            exit(0);
+            fname = args[1];
+            fname = fname.substr(fname.length() - 2, fname.length());
+
+            if (fname == "n6")
+            {
+                infile = std::ifstream(args[1]);
+            }
+            else
+            {
+                std::cout << "[ MAIN ] Falsche Dateiendung(" << fname << ")! Erwartet: *.n6" << std::endl;
+                exit(0);
+            }
         }
     }
     else if (argc == 0 || argc < 2)
@@ -168,7 +164,8 @@ int main(int argc, char *args[])
         if (strcmp(args[1], "-cc") == 0)
         {
             Variables.setCpp(true);
-            std::cout << Variables.isCpp() << std::endl;
+            CPPSource.setCpp(true);
+            // std::cout << Variables.isCpp() << std::endl;
         }
 
         fname = args[2];
@@ -312,9 +309,11 @@ int main(int argc, char *args[])
         Tokenizer t;
         t.setCode(code);
 
+        if (CPPSource.isCpp()) std::cout << "Betrete Parser-Klasse." << std::endl;
         Parser p;
         p.setCode(t.doTokenize());
         p.parseAll();
+        if (CPPSource.isCpp()) std::cout << "Beende Parser-Klasse." << std::endl;
 
     }
     else

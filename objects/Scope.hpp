@@ -22,6 +22,26 @@ private:
     std::vector<RealGoto> gotos;
 
 public:
+    void listItems()
+    {
+        std::cout << std::endl;
+        for (int i = 0; i < strings.size(); i++)
+        {
+            std::cout << "[" << scopename << "][STR] " << strings[i].getName() << std::endl;
+        }
+        std::cout << std::endl;
+        for (int i = 0; i < integer.size(); i++)
+        {
+            std::cout << "[" << scopename << "][INT] " << integer[i].getName() << std::endl;
+        }
+        std::cout << std::endl;
+        for (int i = 0; i < gotos.size(); i++)
+        {
+            std::cout << "[" << scopename << "][RGT] " << gotos[i].getName() << std::endl;
+        }
+        std::cout << std::endl;
+    }
+
     RealGoto getRealGoto(std::string name)
     {
         for (int i = 0; i < gotos.size(); i++)

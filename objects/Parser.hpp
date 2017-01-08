@@ -34,20 +34,27 @@ public:
     void parseAll()
     {
         bool isfm = true;
+        if (CPPSource.isCpp()) std::cout << "Starte Praeprozessor." << std::endl;
 
         // Praeprozessor
-        for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
+        for (i = Gotos.getI(); i < code.size(); i++)
         {
             if (code[i].substr(0, 1) == "{" && code[i].substr(code[i].length() - 1, code[i].length() - 2) == "}")
             {
                 std::string marke = code[i].substr(1, code[i].length() - 2);
 
+                if (Gotos.findGoto(marke))
+                {
+                    std::cout << "[ MAIN ]:[ PRAE ]:[ ALREADY_EXISTS:" << marke << " ] Sprungmarke existiert schon!" << std::endl;
+                    exit(0);
+                }
 
                 if (StringCH.isNumber(marke))
                 {
                     std::cout << "[ MAIN ]:[ PRAE ]:[ INVALID_GOTO_LABEL:" << marke
                               << " ] Die Sprungmarke besteht nur aus Zahlen!"
                               << std::endl;
+                    exit(0);
                 }
 
                 if (Gotos.getGoto(aktgoto).getIndex() != -999)
@@ -92,7 +99,6 @@ public:
                     {
                         RealGoto rg(gtn, i);
                         Variables.addRealGoto(rg);
-                        // std::cout << "ADD RGOTO S:" << Variables.getAktScope().getRealGotos().size() << " >> \"" << rg.getName() << "\" AT " << rg.getIndex() << std::endl;
                     }
                     else
                     {
@@ -104,10 +110,9 @@ public:
                     Gotos.setGotoClosed(aktgoto, true);
                 }
             }
-
-            Gotos.setI((Gotos.getI() + 1));
         }
 
+        if (CPPSource.isCpp()) std::cout << "Verlasse Praeprozessor." << std::endl;
         CPPSource.addRawSource("");
         aktgoto = "public__aXX";
         Variables.setAktScope(Variables.getScope(aktgoto));
@@ -126,9 +131,16 @@ public:
             exit(0);
         }
 
+        if (CPPSource.isCpp()) std::cout << "Starte Parser." << std::endl;
         // Command Parser & Executor
-        for (i = Gotos.getI(); i < code.size(); i = Gotos.getI())
+        int i2 = 0;
+        for (i = Gotos.getI(); i < code.size() && i2 < code.size(); i = Gotos.getI())
         {
+            if (CPPSource.isCpp())
+            {
+                i = i2;
+            }
+
             std::string gtn = code[i].substr(1, code[i].size()-3);
 
             char gtn1 = code[i].at(0);
@@ -152,40 +164,32 @@ public:
                 }
 
                 std::string marke = code[i].substr(1, code[i].length() - 2);
-                //std::cout << "Sprungmarke:\t\t" << code[i] << " -> " << marke << " || " << i << std::endl;
+                //std::cout << "Funktion: " << marke << std::endl;
 
                 if (!Gotos.getGoto(marke).isAlreadyDefined())
                 {
                     CPPSource.addRawSource("\nint " + marke + "()\n{");
                     Gotos.getGoto(marke).setAlreadyDefined(true);
 
+                    Scope n;
+                    n.setName(marke);
+                    Variables.addScope(n);
+                    Variables.setAktScope(Variables.getScope(n.getName()));
+
                     aktgoto = marke;
+                    //std::cout << "AKTGT = " << marke << std::endl;
                 }
 
-                // i++;
-                // Gotos.setI(i);
             }
 
             if (gtn1 == '(' && gtn2 == ')')
             {
-                if (Variables.existsRealGoto(gtn))
-                {
-                    CPPSource.addRawSource(gtn+":");
-                    //std::cout << "ADD RGOTO S:" << Variables.getAktScope().getRealGotos().size() << " >> \"" << gtn << "\" AT " << i << std::endl;
-                    //std::cout << CPPSource.getSource() << std::endl;
-                    //exit(0);
-                }
-                else
-                {
-                    Error.printErr("[ MAIN ]:[ PRAE ]:[ RGOTO ]:[ ALREADYEXISTS:",gtn," ] Goto (!=func) existiert schon!");
-                }
+                CPPSource.addRawSource(gtn+":");
+                //std::cout << "ADD RGOTO S:" << Variables.getAktScope().getRealGotos().size() << " >> \"" << gtn << "\" AT " << i << std::endl;
+                //std::cout << CPPSource.getSource() << std::endl;
+                //exit(0);
             }
-            else
-            {
-                // std::cout << "GT? ]] " << gtn << std::endl;
-                // std::cout << "    >> " << gtn1 << std::endl;
-                // std::cout << "    >> " << gtn2 << std::endl;
-            }
+
 
             char ab = 13;
             char ac = 64;
@@ -197,7 +201,6 @@ public:
                 if (!Variables.isCpp())
                     std::cout << std::endl;
                 CPPSource.addSource("std::cout << std::endl");
-                //std::cout << "Aha!! ]] " << (int) code[i].at(code[i].size()-1) << " + " << (int) code[i].at(code[i].size()-2) << std::endl;
 
                 i++;
                 Gotos.setI(i);
@@ -253,7 +256,8 @@ public:
                             CPPSource.addSource(gt + "()");
                             CPPSource.addRawSource("");
 
-                            Variables.setAktScope(Variables.getScope(gt));
+                            if (!CPPSource.isCpp())
+                                Variables.setAktScope(Variables.getScope(gt));
                             //Variables.listScopes();
 
                             // std::cout << ">>  " << Variables.getScope("main").getIntegers().size() << std::endl;
@@ -292,11 +296,9 @@ public:
                         if (!Variables.isCpp())
                         {
                             Gotos.setI(Gotos.getLJ());
+                            i = Gotos.getI();
                             Variables.setAktScope(Variables.getScope(Gotos.getLS()));
                         }
-
-                        //std::cout << "RETURN TO >> " << Gotos.getI() << std::endl;
-                        i = Gotos.getI();
 
                         CPPSource.addSource("return 0");
                         break;
@@ -311,6 +313,7 @@ public:
                     else if (code[i] == "endf")
                     {
                         CPPSource.addRawSource("}");
+                        Variables.clearVariables();
 
                         if (!Variables.isCpp())
                         {
@@ -321,7 +324,6 @@ public:
                             }
                             else
                             {
-                                Variables.clearVariables();
                                 Gotos.setI(Gotos.getLJ());
                                 Variables.setAktScope(Variables.getScope(Gotos.getLS()));
                             }
@@ -331,11 +333,13 @@ public:
                 }
             }
 
-            Gotos.setI((Gotos.getI() + 1));
+            if (!Variables.isCpp()) Gotos.setI((Gotos.getI() + 1));
+            i2++;
             //std::cout << Gotos.getI() << std::endl;
         }
 
         //CPPSource.addRawSource("\n\treturn 0;\n}");
+        if (CPPSource.isCpp()) std::cout << "Beende Parser" << std::endl;
     }
 };
 

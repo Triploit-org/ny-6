@@ -43,8 +43,14 @@ int main()
 {
 	int h = 90;
 	int h2 = 10;
+	int x = 0;
+beb:
+	x = x + 1;
 	h = h / h2;
 	std::cout << h;
+	std::cout << std::endl;
+	std::cout << "[ MAIN ] X = ";
+	std::cout << x;
 	std::cout << std::endl;
 	std::cout << "Hallo Welt! von Main";
 	std::cout << std::endl;
@@ -52,11 +58,14 @@ int main()
 
 	std::cout << "Wieder MAIN!";
 	std::cout << std::endl;
+	if (x < 10)
+		goto beb;
 	exit(0);
 }
 
 int ok2()
 {
+	int x = 0;
 begOk2:
 	_axs = "Hallo";
 	_cxs = "Hallo von OK2!";
@@ -64,10 +73,11 @@ begOk2:
 	std::cout << std::endl;
 	std::cout << _cxs;
 	std::cout << std::endl;
-	_cxi = _cxi + 1;
-	std::cout << _cxi;
+	x = x + 1;
+	std::cout << "[ OK2  ] X = ";
+	std::cout << x;
 	std::cout << std::endl;
-	if (_cxi != 1)
+	if (x != 1)
 		goto begOk2;
 endOk2:
 	return 0;

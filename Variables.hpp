@@ -6,6 +6,7 @@
 #define TEST_VARIABLES_HPP
 
 #include <vector>
+#include <stdlib.h>
 #include "objects/String.hpp"
 #include "objects/Integer.hpp"
 #include "objects/Scope.hpp"

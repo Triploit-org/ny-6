@@ -13,8 +13,8 @@ private:
     std::string name;
     int index;
 
-    bool isclosed;
-    bool isadefined;
+    bool isclosed = false;
+    bool isadefined = false;
 
 public:
     std::string getName()

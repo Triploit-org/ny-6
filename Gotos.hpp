@@ -8,7 +8,8 @@
 #include <iostream>
 #include <vector>
 #include "objects/Goto.hpp"
-
+#include "Variables.hpp"
+#include "CPPSource.hpp"
 class Gotos
 {
 private:
@@ -39,7 +40,10 @@ public:
 
     void setI(int s)
     {
-        i = s;
+        if (!CPPSource.isCpp())
+        {
+            i = s;
+        }
     }
 
     int getLJ()

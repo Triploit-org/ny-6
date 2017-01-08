@@ -135,7 +135,7 @@ void not_equals_int(std::vector<std::string> args)
 
     if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
-        std::cout << "[ MAIN ]:[ EQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
+        std::cout << "[ MAIN ]:[ NQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
         exit(0);
     }
@@ -243,8 +243,9 @@ void less_equals_int(std::vector<std::string> args)
 
     if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
-        std::cout << "[ MAIN ]:[ EQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
+        std::cout << "[ MAIN ]:[ LQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
+        std::cout << CPPSource.getSource() << std::endl;
         exit(0);
     }
 
@@ -358,7 +359,7 @@ void greater_equals_int(std::vector<std::string> args)
 
     if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
-        std::cout << "[ MAIN ]:[ EQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
+        std::cout << "[ MAIN ]:[ GQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
         exit(0);
     }

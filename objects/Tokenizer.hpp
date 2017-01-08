@@ -87,42 +87,9 @@ public:
             if (code[i] == '\"')
             {
                 if (isStr)
-                {
                     isStr = false;
-
-                    StringCheck sc;
-
-                    if (!Variables.isCpp())
-                    {
-                        sc.replaceStringFromTo(tmp, "%nX", "\n");
-                        sc.replaceStringFromTo(tmp, "%tX", "\t");
-                        sc.replaceStringFromTo(tmp, "%aX", "\"");
-                        sc.replaceStringFromTo(tmp, "%eX", "\'");
-                    }
-
-                    sc.replaceStringFromTo(tmp, "[NL:97:LN]", "");
-
-                    /*
-                    %aX >> "
-                    %eX >> '
-                    %tX >> \t
-                    %nX >> \n
-                     */
-                }
                 else
-                {
                     isStr = true;
-                }
-            }
-            else if (code[i] == '?')
-            {
-                for (int j = i; j < code.size(); j++)
-                {
-                    if (code[j] == '?')
-                        break;
-
-                    i = j + 1;
-                }
             }
         }
 

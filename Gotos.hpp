@@ -8,7 +8,6 @@
 #include <iostream>
 #include <vector>
 #include "objects/Goto.hpp"
-#include "Variables.hpp"
 
 class Gotos
 {
@@ -16,23 +15,12 @@ private:
     std::vector<Goto> gotos;
     std::vector<Goto> labels;
     std::vector<int> goto_index;
-    std::string aktgoto;
     int i;
-
     std::vector<int> lj;
-    std::vector<std::string> lm;
+    std::vector<std::string> ls;
     int line = 1;
 
 public:
-    std::string getAktGoto()
-    {
-        return aktgoto;
-    }
-
-    void setAktGoto(std::string n)
-    {
-        aktgoto = n;
-    }
 
     void addLineCount()
     {
@@ -59,27 +47,27 @@ public:
         int r = lj[lj.size()-1];
         //std::cout << "\t>> " << r << std::endl;
         lj.erase(lj.end()-1);
-
-        for (int i = lj.size(); i > lm.size(); lm.erase(lm.end()-1)) {} // Buganfällig?
-
         return r;
-    }
-
-    std::string getLM()
-    {
-        std::string l = lm[lm.size()-1];
-        lm.erase(lm.end()-1);
-
-        for (int i = lm.size(); i > lj.size(); lj.erase(lj.end()-1)) {} // Buganfällig?
-
-        return l;
     }
 
     void addLJ(int l)
     {
-       // std::cout << "ADDI: " << l << std::endl;
+        // std::cout << "ADDI: " << l << std::endl;
         lj.push_back(l);
-        lm.push_back(aktgoto);
+    }
+
+    std::string getLS()
+    {
+        std::string r = ls[ls.size()-1];
+        //std::cout << "\t>> " << r << std::endl;
+        ls.erase(ls.end()-1);
+        return r;
+    }
+
+    void addLS(std::string l)
+    {
+        // std::cout << "ADDI: " << l << std::endl;
+        ls.push_back(l);
     }
 
     Goto getGoto(std::string name)

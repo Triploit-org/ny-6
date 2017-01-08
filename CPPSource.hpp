@@ -26,11 +26,6 @@ public:
     {
         return source;
     }
-
-    void setSource(std::string src)
-    {
-        source = src;
-    }
 } CPPSource;
 
 #endif //TEST_CPPSOURCE_HPP

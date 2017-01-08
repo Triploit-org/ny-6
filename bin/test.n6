@@ -1,37 +1,34 @@
 {main}  defi    h, [90];
         defi    h2, [10];
+        defi    x, [0];
 
-        (start)
-
-        moi     [90], h;
-        moi     [10], h2;
-        sti     h, _axs;
-
+        (beb)
+        add     [1], x;
         div     h2, h;
         prv     h;@
+        say     "[ MAIN ] X = ";
+        prv     x;@
 
-        say     "Hallo Welt! von %aXMain%aX";@
+        say     "Hallo Welt! von Main";@
         cl      ok2;
         say     "Wieder MAIN!";@
-
-        add     [4], _axi;
-        prv     _NL;
-        eqi     _axi, [4], <start>;
-        nqi     _axi, [4], <ende>;
-        (ende)
+        lqi     x, [2], <beb>;
 
         end;
         endf;
 
-{ok2}   (begOk2)
+{ok2}   defi    x, [0];
+
+        (begOk2)
         mos     "Hallo", _axs;
         mos     "Hallo von OK2!", _cxs;
         say     "Schleife?";@
 
         prv     _cxs;@
-        moi     [1], _cxi;
-        prv     _cxi;@
-        nqi     _cxi, [1], <begOk2>;
+        add     [1], x;
+        say     "[ OK2  ] X = ";
+        prv     x;@
+        nqi     x, [1], <begOk2>;
 
         (endOk2)
         return;

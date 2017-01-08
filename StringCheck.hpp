@@ -63,19 +63,6 @@ public:
         }
         return false;
     }
-
-    bool replaceStringFromTo(std::string& str, const std::string& from, const std::string& to)
-    {
-
-        for (int i = 0; i < str.size(); i++)
-        {
-            size_t start_pos = str.find(from);
-            if (start_pos == std::string::npos)
-                return false;
-            str.replace(start_pos, from.length(), to);
-        }
-        return true;
-    }
 } StringCH;
 
 #endif //TEST_STRINGCHECK_HPP

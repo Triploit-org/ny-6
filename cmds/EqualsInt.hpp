@@ -26,14 +26,6 @@ void equals_equals_int(std::vector<std::string> args)
     {
         std::cout << "[ MAIN ]:[ EQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
-
-        std::vector<RealGoto> rgs = Variables.getRealGotos();
-        for (int i = 0; i < rgs.size(); i++)
-        {
-            std::cout << i << "/" << rgs.size()-1 << "]] " << rgs[i].getName() << std::endl;
-        }
-        std::cout << rgs.size();
-
         exit(0);
     }
 
@@ -60,9 +52,10 @@ void equals_equals_int(std::vector<std::string> args)
                 else
                 {
                     // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
                     Gotos.addLJ(Gotos.getI());
+                    Gotos.addLS(Variables.getAktScope().getName());
                     Gotos.setI(Gotos.getGoto(gtn).getIndex());
-                    Variables.setAktScope(Variables.getScope(gtn));
                 }
 
             }
@@ -115,8 +108,8 @@ void equals_equals_int(std::vector<std::string> args)
                         // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
 
                         Gotos.addLJ(Gotos.getI());
+                        Gotos.addLS(Variables.getAktScope().getName());
                         Gotos.setI(Gotos.getGoto(gtn).getIndex());
-                        Variables.setAktScope(Variables.getScope(gtn));
                     }
                 }
             }
@@ -170,9 +163,10 @@ void not_equals_int(std::vector<std::string> args)
                 else
                 {
                     // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
                     Gotos.addLJ(Gotos.getI());
+                    Gotos.addLS(Variables.getAktScope().getName());
                     Gotos.setI(Gotos.getGoto(gtn).getIndex());
-                    Variables.setAktScope(Variables.getScope(gtn));
                 }
             }
         }
@@ -222,8 +216,8 @@ void not_equals_int(std::vector<std::string> args)
                         // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
 
                         Gotos.addLJ(Gotos.getI());
+                        Gotos.addLS(Variables.getAktScope().getName());
                         Gotos.setI(Gotos.getGoto(gtn).getIndex());
-                        Variables.setAktScope(Variables.getScope(gtn));
                     }
                 }
             }
@@ -278,9 +272,10 @@ void less_equals_int(std::vector<std::string> args)
                 else
                 {
                     // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
                     Gotos.addLJ(Gotos.getI());
+                    Gotos.addLS(Variables.getAktScope().getName());
                     Gotos.setI(Gotos.getGoto(gtn).getIndex());
-                    Variables.setAktScope(Variables.getScope(gtn));
                 }
             }
         }
@@ -336,8 +331,8 @@ void less_equals_int(std::vector<std::string> args)
                         // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
 
                         Gotos.addLJ(Gotos.getI());
+                        Gotos.addLS(Variables.getAktScope().getName());
                         Gotos.setI(Gotos.getGoto(gtn).getIndex());
-                        Variables.setAktScope(Variables.getScope(gtn));
                     }
                 }
             }
@@ -361,11 +356,10 @@ void greater_equals_int(std::vector<std::string> args)
     char gtn2 = ' ';
     gtn2 = gtn.at(gtn.length()-1);
 
-    if (!Gotos.findGoto(gtnaz) && !Variables.existsRealGoto(gtnaz))
+    if (!Gotos.findGoto(gtn) && !Variables.existsRealGoto(gtnaz))
     {
-        std::cout << "[ MAIN ]:[ GQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
+        std::cout << "[ MAIN ]:[ EQI ]:[ GOTO_NOT_FOUND:" << gtn << "||" << gtnaz << " ] Es gibt diese Sprungmarke nicht!"
                   << std::endl;
-
         exit(0);
     }
 
@@ -392,9 +386,10 @@ void greater_equals_int(std::vector<std::string> args)
                 else
                 {
                     // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
+
                     Gotos.addLJ(Gotos.getI());
+                    Gotos.addLS(Variables.getAktScope().getName());
                     Gotos.setI(Gotos.getGoto(gtn).getIndex());
-                    Variables.setAktScope(Variables.getScope(gtn));
                 }
             }
         }
@@ -447,8 +442,8 @@ void greater_equals_int(std::vector<std::string> args)
                         // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
 
                         Gotos.addLJ(Gotos.getI());
+                        Gotos.addLS(Variables.getAktScope().getName());
                         Gotos.setI(Gotos.getGoto(gtn).getIndex());
-                        Variables.setAktScope(Variables.getScope(gtn));
                     }
                 }
             }

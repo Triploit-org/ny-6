@@ -30,11 +30,9 @@ int main(int argc, char *args[])
 
     CPPSource.addRawSource("#include <iostream>");
     CPPSource.addRawSource("#include <cstdlib>");
-    CPPSource.addRawSource("#include <cstdio>");
+    CPPSource.addRawSource("#include <cstdio>\n");
     CPPSource.addRawSource("#include <cmath>\n");
-    CPPSource.addRawSource("#include <unistd.h>");
-    CPPSource.addRawSource("#include <fstream>");
-    CPPSource.addRawSource("#include <sys/stat.h>");
+    CPPSource.addRawSource("");
 
     CPPSource.addRawSource("#ifdef _WIN32");
     CPPSource.addRawSource("int _fos = 0;");
@@ -68,8 +66,6 @@ int main(int argc, char *args[])
     CPPSource.addRawSource("std::string _dxs = \"\";");
     CPPSource.addRawSource("std::string _exs = \"\";");
     CPPSource.addRawSource("std::string _NL = \"\\n\";");
-    CPPSource.addRawSource("\nstd::fstream f;");
-    CPPSource.addRawSource("std::string c = \"\";");
     CPPSource.addRawSource("");
 
     /*
@@ -96,12 +92,6 @@ int main(int argc, char *args[])
 
     if (argc == 2)
     {
-        if (strcmp(args[1], "-v") == 0)
-        {
-            std::cout << "0.4" << std::endl;
-            return 0;
-        }
-
         fname = args[1];
         fname = fname.substr(fname.length() - 2, fname.length());
 
@@ -194,17 +184,128 @@ int main(int argc, char *args[])
             exit(0);
         }
     }
+
     std::string code = "";
     std::string line;
 
     if (infile)
     {
-        int lc = 1;
         while (std::getline(infile, line))
         {
-            code = code + line + " [NL:97:LN] ";
-            line = "";
-            lc++;
+            if (line.substr(0, 4) == "%inc")
+            {
+                // std::cout << "INC!" << std::endl;
+
+                line = line.substr(5, line.size());
+                std::ifstream f = std::ifstream(line);
+
+                while (std::getline(f, line))
+                {
+                    if (line.substr(0, 4) == "%def")
+                    {
+                        line = line.substr(5, line.size());
+
+                        PVariable p;
+                        p.setName(line);
+                        PraeVars.addPVar(p);
+                    }
+                    else if (line.substr(0, 4) == "%undef")
+                    {
+                        line = line.substr(7, line.size());
+
+                        PVariable p;
+                        p.setName(line);
+                        PraeVars.removePVar(p.getName());
+                    }
+                    else
+                    {
+                        code = code + line + " [NL:97:LN] ";
+                    }
+                }
+            }
+            else if (line.substr(0, 6) == "%indic")
+            {
+                // std::cout << "INDIC!" << std::endl;
+
+                line = line.substr(7, line.size());
+                std::string file = "";
+                std::string var = "";
+
+                int ind = 0;
+
+                for (int i = 0; line[i] != ' '; i++)
+                {
+                    var += line[i];
+                    ind = i + 1;
+                }
+                ind++;
+
+                // std::cout << "WEITER" << std::endl;
+                // std::cout << ind << " < " << line.size() << std::endl;
+
+                for (int i = ind; line[i] != ' ' && i < line.size(); i++)
+                {
+                    file += line[i];
+                    // std::cout << "FILE=" << file << std::endl;
+                }
+
+                // %indic var test.n6 -> var test.txt
+
+                if (!PraeVars.existsVar(var))
+                {
+                    std::ifstream f = std::ifstream(file);
+
+                    while (std::getline(f, line))
+                    {
+                        if (line.substr(0, 4) == "%def")
+                        {
+                            line = line.substr(5, line.size());
+
+                            PVariable p;
+                            p.setName(line);
+                            PraeVars.addPVar(p);
+                            // std::cout << "def " << p.getName() << std::endl;
+                        }
+                        else if (line.substr(0, 6) == "%undef")
+                        {
+                            line = line.substr(7, line.size());
+
+                            PVariable p;
+                            p.setName(line);
+                            PraeVars.removePVar(p.getName());
+                        }
+                        else
+                        {
+                            //std::cout << var << " " << file << "] " << line << std::endl;
+                            code = code + line + " [NL:97:LN] ";
+                        }
+                    }
+
+                }
+            }
+            else if (line.substr(0, 4) == "%def")
+            {
+                // std::cout << "DEF!" << std::endl;
+                line = line.substr(5, line.size());
+
+                PVariable p;
+                p.setName(line);
+                PraeVars.addPVar(p);
+            }
+            else if (line.substr(0, 4) == "%undef")
+            {
+                // std::cout << "UNDEF!" << std::endl;
+                line = line.substr(7, line.size());
+
+                PVariable p;
+                p.setName(line);
+                PraeVars.removePVar(p.getName());
+            }
+            else
+            {
+                code = code + line + " [NL:97:LN] ";
+                line = "";
+            }
         }
 
 
@@ -224,16 +325,6 @@ int main(int argc, char *args[])
 
     if (Variables.isCpp())
     {
-        StringCheck sc;
-        std::string tmp = CPPSource.getSource();
-
-        sc.replaceStringFromTo(tmp, "%nX", "\\n");
-        sc.replaceStringFromTo(tmp, "%tX", "\\t");
-
-        sc.replaceStringFromTo(tmp, "%aX", "\\\"");
-        sc.replaceStringFromTo(tmp, "%eX", "\\\'");
-
-        CPPSource.setSource(tmp);
         std::cout << CPPSource.getSource() << std::endl;
         std::string n;
         std::string n2;

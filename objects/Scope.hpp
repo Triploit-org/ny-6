@@ -160,6 +160,12 @@ public:
         }
     }
 
+    void clearVariables()
+    {
+        strings.clear();
+        integer.clear();
+        // gotos.clear();
+    }
 };
 
 

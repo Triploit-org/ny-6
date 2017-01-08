@@ -1,11 +1,10 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
+
 #include <cmath>
 
-#include <unistd.h>
-#include <fstream>
-#include <sys/stat.h>
+
 #ifdef _WIN32
 int _fos = 0;
 #elif _WIN64
@@ -35,9 +34,6 @@ std::string _cxs = "";
 std::string _dxs = "";
 std::string _exs = "";
 std::string _NL = "\n";
-
-std::fstream f;
-std::string c = "";
 
 int main();
 int ok2();

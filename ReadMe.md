@@ -149,15 +149,8 @@ oder (CMake von nöten)
 
 ##1 Der Interpreter
 
-Um eine Datei zu starten, müssen wir folgenden Befehl eingeben:
-
-	ny6 [Datei]
-
-oder auf Linux
-
-	./ny6 [Datei]
-
-damit wird die Datei `[Datei]` gestartet, einfach `[Datei]` durch die gewünschte Datei ersetzen.
+Interpreter entfernt, nur noch kompilierung möglich.
+Dies sollte jedoch keine Nachteile haben.
 
 ## 2 Der Compiler
 

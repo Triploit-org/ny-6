@@ -9,7 +9,7 @@
         add     [1], x;
         div     h2, h;
         prv     h;@
-        say     "[ MAIN%tX]%tXX = ";
+        say     "[ MAIN%tX]%tXX |%tX| ";
         prv     x;@
 
         say     "Hallo Welt! von Main";@
@@ -31,7 +31,7 @@
 
         prv     _cxs;@
         add     [1], x;
-        say     "[ OK2%tX]%tXX = ";
+        say     "[ OK2%tX]%tXX(2) |%tX| ";
         prv     x;@
         nqi     x, [1], <begOk2>;
 

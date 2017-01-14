@@ -7,7 +7,7 @@
 #include "objects/Tokenizer.hpp"
 #include "objects/Parser.hpp"
 
-#define __VERSION "4.0.3"
+#define __VERSION "4.0.4"
 
 int main(int argc, char *args[])
 {
@@ -80,9 +80,13 @@ int main(int argc, char *args[])
 
     if (argc == 2)
     {
+        Variables.setCpp(true);
+        CPPSource.setCpp(true);
+
         if (strcmp(args[1], "-v") == 0 || strcmp(args[1], "--version") == 0)
         {
-            std::cout << __VERSION << std::endl;
+            std::cout << "Version " << __VERSION << std::endl << std::endl;
+            std::cout << "Ny++6 - Compiler\nInterpreter deaktiviert.\nNur Uebersetzung in C++ moeglich." << std::endl;
             exit(0);
         }
         else
@@ -103,61 +107,8 @@ int main(int argc, char *args[])
     }
     else if (argc == 0 || argc < 2)
     {
-        std::string code = "";
-        std::string line;
-
-        while (true)
-        {
-            std::cout << "> ";
-            std::getline(std::cin, line);
-
-            if (line == "q" || line == "quit" || line == "exit")
-                exit(0);
-            else if (line == "end")
-            {}
-            else if (line == "clear")
-            {
-                code = "";
-            }
-            else if (line == "help")
-            {
-                std::cout << "Dies ist eine shellartige Umgebung in der du Ny++6-Befehle und" << std::endl
-                          << "sogenannte Debug-Befehle eingeben kannst. Wenn ein eingegebener Befehl" << std::endl
-                          << "kein Debug-Befehl ist, wird es zu der Liste eingegebenen der Ny++6-Befehle" << std::endl
-                          << "hinzugefuegt. Hier alle Debug-Befehle:" << std::endl << std::endl
-                          << " >> clear >> Loescht die Liste der Ny++6-befehle " << std::endl
-                          << " >> help  >> Zeigt diese Hilfeseite an" << std::endl
-                          << " >> quit  >> Shell beenden" << std::endl
-                          << " >> run   >> Liste der Ny++6-Befehle ausfuehren" << std::endl << std::endl
-                          << "Info: Alle End-Ny++-Befehle werden ignoriert!" << std::endl
-                          << "Info: Falls ein Error auftritt, wird die Shell beendet."
-                          << std::endl;
-            }
-            else if (line == "run")
-            {
-                std::string ans;
-                std::cout << "[ WARN ] Danach wird der temporaere Speicher..." << std::endl
-                          << "[ WARN ] ...mit allen Befehlen geloescht, fortfahren? j/n :: ";
-                std::cin >> ans;
-
-                if (ans == "j" || ans == "J")
-                {
-                    Tokenizer t;
-                    t.setCode(code);
-
-                    Parser p;
-                    p.setCode(t.doTokenize());
-                    p.parseAll();
-                    code = "";
-                }
-            }
-            else
-            {
-                code = code + line + " [NL:97:LN] ";
-                line = "";
-            }
-
-        }
+        std::cout << "[ MAIN ] Bitte gib eine Datei an!" << std::endl;
+        exit(0);
     }
     else if (argc == 3)
     {
@@ -329,11 +280,9 @@ int main(int argc, char *args[])
         Tokenizer t;
         t.setCode(code);
 
-        if (CPPSource.isCpp()) std::cout << "Betrete Parser-Klasse." << std::endl;
         Parser p;
         p.setCode(t.doTokenize());
         p.parseAll();
-        if (CPPSource.isCpp()) std::cout << "Beende Parser-Klasse." << std::endl;
 
     }
     else
@@ -344,10 +293,15 @@ int main(int argc, char *args[])
 
     if (Variables.isCpp())
     {
-        std::cout << CPPSource.getSource() << std::endl;
+        std::cout << std::endl << std::endl << CPPSource.getSource() << std::endl;
         std::string n;
         std::string n2;
-        n2 = args[2];
+
+        if (argc == 3)
+            n2 = args[2];
+        else if (argc == 2)
+            n2 = args[1];
+
         std::string cmd;
         std::string ans;
 
@@ -360,7 +314,11 @@ int main(int argc, char *args[])
         f << CPPSource.getSource() << std::endl;
         f.close();
 
-        n = args[2];
+        if (argc == 3)
+            n = args[2];
+        else if (argc == 2)
+            n = args[1];
+
         n = n.substr(0, n.length() - 3);
         cmd = "g++ -o " + n + " " + n2;
 

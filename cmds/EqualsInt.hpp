@@ -265,14 +265,13 @@ void less_equals_int(std::vector<std::string> args)
 
             if (v < v2)
             {
-
                 if (gtn1 == '<' && gtn2 == '>')
                 {
+
                     Gotos.setI(Variables.getRealGoto(gtnaz).getIndex());
                 }
                 else
                 {
-                    // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
 
                     Gotos.addLJ(Gotos.getI());
                     Gotos.addLS(Variables.getAktScope().getName());
@@ -329,7 +328,6 @@ void less_equals_int(std::vector<std::string> args)
                     }
                     else
                     {
-                        // std::cout << "EQI >> <MARKE> >> " << gtn << std::endl;
 
                         Gotos.addLJ(Gotos.getI());
                         Gotos.addLS(Variables.getAktScope().getName());

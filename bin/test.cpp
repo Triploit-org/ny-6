@@ -45,11 +45,13 @@ int main()
 	int h2 = 10;
 	int x = 0;
 beb:
+	h = 90;
+	h2 = 10;
 	x = x + 1;
 	h = h / h2;
 	std::cout << h;
 	std::cout << std::endl;
-	std::cout << "[ MAIN\t]\tX = ";
+	std::cout << "[ MAIN\t]\tX |\t| ";
 	std::cout << x;
 	std::cout << std::endl;
 	std::cout << "Hallo Welt! von Main";
@@ -58,14 +60,17 @@ beb:
 
 	std::cout << "Wieder MAIN!";
 	std::cout << std::endl;
-	if (x < 10)
+	if (x < h2)
 		goto beb;
 	std::cout << "\t(TAB) = %tX";
+	std::cout << std::endl;
 	exit(0);
 }
 
 int ok2()
 {
+	std::cout << "OK2";
+	std::cout << std::endl;
 	int x = 0;
 begOk2:
 	_axs = "Hallo";
@@ -75,7 +80,7 @@ begOk2:
 	std::cout << _cxs;
 	std::cout << std::endl;
 	x = x + 1;
-	std::cout << "[ OK2\t]\tX = ";
+	std::cout << "[ OK2\t]\tX(2) |\t| ";
 	std::cout << x;
 	std::cout << std::endl;
 	if (x != 1)

@@ -9,11 +9,8 @@ func remove
 {
   [
     #!/bin/bash
-    if [-f /usr/bin/ny6 ]
-    then
+    if [-f /usr/bin/ny6 ]; then
       sudo rm /usr/bin/ny6
-    else
-      echo "Binary file not found, exiting without uninstalling."
     fi
   ]
 }

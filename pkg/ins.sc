@@ -7,12 +7,7 @@ func install
 
 func remove
 {
-  [
-    #!/bin/bash
-    if [-f /usr/bin/ny6 ]; then
-      sudo rm /usr/bin/ny6
-    fi
-  ]
+  sudo rm /usr/bin/ny6
 }
 
 func update

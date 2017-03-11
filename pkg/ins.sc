@@ -20,7 +20,7 @@ func install_win
   [
     @echo off
     
-    if NOT EXISTS "%appdata%\\info.inf" (
+    if NOT EXIST %appdata%\info.inf (
       mkdir %appdata%\bin
       type NUL > info.inf
     setx PATH "%PATH%;%appdata%\\bin\\"

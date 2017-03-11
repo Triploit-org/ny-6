@@ -17,15 +17,25 @@ func update
 
 func install_win
 {
-  mkdir %appdata%\bin
-  setx %PATH% "%PATH%;%appdata%\\ny6\\"
-  g++ main.cpp -o ny6.exe -static
-  copy ny6.exe %appdata%\\bin\\ny6.exe
+  [
+    @echo off
+    
+    if NOT EXISTS %appdata%\info.inf (
+    mkdir %appdata%\bin
+    echo "Triploit-Binary-Directory" > info.inf
+    setx PATH "%PATH%;%appdata%\\bin\\"
+    ) ELSE (
+      echo Triploit Directory Exists, Continue...
+    )
+    
+    g++ main.cpp -o ny6.exe -static
+    copy ny6.exe %appdata%\\bin\\ny6.exe
+  ]
 }
 
 func remove_win
 {
-  del %appdata%\ny6\ny6.exe
+  del %appdata%\bin\ny6.exe
 }
 
 func update_win

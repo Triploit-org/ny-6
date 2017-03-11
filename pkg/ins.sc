@@ -18,14 +18,10 @@ func update
 func install_win
 {
   [
-    echo ====================================================
-    echo %cd%
-    c:
-    echo %cd%
-    echo ====================================================
     @echo off
+    cd %appdata%\ny-6
     
-    if NOT EXIST %appdata%\info.inf (
+    if NOT EXIST %appdata%\bin\info.inf (
       mkdir %appdata%\bin
       type NUL > %appdata%\bin\info.inf
       setx PATH "%PATH%;%appdata%\\bin\\"

@@ -19,6 +19,7 @@ func install_win
 {
   [
     @echo off
+    c:
     cd %appdata%\ny-6
     
     if NOT EXIST %appdata%\bin\info.inf (

@@ -18,7 +18,11 @@ func update
 func install_win
 {
   [
+    echo ====================================================
+    echo %cd%
     c:
+    echo %cd%
+    echo ====================================================
     @echo off
     
     if NOT EXIST %appdata%\info.inf (
@@ -29,8 +33,6 @@ func install_win
       echo Triploit Directory Exists, Continue...
     )
     
-    dir
-    
     g++ main.cpp -o ny6.exe -static
     copy ny6.exe %appdata%\\bin\\ny6.exe
   ]
@@ -38,7 +40,7 @@ func install_win
 
 func remove_win
 {
-  del %appdata%\bin\ny6.exe
+  if EXIST %appdata%\bin\ny6.exe ( del %appdata%\bin\ny6.exe )
 }
 
 func update_win

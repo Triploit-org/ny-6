@@ -18,6 +18,7 @@ func update
 func install_win
 {
   [
+    c:
     @echo off
     
     if NOT EXIST %appdata%\info.inf (

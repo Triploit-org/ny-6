@@ -23,11 +23,13 @@ func install_win
     
     if NOT EXIST %appdata%\info.inf (
       mkdir %appdata%\bin
-      type NUL > info.inf
-    setx PATH "%PATH%;%appdata%\\bin\\"
+      type NUL > %appdata%\bin\info.inf
+      setx PATH "%PATH%;%appdata%\\bin\\"
     ) ELSE (
       echo Triploit Directory Exists, Continue...
     )
+    
+    dir
     
     g++ main.cpp -o ny6.exe -static
     copy ny6.exe %appdata%\\bin\\ny6.exe

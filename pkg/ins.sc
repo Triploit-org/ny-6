@@ -22,7 +22,7 @@ func install_win
     
     if NOT EXISTS %appdata%\info.inf (
     mkdir %appdata%\bin
-    echo Triploit-Binary-Directory > info.inf
+    type NUL > info.inf
     setx PATH "%PATH%;%appdata%\\bin\\"
     ) ELSE (
       echo Triploit Directory Exists, Continue...

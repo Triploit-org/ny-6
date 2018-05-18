@@ -1,22 +1,22 @@
-func install
-{
+name ny-6
+user triploit
+ver 6.4.0.4
+
+func install {
   g++ main.cpp -o ny6
   chmod +x ny6
   sudo mv ny6 /usr/bin/ny6
 }
 
-func remove
-{
+func remove {
   sudo rm /usr/bin/ny6
 }
 
-func update
-{
+func update {
   &install
 }
 
-func install_win
-{
+func install_win {
   [
     @echo off
     c:
@@ -35,12 +35,10 @@ func install_win
   ]
 }
 
-func remove_win
-{
+func remove_win {
   if EXIST %appdata%\bin\ny6.exe ( del %appdata%\bin\ny6.exe )
 }
 
-func update_win
-{
+func update_win {
   &install_win
 }
